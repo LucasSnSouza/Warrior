@@ -2,7 +2,7 @@
 
     <div class="kingdom h-full">
 
-        <div class="kingdom-cards w-full gap-md flex scroll-x">
+        <div class="kingdom-cards w-full h-full gap-md flex scroll-x">
 
             <CardBasic
                 v-for="(item, index) in kingdom_cards"
@@ -35,7 +35,22 @@ export default {
                     name: "",
                     background: "/images/environments/plain-one.png",
                     display: "/images/weapons/one-hand-sword.png"
-                }
+                },
+                {
+                    name: "",
+                    background: "/images/environments/plain-one.png",
+                    display: "/images/structures/house-one.png"
+                },
+                {
+                    name: "",
+                    background: "/images/environments/plain-one.png",
+                    display: "/images/weapons/one-hand-sword.png"
+                },
+                {
+                    name: "",
+                    background: "/images/environments/plain-one.png",
+                    display: "/images/structures/house-one.png"
+                },
             ]
         }
     },
