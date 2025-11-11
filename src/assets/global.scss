@@ -1,0 +1,150 @@
+.pointer{
+    cursor: pointer;
+}
+
+.relative{
+    position: relative;
+}
+
+.absolute{
+    position: absolute;
+}
+
+.oclude{
+    overflow: hidden;
+}
+
+.ghost{
+    border: 1px solid currentColor;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.slim{
+    font-weight: 400;
+}
+
+.grid{
+    display: grid;
+}
+
+.warp{
+    flex-wrap: wrap;
+}
+
+.flex{
+    display: flex;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.flex-reverse-column{
+    flex-direction: column-reverse;
+}
+
+.flex-row{
+    flex-direction: row;
+}
+
+.flex-reverse-row{
+    flex-direction: row-reverse;
+}
+
+.justify-between{
+    justify-content: space-between;
+}
+
+.x-start{
+    justify-content: flex-start;
+}
+
+.x-center{
+    justify-content: center;
+}
+
+.x-end{
+    justify-content: flex-end;
+}
+
+.y-start{
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.y-center{
+    align-items: center;
+    align-content: center;
+}
+
+.y-end{
+    align-items: flex-end;
+    align-content: flex-end;
+}
+
+.h-full{
+    height: auto;
+}
+
+.h-full{
+    height: 100%;
+}
+
+.h-3-4{
+    height: 75%;
+}
+
+.h-half{
+    height: 50%;
+}
+
+.h-1-4{
+    height: 25%;
+}
+
+.w-auto{
+    width: auto;
+}
+
+.w-full{
+    width: 100%;
+}
+
+.w-3-4{
+    width: 75%;
+}
+
+.w-half{
+    width: 50%;
+}
+
+.w-1-4{
+    width: 25%;
+}
+
+.text-start{
+    text-align: start;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.text-end{
+    text-align: end;
+}
+
+.overflow-hidden{
+    overflow: hidden;
+}
+
+.scroll-y{
+    overflow-y: scroll;
+}
+
+.scroll-x{
+    overflow-x: scroll;
+}
