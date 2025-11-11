@@ -28,13 +28,13 @@ export default {
             kingdom_cards: [
                 {
                     name: "",
-                    background: "/public/images/environments/plain-one.png",
-                    display: "/public/images/structures/house-one.png"
+                    background: "/images/environments/plain-one.png",
+                    display: "/images/structures/house-one.png"
                 },
                 {
                     name: "",
-                    background: "/public/images/environments/plain-one.png",
-                    display: "/public/images/weapons/one-hand-sword.png"
+                    background: "/images/environments/plain-one.png",
+                    display: "/images/weapons/one-hand-sword.png"
                 }
             ]
         }
