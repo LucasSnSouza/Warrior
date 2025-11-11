@@ -73,14 +73,10 @@ export default {
         background-position: center;
         border: var(--scale-brand-md) solid white;
         z-index: 1;
+        animation: swap 0.5s;
         
         .card-information{
-            z-index: 2;
-    
-            img{
-                // filter: drop-shadow(0px 0px var(--scale-brand-lg) rgba(0, 0, 0, 0.2));
-            }
-    
+            z-index: 2;    
         }
 
     }
@@ -96,6 +92,18 @@ export default {
     }
 
 
+}
+
+@keyframes swap {
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(0.9);
+    }
+    100%{
+        transform: scale(1);
+    }
 }
 
 </style>

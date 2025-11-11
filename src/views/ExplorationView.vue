@@ -12,6 +12,7 @@
                         transform: scaleX(-1);
                         margin-left: -15px;
                     "
+                    @click="previousCard()"
                 >
                     <MiscIcon
                         icon="styled-arrow-icon"
@@ -25,6 +26,7 @@
                     style="
                         margin-right: -15px;
                     "
+                    @click="nextCard()"
                 >
                     <MiscIcon
                         icon="styled-arrow-icon"
@@ -36,8 +38,9 @@
             </div>
 
             <CardBasic
-                :background="kingdom_cards[0]?.background"
-                :display="kingdom_cards[0]?.display"
+                :background="exploration_cards[exploration_index]?.background"
+                :display="exploration_cards[exploration_index]?.display"
+                :key="exploration_index"
             />
 
         </div>
@@ -55,7 +58,8 @@ import * as Card from "@/components/Card"
 export default {
     data(){
         return{
-            kingdom_cards: [
+            exploration_index: 0,
+            exploration_cards: [
                 {
                     name: "",
                     background: "/images/environments/plain-one.png",
@@ -90,6 +94,18 @@ export default {
         ...Button
     },
     methods: {
+        nextCard() {
+            this.exploration_index++;
+            if (this.exploration_index >= this.exploration_cards.length) {
+                this.exploration_index = 0;
+            }
+        },
+        previousCard() {
+            this.exploration_index--;
+            if (this.exploration_index < 0) {
+                this.exploration_index = this.exploration_cards.length - 1;
+            }
+        }
     },
     computed: {
     },

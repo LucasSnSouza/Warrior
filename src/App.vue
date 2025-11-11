@@ -50,6 +50,37 @@
         <div class="app-information h-full p-xlg">
             <RouterView/>
         </div>
+
+        <div class="app-navigation flex gap-md x-center p-xlg">
+
+            <ButtonBasic
+                class="p-lg rounded-md"
+                style="
+                    transform: scaleX(-1);
+                "
+            >
+                <MiscIcon
+                    icon="home-icon"
+                    class="bg-color-brand-three"
+                    :size="[20,20]"
+                />
+            </ButtonBasic>
+
+            <ButtonBasic
+                class="p-lg rounded-md"
+                style="
+                    transform: scaleX(-1);
+                "
+            >
+                <MiscIcon
+                    icon="inventory-icon"
+                    class="bg-color-brand-three"
+                    :size="[20,20]"
+                />
+            </ButtonBasic>
+
+        </div>
+
     </div>
 
 </template>
