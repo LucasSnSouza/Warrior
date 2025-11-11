@@ -1,6 +1,51 @@
 <template>
 
-    <div class="app h-full">
+    <div class="app h-full flex flex-column bg-color-brand-three">
+
+        <div class="app-header flex p-xlg">
+
+            <ButtonBasic
+                class="p-lg rounded-md"
+                style="
+                    transform: scaleX(-1);
+                "
+            >
+                <MiscIcon
+                    icon="styled-arrow-icon"
+                    class="bg-color-brand-three"
+                    :size="[16,16]"
+                />
+            </ButtonBasic>
+
+            <div class="h-full x-center y-center flex flex-column gap-md">
+                <p class="font-lg color-brand-two">Exploration</p>
+            </div>
+
+            <div class="flex gap-md">
+
+                <ButtonBasic
+                    class="p-lg rounded-md"
+                >
+                    <MiscIcon
+                        icon="market-icon"
+                        class="bg-color-brand-three"
+                        :size="[16,16]"
+                    />
+                </ButtonBasic>
+
+                <ButtonBasic
+                    class="p-lg rounded-md"
+                >
+                    <MiscIcon
+                        icon="settings-icon"
+                        class="bg-color-brand-three"
+                        :size="[16,16]"
+                    />
+                </ButtonBasic>
+
+            </div>
+
+        </div>
         
         <div class="app-information h-full p-xlg">
             <RouterView/>
@@ -14,12 +59,17 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { useSystemStore } from '@/stores/system.js'
 
+import * as Button from "@/components/Button"
+import * as Misc from "@/components/Misc"
+
 export default {
     data(){
         return{
         }
     },
     components: {
+        ...Button,
+        ...Misc
     },
     methods: {
     },
@@ -32,5 +82,13 @@ export default {
 </script>
 
 <style lang="scss">
+
+.app{
+
+    .app-header{
+        justify-content: space-between;
+    }
+
+}
 
 </style>
