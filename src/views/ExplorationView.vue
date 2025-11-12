@@ -41,6 +41,7 @@
                 :background="exploration_cards[exploration_index]?.background"
                 :display="exploration_cards[exploration_index]?.display"
                 :key="exploration_index"
+                @click="$router.push( { path: '/interaction' } ), storeSelectedCard(exploration_cards[exploration_index])"
             />
 
         </div>
@@ -50,6 +51,8 @@
 </template>
 
 <script>
+
+import { useExplorationStore } from "@/stores/exploration.js"
 
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"
@@ -61,29 +64,39 @@ export default {
             exploration_index: 0,
             exploration_cards: [
                 {
-                    name: "",
                     background: "/images/environments/plain-one.png",
-                    display: "/images/structures/house-one.png"
+                    display: "/images/structures/house-one.png",
+                    name: "Forja",
+                    author: "Kingdom",
+                    tier: 0,
                 },
                 {
-                    name: "",
                     background: "/images/environments/plain-one.png",
-                    display: "/images/weapons/one-hand-sword.png"
+                    display: "/images/weapons/one-hand-sword.png",
+                    name: "Espada Longa de Guerra",
+                    author: "Kingdom",
+                    tier: 1,
                 },
                 {
-                    name: "",
                     background: "/images/environments/plain-one.png",
-                    display: "/images/structures/house-one.png"
+                    display: "/images/structures/house-one.png",
+                    name: "Forja",
+                    author: "Kingdom",
+                    tier: 2,
                 },
                 {
-                    name: "",
                     background: "/images/environments/plain-one.png",
-                    display: "/images/weapons/one-hand-sword.png"
+                    display: "/images/weapons/one-hand-sword.png",
+                    name: "Espada Longa de Guerra",
+                    author: "Kingdom",
+                    tier: 3,
                 },
                 {
-                    name: "",
                     background: "/images/environments/plain-one.png",
-                    display: "/images/structures/house-one.png"
+                    display: "/images/structures/house-one.png",
+                    name: "Forja",
+                    author: "Kingdom",
+                    tier: 4,
                 },
             ]
         }
@@ -105,6 +118,9 @@ export default {
             if (this.exploration_index < 0) {
                 this.exploration_index = this.exploration_cards.length - 1;
             }
+        },
+        storeSelectedCard(card){
+            useExplorationStore().setSelectedCard(card)
         }
     },
     computed: {

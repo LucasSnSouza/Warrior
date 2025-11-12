@@ -5,10 +5,12 @@
         <div class="app-header flex p-xlg">
 
             <ButtonBasic
+                v-if="$route.meta.goback"
                 class="p-lg rounded-md"
                 style="
                     transform: scaleX(-1);
                 "
+                @click="$router.back()"
             >
                 <MiscIcon
                     icon="styled-arrow-icon"
