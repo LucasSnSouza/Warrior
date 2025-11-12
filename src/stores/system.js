@@ -13,7 +13,6 @@ export const useSystemStore = defineStore('system', {
             "white"
         ],
         sidebar: false,
-        logged: true,
     }),
     getters: {
         getTheme: (state) => state.theme,
@@ -21,7 +20,6 @@ export const useSystemStore = defineStore('system', {
         getLanguages: (state) => state.languages,
         getThemes: (state) => state.themes,
         getSidebar: (state) => state.sidebar,
-        getLogged: (state) => state.logged
     },
     actions: {
         toggleLanguage(language){
@@ -42,12 +40,5 @@ export const useSystemStore = defineStore('system', {
             }
             this.sidebar = !this.sidebar
         },
-        toggleLoggedState(value=false){
-            if(value){
-                this.logged = value
-                return;
-            }
-            this.logged = !this.logged
-        }
     }
 })

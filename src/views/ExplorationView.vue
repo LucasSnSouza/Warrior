@@ -38,6 +38,7 @@
             </div>
 
             <CardBasic
+                style="margin-top: 10px;"
                 :background="exploration_cards[exploration_index]?.background"
                 :display="exploration_cards[exploration_index]?.display"
                 :key="exploration_index"
@@ -62,43 +63,7 @@ export default {
     data(){
         return{
             exploration_index: 0,
-            exploration_cards: [
-                {
-                    background: "/images/environments/plain-one.png",
-                    display: "/images/structures/house-one.png",
-                    name: "Forja",
-                    author: "Kingdom",
-                    tier: 0,
-                },
-                {
-                    background: "/images/environments/plain-one.png",
-                    display: "/images/weapons/one-hand-sword.png",
-                    name: "Espada Longa de Guerra",
-                    author: "Kingdom",
-                    tier: 1,
-                },
-                {
-                    background: "/images/environments/plain-one.png",
-                    display: "/images/structures/house-one.png",
-                    name: "Forja",
-                    author: "Kingdom",
-                    tier: 2,
-                },
-                {
-                    background: "/images/environments/plain-one.png",
-                    display: "/images/weapons/one-hand-sword.png",
-                    name: "Espada Longa de Guerra",
-                    author: "Kingdom",
-                    tier: 3,
-                },
-                {
-                    background: "/images/environments/plain-one.png",
-                    display: "/images/structures/house-one.png",
-                    name: "Forja",
-                    author: "Kingdom",
-                    tier: 4,
-                },
-            ]
+            exploration_cards: []
         }
     },
     components: {
@@ -125,7 +90,12 @@ export default {
     },
     computed: {
     },
+    async mounted(){
+        
+        this.exploration_cards = await useExplorationStore().fetchRegion("granhelm")
+    },
     created(){
+        
     }
 }
 

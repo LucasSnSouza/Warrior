@@ -17,6 +17,52 @@
             </div>
         </div>
 
+        <div class="interaction-information w-full gap-md">
+
+            <div 
+                v-if="getSelectedCard?.damage"
+                class="information-container flex x-start y-center color-brand-two gap-md"
+            >
+                <div class="information-icon p-lg bg-color-brand-two rounded-md">
+                    <MiscIcon
+                        icon="sword-icon"
+                        class="bg-color-brand-three"
+                        :size="[16,16]"
+                    />
+                </div>
+                <p>00</p>
+            </div>
+
+            <div 
+                v-if="getSelectedCard?.defense"
+                class="information-container flex x-start y-center color-brand-two gap-md"
+            >
+                <div class="information-icon p-lg bg-color-brand-two rounded-md">
+                    <MiscIcon
+                        icon="shield-icon"
+                        class="bg-color-brand-three"
+                        :size="[16,16]"
+                    />
+                </div>
+                <p>00</p>
+            </div>
+
+            <div 
+                v-if="getSelectedCard?.durability"
+                class="information-container flex x-start y-center color-brand-two gap-md"
+            >
+                <div class="information-icon p-lg bg-color-brand-two rounded-md">
+                    <MiscIcon
+                        icon="heart-icon"
+                        class="bg-color-brand-three"
+                        :size="[16,16]"
+                    />
+                </div>
+                <p>00</p>
+            </div>
+
+        </div>
+
     </div>
 
 </template>
@@ -53,6 +99,16 @@ export default {
 </script>
 
 <style lang="scss">
+
+.interaction{
+
+    .interaction-information{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+}
 
 
 </style>

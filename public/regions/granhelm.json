@@ -1,0 +1,44 @@
+[
+    {
+        "background": "/images/environments/granhelm/plain-1.png",
+        "display": "/images/structures/granhelm/house-1.png",
+        "name": "Fundição",
+        "author": "Granhelm",
+        "tier": 1
+    },
+    {
+        "background": "/images/environments/granhelm/plain-1.png",
+        "display": "/images/structures/granhelm/house-2.png",
+        "name": "Serraria",
+        "author": "Granhelm",
+        "tier": 0
+    },
+    {
+        "background": "/images/environments/granhelm/plain-1.png",
+        "display": "/images/structures/granhelm/house-3.png",
+        "name": "Pedreira",
+        "author": "Granhelm",
+        "tier": 3
+    },
+    {
+        "background": "/images/environments/granhelm/plain-1.png",
+        "display": "/images/structures/granhelm/house-1.png",
+        "name": "Tecelagem",
+        "author": "Granhelm",
+        "tier": 0
+    },
+    {
+        "background": "/images/environments/granhelm/plain-1.png",
+        "display": "/images/structures/granhelm/house-2.png",
+        "name": "Curtume",
+        "author": "Granhelm",
+        "tier": 1
+    },
+    {
+        "background": "/images/environments/granhelm/plain-1.png",
+        "display": "/images/structures/granhelm/house-2.png",
+        "name": "Portões",
+        "author": "Granhelm",
+        "tier": 0
+    }
+]

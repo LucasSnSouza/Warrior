@@ -49,7 +49,7 @@
 
         </div>
         
-        <div class="app-information h-full p-xlg">
+        <div class="app-information scroll-y h-full p-xlg">
             <RouterView/>
         </div>
 
@@ -76,6 +76,19 @@
             >
                 <MiscIcon
                     icon="inventory-icon"
+                    class="bg-color-brand-three"
+                    :size="[20,20]"
+                />
+            </ButtonBasic>
+
+            <ButtonBasic
+                class="p-lg rounded-md"
+                style="
+                    transform: scaleX(-1);
+                "
+            >
+                <MiscIcon
+                    icon="action-icon"
                     class="bg-color-brand-three"
                     :size="[20,20]"
                 />
@@ -120,6 +133,11 @@ export default {
 
     .app-header{
         justify-content: space-between;
+    }
+
+    .app-information{
+        padding-top: 0px;
+        padding-bottom: 0px;
     }
 
 }
