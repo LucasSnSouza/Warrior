@@ -39,8 +39,8 @@
 
             <CardBasic
                 style="margin-top: 10px;"
-                :background="exploration_cards[exploration_index]?.background"
-                :display="exploration_cards[exploration_index]?.display"
+                :background="exploration_cards[exploration_index]?.external.background"
+                :display="exploration_cards[exploration_index]?.external.display"
                 :key="exploration_index"
                 @click="$router.push( { path: '/interaction' } ), storeSelectedCard(exploration_cards[exploration_index])"
             />

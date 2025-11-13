@@ -6,7 +6,7 @@
 
             <ButtonBasic
                 v-if="$route.meta.goback"
-                class="p-lg rounded-md"
+                class="p-lg rounded-md aspect-ratio"
                 style="
                     transform: scaleX(-1);
                 "
@@ -15,7 +15,7 @@
                 <MiscIcon
                     icon="styled-arrow-icon"
                     class="bg-color-brand-three"
-                    :size="[16,16]"
+                    :size="[24,24]"
                 />
             </ButtonBasic>
 
@@ -26,22 +26,22 @@
             <div class="flex gap-md">
 
                 <ButtonBasic
-                    class="p-lg rounded-md"
+                    class="p-lg rounded-md aspect-ratio"
                 >
                     <MiscIcon
                         icon="market-icon"
                         class="bg-color-brand-three"
-                        :size="[16,16]"
+                        :size="[24,24]"
                     />
                 </ButtonBasic>
 
                 <ButtonBasic
-                    class="p-lg rounded-md"
+                    class="p-lg rounded-md aspect-ratio"
                 >
                     <MiscIcon
                         icon="settings-icon"
                         class="bg-color-brand-three"
-                        :size="[16,16]"
+                        :size="[24,24]"
                     />
                 </ButtonBasic>
 
@@ -64,7 +64,7 @@
                 <MiscIcon
                     icon="home-icon"
                     class="bg-color-brand-three"
-                    :size="[20,20]"
+                    :size="[24,24]"
                 />
             </ButtonBasic>
 
@@ -77,7 +77,7 @@
                 <MiscIcon
                     icon="inventory-icon"
                     class="bg-color-brand-three"
-                    :size="[20,20]"
+                    :size="[24,24]"
                 />
             </ButtonBasic>
 
@@ -90,7 +90,7 @@
                 <MiscIcon
                     icon="action-icon"
                     class="bg-color-brand-three"
-                    :size="[20,20]"
+                    :size="[24,24]"
                 />
             </ButtonBasic>
 

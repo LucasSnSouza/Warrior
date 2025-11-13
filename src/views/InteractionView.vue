@@ -3,8 +3,8 @@
     <div class="interaction scroll-y w-full h-full flex flex-column gap-xlg">
 
         <CardOverview
-            :background="getSelectedCard?.background"
-            :display="getSelectedCard?.display"
+            :background="getSelectedCard?.internal.background"
+            :display="getSelectedCard?.internal.display"
         />
 
         <div class="interaction-basic-information w-full flex bg-color-brand-two rounded-md p-md gap-lg">
