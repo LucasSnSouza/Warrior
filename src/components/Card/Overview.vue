@@ -55,7 +55,7 @@ export default {
         width: 100%;
         border-radius: var(--scale-brand-md);
         scroll-snap-align: center;
-        background-size: 105%;
+        background-size: 100% 100%;
         background-position: top;
         border: var(--scale-brand-md) solid white;
         z-index: 1;
