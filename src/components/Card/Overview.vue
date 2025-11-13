@@ -1,6 +1,6 @@
 <template>
 
-    <div class="card relative w-full flex flex-column x-center">
+    <div class="card-overview relative w-full flex flex-column x-center">
         <div 
             class="card-wrapper flex relative bg-color-brand-three"
             :style="{ backgroundImage: `url(${background})` }"
@@ -47,7 +47,7 @@ export default {
 
 <style lang="scss">
 
-.card{
+.card-overview{
     
     .card-wrapper{
 
@@ -56,7 +56,7 @@ export default {
         border-radius: var(--scale-brand-md);
         scroll-snap-align: center;
         background-size: 105%;
-        background-position: center;
+        background-position: top;
         border: var(--scale-brand-md) solid white;
         z-index: 1;
         

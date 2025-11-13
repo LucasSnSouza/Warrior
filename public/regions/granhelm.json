@@ -5,9 +5,15 @@
             "display": "/images/structures/granhelm/house-1.png"
         },
         "internal": {
-            "background": "/images/environments/granhelm/plain-1.png",
-            "display": "/images/structures/granhelm/house-1.png"
+            "background": "/images/structures/granhelm/house-interior-1.png",
+            "display": ""
         },
+        "interactions": {
+            "travel": false,
+            "refine": true,
+            "craft": false
+        },
+        "refine_types": ["metal"],
         "name": "Fundição",
         "description": "",
         "author": "Granhelm",
@@ -19,9 +25,15 @@
             "display": "/images/structures/granhelm/house-2.png"
         },
         "internal": {
-            "background": "/images/environments/granhelm/plain-1.png",
-            "display": "/images/structures/granhelm/house-2.png"
+            "background": "/images/structures/granhelm/house-interior-1.png",
+            "display": ""
         },
+        "interactions": {
+            "travel": false,
+            "refine": true,
+            "craft": false
+        },
+        "refine_types": ["wood"],
         "name": "Serraria",
         "description": "",
         "author": "Granhelm",
@@ -33,9 +45,15 @@
             "display": "/images/structures/granhelm/house-3.png"
         },
         "internal": {
-            "background": "/images/environments/granhelm/plain-1.png",
-            "display": "/images/structures/granhelm/house-3.png"
+            "background": "/images/structures/granhelm/house-interior-1.png",
+            "display": ""
         },
+        "interactions": {
+            "travel": false,
+            "refine": true,
+            "craft": false
+        },
+        "refine_types": ["stone"],
         "name": "Pedreira",
         "description": "",
         "author": "Granhelm",
@@ -47,9 +65,15 @@
             "display": "/images/structures/granhelm/house-1.png"
         },
         "internal": {
-            "background": "/images/environments/granhelm/plain-1.png",
-            "display": "/images/structures/granhelm/house-1.png"
+            "background": "/images/structures/granhelm/house-interior-1.png",
+            "display": ""
         },
+        "interactions": {
+            "travel": false,
+            "refine": true,
+            "craft": false
+        },
+        "refine_types": ["fiber"],
         "name": "Tecelagem",
         "description": "",
         "author": "Granhelm",
@@ -61,9 +85,15 @@
             "display": "/images/structures/granhelm/house-2.png"
         },
         "internal": {
-            "background": "/images/environments/granhelm/plain-1.png",
-            "display": "/images/structures/granhelm/house-2.png"
+            "background": "/images/structures/granhelm/house-interior-1.png",
+            "display": ""
         },
+        "interactions": {
+            "travel": false,
+            "refine": true,
+            "craft": false
+        },
+        "refine_types": ["raw"],
         "name": "Curtume",
         "description": "",
         "author": "Granhelm",
@@ -77,6 +107,11 @@
         "internal": {
             "background": "/images/environments/granhelm/plain-1.png",
             "display": "/images/structures/granhelm/gate.png"
+        },
+        "interactions": {
+            "travel": true,
+            "refine": false,
+            "craft": false
         },
         "name": "Portões",
         "description": "",

@@ -91,8 +91,13 @@ export default {
     computed: {
     },
     async mounted(){
-        
         this.exploration_cards = await useExplorationStore().fetchRegion("granhelm")
+        if(useExplorationStore().getSelectedCard){
+            const selectedCard = useExplorationStore().getSelectedCard
+            this.exploration_index = this.exploration_cards.findIndex(
+                card => card.name === selectedCard.name
+            )
+        }
     },
     created(){
         
