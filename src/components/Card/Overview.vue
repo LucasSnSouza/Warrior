@@ -1,8 +1,8 @@
 <template>
 
-    <div class="card-overview relative w-full flex flex-column x-center">
+    <div class="card-overview relative w-full flex aspect-ratio flex-column x-center">
         <div 
-            class="card-wrapper flex relative bg-color-brand-three"
+            class="card-wrapper h-full flex relative bg-color-brand-three"
             :style="{ backgroundImage: `url(${background})` }"
         >
             <div class="card-information flex x-center y-center w-full">
@@ -50,8 +50,6 @@ export default {
 .card-overview{
     
     .card-wrapper{
-
-        height: 355px;
         width: 100%;
         border-radius: var(--scale-brand-md);
         scroll-snap-align: center;

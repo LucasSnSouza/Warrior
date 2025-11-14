@@ -9,7 +9,7 @@
 
         <div class="interaction-basic-information w-full flex bg-color-brand-two rounded-md p-md gap-lg">
             <MiscTierDisplay
-                :tier="getSelectedCard?.tier || 0"
+                :tier="getSelectedCard?.tier"
             />
             <div class="flex flex-column">
                 <p class="font-lg">{{ getSelectedCard?.name }}</p>
@@ -17,51 +17,19 @@
             </div>
         </div>
 
-        <div class="interaction-information w-full gap-md">
+        <ActionTravel
+            v-if="getSelectedCard?.interactions?.travel"
+        />
 
-            <div 
-                v-if="getSelectedCard?.damage"
-                class="information-container flex x-start y-center color-brand-two gap-md"
-            >
-                <div class="information-icon p-lg bg-color-brand-two rounded-md">
-                    <MiscIcon
-                        icon="sword-icon"
-                        class="bg-color-brand-three"
-                        :size="[16,16]"
-                    />
-                </div>
-                <p>00</p>
-            </div>
+        <ActionRefine
+            v-if="getSelectedCard?.interactions?.refine"
+            :refineTier="getSelectedCard?.tier"
+            :refineTypes="getSelectedCard?.refine_types || []"
+        />
 
-            <div 
-                v-if="getSelectedCard?.defense"
-                class="information-container flex x-start y-center color-brand-two gap-md"
-            >
-                <div class="information-icon p-lg bg-color-brand-two rounded-md">
-                    <MiscIcon
-                        icon="shield-icon"
-                        class="bg-color-brand-three"
-                        :size="[16,16]"
-                    />
-                </div>
-                <p>00</p>
-            </div>
-
-            <div 
-                v-if="getSelectedCard?.durability"
-                class="information-container flex x-start y-center color-brand-two gap-md"
-            >
-                <div class="information-icon p-lg bg-color-brand-two rounded-md">
-                    <MiscIcon
-                        icon="heart-icon"
-                        class="bg-color-brand-three"
-                        :size="[16,16]"
-                    />
-                </div>
-                <p>00</p>
-            </div>
-
-        </div>
+        <ActionCraft
+            v-if="getSelectedCard?.interactions?.craft"
+        />
 
     </div>
 
@@ -74,6 +42,7 @@ import { useExplorationStore } from "@/stores/exploration.js"
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"
 import * as Card from "@/components/Card"
+import * as Action from "@/components/Action"
 
 export default {
     data(){
@@ -83,7 +52,8 @@ export default {
     components: {
         ...Misc,
         ...Card,
-        ...Button
+        ...Button,
+        ...Action
     },
     methods: {
     },
