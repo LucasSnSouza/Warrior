@@ -55,21 +55,68 @@ export const refined = [
         description: "Metal facilmente maleavel e em abundancia torna essa Barra barata de se produzir.",
         type: "metal",
         tier: 1,
-        requires: []
+        visuals: {
+            background: "/images/tiers/tier-2.png",
+            display: "/images/resources/tin-ingot.png"
+        },
+        requires: [
+            {
+                name: "Carvão",
+                amount: 5,
+            },
+            {
+                name: "Minerio de Estanho",
+                amount: 10,
+            }
+        ]
     },
     {
         name: "Barra de Cobre",
         description: "Um Metal duro porém menos resistente que o ferro, para barras intermediarias de qualidade",
         type: "metal",
         tier: 2,
-        requires: []
+        visuals: {
+            background: "/images/tiers/tier-3.png",
+            display: "/images/resources/cooper-ingot.png"
+        },
+        requires: [
+            {
+                name: "Carvão",
+                amount: 25,
+            },
+            {
+                name: "Barra de Estanho",
+                amount: 5,
+            },
+            {
+                name: "Minerio de Cobre",
+                amount: 10,
+            }
+        ]
     },
     {
         name: "Barra de Ferro",
         description: "Reconhecido por muitos por sua resistencia incrivel e durabilidade.",
         type: "metal",
         tier: 3,
-        requires: []
+        visuals: {
+            background: "/images/tiers/tier-4.png",
+            display: "/images/resources/iron-ingot.png"
+        },
+        requires: [
+            {
+                name: "Carvão",
+                amount: 50,
+            },
+            {
+                name: "Barra de Estanho",
+                amount: 5,
+            },
+            {
+                name: "Minerio de Ferro",
+                amount: 10,
+            }
+        ]
     },
     {
         name: "Barra de Damasco",

@@ -7,7 +7,7 @@
         >
             <div class="card-information flex x-center y-center w-full">
                 <img 
-                    class="h-3-4"
+                    class="h-half"
                     :src="display"
                 >
                 </img>
@@ -59,7 +59,12 @@ export default {
         z-index: 1;
         
         .card-information{
-            z-index: 2;    
+            z-index: 2;
+
+            img{
+                filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.2));
+            }
+
         }
 
     }

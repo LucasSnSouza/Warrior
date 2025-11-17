@@ -9,6 +9,8 @@
                 :name="item.name"
                 :description="item?.description"
                 :tier="item.tier"
+                :visuals="item.visuals"
+                :requeries="item.requires"
                 :panel="item.panel"
                 :index="index"
                 @click="item.panel = !item.panel"

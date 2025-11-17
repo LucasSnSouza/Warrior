@@ -3,6 +3,7 @@
     <div class="interaction scroll-y w-full h-full flex flex-column gap-xlg">
 
         <CardOverview
+            v-if="false"
             :background="getSelectedCard?.internal.background"
             :display="getSelectedCard?.internal.display"
         />
