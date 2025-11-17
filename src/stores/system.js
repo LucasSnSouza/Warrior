@@ -12,14 +12,12 @@ export const useSystemStore = defineStore('system', {
             "",
             "white"
         ],
-        sidebar: false,
     }),
     getters: {
         getTheme: (state) => state.theme,
         getCurrentLanguage: (state) => state.language,
         getLanguages: (state) => state.languages,
         getThemes: (state) => state.themes,
-        getSidebar: (state) => state.sidebar,
     },
     actions: {
         toggleLanguage(language){
@@ -32,13 +30,6 @@ export const useSystemStore = defineStore('system', {
                 return;
             }
             this.theme = this.themes[theme_index + 1];
-        },
-        toggleSidebar(value=false){
-            if(value){
-                this.sidebar = value
-                return;
-            }
-            this.sidebar = !this.sidebar
         },
     }
 })

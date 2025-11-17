@@ -1,29 +1,28 @@
 <template>
 
-    <div class="modal-basic-wrapper absolute w-full p-lg bg-color-brand-three flex flex-column justify-between">
-        <div 
-            v-if="title"
-            class="modal-basic-title flex flex-column color-brand-one"
-        >
-            <h1 class="font-md">{{ title }}</h1>
-        </div>
-        <div class="modal-basic-contents h-full">
-            <slot/>
-        </div>
-        <div class="modal-basic-buttons flex gap-md">
+    <div class="modal-basic-wrapper p-xlg absolute w-full h-full y-center flex">
 
-            <ButtonBasic
-                class="w-full p-lg rounded-md bg-color-brand-one"
-            >
-                <p>Cancel</p>
-            </ButtonBasic>
-
-            <ButtonBasic
-                class="w-full p-lg rounded-md bg-color-brand-one"
-            >
-                <p>Submit</p>
-            </ButtonBasic>
-            
+        <div class="modal-basic-panel w-full">
+            <div class="modal-basic-informations flex flex-column h-full p-md">
+                <slot/>
+            </div>
+            <div class="modal-basic-actions flex gap-md p-md">
+    
+                <ButtonBasic
+                    class="w-full p-lg rounded-md color-brand-three bg-none"
+                    @click="$emit('cancel-action')"
+                >
+                    <p>Cancelar</p>
+                </ButtonBasic>
+    
+                <ButtonBasic
+                    class="w-full p-lg rounded-md bg-color-brand-three color-brand-two"
+                    @click="$emit('confirm-action')"
+                >
+                    <p>Confirmar</p>
+                </ButtonBasic>
+                
+            </div>
         </div>
     </div>
 
@@ -55,18 +54,23 @@ export default{
 <style lang="scss">
 
 .modal-basic-wrapper{
-    height: 0px;
-    bottom: 0px;
-    left: 0px;
+    background-color: rgba(0, 0, 0, 0.2);
     z-index: 5;
-    animation: fade-in 0.1s linear forwards;
-}
 
-@keyframes fade-in {
-    from{
-        height: 0px;
-    }to{
-        height: calc(50%);
+    .modal-basic-panel{
+
+        .modal-basic-informations{
+            background: white;
+            border-top-left-radius: var(--scale-brand-md);
+            border-top-right-radius: var(--scale-brand-md);
+        }
+
+        .modal-basic-actions{
+            background: rgb(245, 245, 245);
+            border-bottom-left-radius: var(--scale-brand-md);
+            border-bottom-right-radius: var(--scale-brand-md);
+        }
+
     }
 }
 

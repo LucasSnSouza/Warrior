@@ -96,6 +96,23 @@
 
         </div>
 
+        <ModalBasic
+            v-if="selectedItem"
+            @cancel-action="removeSelectedItemOnStorage"
+        >
+            <div class="flex x-center">
+                <CardOverview
+                    :background="selectedItem?.visuals.background"
+                    :display="selectedItem?.visuals.display"
+                    style="
+                        width: 30%;
+                        margin-top: -15%;
+                        box-shadow: 2px 2px 4px #00000011;
+                    "
+                />
+            </div>
+        </ModalBasic>
+
     </div>
 
 </template>
@@ -104,8 +121,11 @@
 
 import { RouterLink, RouterView } from 'vue-router'
 import { useSystemStore } from '@/stores/system.js'
+import { useItemsStore } from '@/stores/items.js'
 
 import * as Button from "@/components/Button"
+import * as Modal from "@/components/Modal"
+import * as Card from "@/components/Card"
 import * as Misc from "@/components/Misc"
 
 export default {
@@ -115,11 +135,19 @@ export default {
     },
     components: {
         ...Button,
-        ...Misc
+        ...Misc,
+        ...Modal,
+        ...Card
     },
     methods: {
+        removeSelectedItemOnStorage(){
+            useItemsStore().removeSelectedItem()
+        }
     },
     computed: {
+        selectedItem(){
+            return useItemsStore().getSelectedItem
+        }
     },
     created(){
     }

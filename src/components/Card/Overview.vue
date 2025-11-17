@@ -1,6 +1,9 @@
 <template>
 
-    <div class="card-overview relative w-full flex aspect-ratio flex-column x-center">
+    <div 
+        :class="this.class"
+        class="card-overview relative w-full flex aspect-ratio flex-column x-center"
+    >
         <div 
             class="card-wrapper h-full flex relative bg-color-brand-three"
             :style="{ backgroundImage: `url(${background})` }"
@@ -26,6 +29,10 @@ export default {
         }
     },
     props: {
+        class: {
+            type: String,
+            default: ""
+        },  
         background: {
             type: String,
         },

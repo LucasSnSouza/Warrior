@@ -3,20 +3,18 @@
     <div class="refine-wrapper w-full flex flex-column gap-md">
         <p class="color-brand-two font-md">Refinamento</p>
         <div class="flex flex-column w-full gap-md">
-
             <ButtonItem
                 v-for="(item, index) in refines_list"
-                :name="item.name"
-                :description="item?.description"
-                :tier="item.tier"
-                :visuals="item.visuals"
-                :requeries="item.requires"
-                :panel="item.panel"
+                :item="item"
                 :index="index"
-                @click="item.panel = !item.panel"
             />
+        </div>
+        <div class="w-full flex flex-column gap-md">
+            <p class="color-brand-two font-md"> Fila de Processamento</p>
+            <div>
 
-        </div>        
+            </div>
+        </div>   
     </div>
 
 </template>
