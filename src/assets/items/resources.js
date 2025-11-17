@@ -51,14 +51,24 @@ export const raw = [
 
 export const refined = [
     {
+        internal: "iron-ingot",
         name: "Barra de Estanho",
         description: "Metal facilmente maleavel e em abundancia torna essa Barra barata de se produzir.",
         type: "metal",
         tier: 1,
         visuals: {
-            background: "/images/tiers/tier-2.png",
+            background: "/images/tiers/tier-1.png",
             display: "/images/resources/tin-ingot.png"
         },
+        stats: [
+            {
+                internal: "weight",
+                name: "Peso",
+                value: 2
+            }
+        ],
+        skills: [],
+        specials: [],
         requires: [
             {
                 name: "Carvão",
@@ -76,9 +86,18 @@ export const refined = [
         type: "metal",
         tier: 2,
         visuals: {
-            background: "/images/tiers/tier-3.png",
+            background: "/images/tiers/tier-2.png",
             display: "/images/resources/cooper-ingot.png"
         },
+        stats: [
+            {
+                internal: "weight",
+                name: "Peso",
+                value: 2
+            }
+        ],
+        skills: [],
+        specials: [],
         requires: [
             {
                 name: "Carvão",
@@ -100,9 +119,18 @@ export const refined = [
         type: "metal",
         tier: 3,
         visuals: {
-            background: "/images/tiers/tier-4.png",
+            background: "/images/tiers/tier-3.png",
             display: "/images/resources/iron-ingot.png"
         },
+        stats: [
+            {
+                internal: "weight",
+                name: "Peso",
+                value: 2
+            }
+        ],
+        skills: [],
+        specials: [],
         requires: [
             {
                 name: "Carvão",
@@ -123,6 +151,19 @@ export const refined = [
         description: "",
         type: "metal",
         tier: 4,
+        visuals: {
+            background: "/images/tiers/tier-4.png",
+            display: "/images/resources/iron-ingot.png"
+        },
+        stats: [
+            {
+                internal: "weight",
+                name: "Peso",
+                value: 2
+            }
+        ],
+        skills: [],
+        specials: [],
         requires: []
     },
     {
@@ -130,6 +171,19 @@ export const refined = [
         description: "",
         type: "stone",
         tier: 1,
+        visuals: {
+            background: "/images/tiers/tier-4.png",
+            display: "/images/resources/iron-ingot.png"
+        },
+        stats: [
+            {
+                internal: "weight",
+                name: "Peso",
+                value: 2
+            }
+        ],
+        skills: [],
+        specials: [],
         requires: []
     },
     {
@@ -137,6 +191,19 @@ export const refined = [
         description: "",
         type: "stone",
         tier: 2,
+        visuals: {
+            background: "/images/tiers/tier-4.png",
+            display: "/images/resources/iron-ingot.png"
+        },
+        stats: [
+            {
+                internal: "weight",
+                name: "Peso",
+                value: 2
+            }
+        ],
+        skills: [],
+        specials: [],
         requires: []
     },
     {
@@ -144,6 +211,19 @@ export const refined = [
         description: "",
         type: "stone",
         tier: 3,
+        visuals: {
+            background: "/images/tiers/tier-4.png",
+            display: "/images/resources/iron-ingot.png"
+        },
+        stats: [
+            {
+                internal: "weight",
+                name: "Peso",
+                value: 2
+            }
+        ],
+        skills: [],
+        specials: [],
         requires: []
     },
     {
@@ -151,6 +231,19 @@ export const refined = [
         description: "",
         type: "stone",
         tier: 4,
+        visuals: {
+            background: "/images/tiers/tier-4.png",
+            display: "/images/resources/iron-ingot.png"
+        },
+        stats: [
+            {
+                internal: "weight",
+                name: "Peso",
+                value: 2
+            }
+        ],
+        skills: [],
+        specials: [],
         requires: []
     },
 ]

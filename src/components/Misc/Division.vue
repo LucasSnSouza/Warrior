@@ -5,7 +5,7 @@
 <style lang="scss">
 
 .division-wrapper{
-    border-bottom: 1px solid var(--color-brand-two);
+    border-bottom: 1px solid var(--color-brand-one);
 }
 
 </style>

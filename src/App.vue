@@ -97,20 +97,24 @@
         </div>
 
         <ModalBasic
-            v-if="selectedItem"
+            v-if="selectedItem?.display == 'details'"
+            cancel-button="Voltar"
             @cancel-action="removeSelectedItemOnStorage"
         >
-            <div class="flex x-center">
-                <CardOverview
-                    :background="selectedItem?.visuals.background"
-                    :display="selectedItem?.visuals.display"
-                    style="
-                        width: 30%;
-                        margin-top: -15%;
-                        box-shadow: 2px 2px 4px #00000011;
-                    "
-                />
-            </div>
+            <ViewModalDetails
+                :item="selectedItem"
+            />
+        </ModalBasic>
+
+        <ModalBasic
+            v-if="selectedItem?.display == 'crafting'"
+            cancel-button="Voltar"
+            confirm-button="Criar"
+            @cancel-action="removeSelectedItemOnStorage"
+        >
+            <ViewModalCraft
+                :item="selectedItem"
+            />
         </ModalBasic>
 
     </div>
@@ -127,6 +131,7 @@ import * as Button from "@/components/Button"
 import * as Modal from "@/components/Modal"
 import * as Card from "@/components/Card"
 import * as Misc from "@/components/Misc"
+import * as View from "@/components/View"
 
 export default {
     data(){
@@ -137,7 +142,8 @@ export default {
         ...Button,
         ...Misc,
         ...Modal,
-        ...Card
+        ...Card,
+        ...View
     },
     methods: {
         removeSelectedItemOnStorage(){

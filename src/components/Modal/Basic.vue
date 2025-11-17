@@ -3,23 +3,25 @@
     <div class="modal-basic-wrapper p-xlg absolute w-full h-full y-center flex">
 
         <div class="modal-basic-panel w-full">
-            <div class="modal-basic-informations flex flex-column h-full p-md">
+            <div class="modal-basic-informations flex flex-column h-full p-md gap-lg">
                 <slot/>
             </div>
             <div class="modal-basic-actions flex gap-md p-md">
     
                 <ButtonBasic
+                    v-if="cancelButton"
                     class="w-full p-lg rounded-md color-brand-three bg-none"
                     @click="$emit('cancel-action')"
                 >
-                    <p>Cancelar</p>
+                    <p>{{ cancelButton }}</p>
                 </ButtonBasic>
     
                 <ButtonBasic
+                    v-if="confirmButton"
                     class="w-full p-lg rounded-md bg-color-brand-three color-brand-two"
                     @click="$emit('confirm-action')"
                 >
-                    <p>Confirmar</p>
+                    <p>{{ confirmButton }}</p>
                 </ButtonBasic>
                 
             </div>
@@ -42,7 +44,11 @@ export default{
         ...Button
     },
     props: {
-        title: {
+        cancelButton: {
+            type: String,
+            default: null
+        },
+        confirmButton: {
             type: String,
             default: null
         }

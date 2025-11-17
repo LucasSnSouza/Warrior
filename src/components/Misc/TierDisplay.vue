@@ -22,11 +22,11 @@ export default{
                 "V"
             ],
             tiers_background_types: [
+                "/images/tiers/tier-0.png",
                 "/images/tiers/tier-1.png",
                 "/images/tiers/tier-2.png",
                 "/images/tiers/tier-3.png",
-                "/images/tiers/tier-4.png",
-                "/images/tiers/tier-5.png"
+                "/images/tiers/tier-4.png"
             ]
         }
     },

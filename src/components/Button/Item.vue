@@ -16,7 +16,7 @@
             <div class="flex gap-md">
                 <div 
                     class="bg-color-brand-three p-md rounded-sm h-full aspect-ratio flex x-center y-center"
-                    @click="setItemInStorage(item)"
+                    @click="setItemInStorage(item, 'details')"
                 >
                     <MiscIcon
                         icon="details-icon"
@@ -24,7 +24,10 @@
                         :size="[20,20]"
                     />
                 </div>
-                <div class="bg-color-brand-three p-md rounded-sm h-full aspect-ratio flex x-center y-center">
+                <div 
+                    class="bg-color-brand-three p-md rounded-sm h-full aspect-ratio flex x-center y-center"
+                    @click="setItemInStorage(item, 'crafting')"
+                >
                     <MiscIcon
                         icon="fire-icon"
                         class="bg-color-brand-two"
@@ -61,8 +64,11 @@ export default{
         ...Card
     },
     methods:{
-        setItemInStorage(item){
-            useItemsStore().setSelectedItem(item)
+        setItemInStorage(item, display_reference){
+            useItemsStore().setSelectedItem({
+                ...item,
+                display: display_reference
+            })
         }
     }
 }
