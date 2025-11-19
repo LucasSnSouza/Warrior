@@ -2,49 +2,58 @@
 
     <div class="app h-full flex flex-column bg-color-brand-three">
 
-        <div class="app-header flex p-xlg">
+        <div class="app-header">
 
-            <ButtonBasic
-                v-if="$route.meta.goback"
-                class="p-lg rounded-md aspect-ratio"
-                style="
-                    transform: scaleX(-1);
-                "
-                @click="$router.back()"
+            <div
+                v-if="$route.meta.header"
+                class="flex p-xlg"
+                style="justify-content: space-between;"
             >
-                <MiscIcon
-                    icon="styled-arrow-icon"
-                    class="bg-color-brand-three"
-                    :size="[24,24]"
-                />
-            </ButtonBasic>
-
-            <div class="h-full x-center y-center flex flex-column gap-md">
-                <p class="font-lg color-brand-two">Exploration</p>
-            </div>
-
-            <div class="flex gap-md">
-
                 <ButtonBasic
+                    v-if="$route.meta.goback"
                     class="p-lg rounded-md aspect-ratio"
+                    style="
+                        transform: scaleX(-1);
+                    "
+                    @click="$router.back()"
                 >
                     <MiscIcon
-                        icon="market-icon"
+                        icon="styled-arrow-icon"
                         class="bg-color-brand-three"
                         :size="[24,24]"
                     />
                 </ButtonBasic>
-
-                <ButtonBasic
-                    class="p-lg rounded-md aspect-ratio"
+    
+                <div class="h-full x-center y-center flex flex-column gap-md">
+                    <p class="font-lg color-brand-two"></p>
+                </div>
+    
+                <div 
+                    v-if="$route.meta.configuration"
+                    class="flex gap-md"
                 >
-                    <MiscIcon
-                        icon="settings-icon"
-                        class="bg-color-brand-three"
-                        :size="[24,24]"
-                    />
-                </ButtonBasic>
-
+    
+                    <ButtonBasic
+                        class="p-lg rounded-md aspect-ratio"
+                    >
+                        <MiscIcon
+                            icon="market-icon"
+                            class="bg-color-brand-three"
+                            :size="[24,24]"
+                        />
+                    </ButtonBasic>
+    
+                    <ButtonBasic
+                        class="p-lg rounded-md aspect-ratio"
+                    >
+                        <MiscIcon
+                            icon="settings-icon"
+                            class="bg-color-brand-three"
+                            :size="[24,24]"
+                        />
+                    </ButtonBasic>
+    
+                </div>
             </div>
 
         </div>
@@ -53,7 +62,10 @@
             <RouterView/>
         </div>
 
-        <div class="app-navigation flex gap-md x-center p-xlg">
+        <div 
+            v-if="$route.meta.navigation"
+            class="app-navigation flex gap-md x-center p-xlg"
+        >
 
             <ButtonBasic
                 class="p-lg rounded-md"
@@ -127,6 +139,8 @@ import { RouterLink, RouterView } from 'vue-router'
 import { useSystemStore } from '@/stores/system.js'
 import { useItemsStore } from '@/stores/items.js'
 
+import { Storage } from '@/utils/storage.js'
+
 import * as Button from "@/components/Button"
 import * as Modal from "@/components/Modal"
 import * as Card from "@/components/Card"
@@ -155,6 +169,19 @@ export default {
             return useItemsStore().getSelectedItem
         }
     },
+    mounted(){
+        if(Storage.get("game-system")){
+            Storage
+            .create("game-system")
+            .merge({
+                game: import.meta.env.VITE_GAME_NAME,
+                version: import.meta.env.VITE_GAME_VERSION,
+                last_profile: "",
+                profiles: []
+            })
+            .save()
+        }
+    },
     created(){
     }
 }
@@ -164,10 +191,6 @@ export default {
 <style lang="scss">
 
 .app{
-
-    .app-header{
-        justify-content: space-between;
-    }
 
     .app-information{
         padding-top: 0px;

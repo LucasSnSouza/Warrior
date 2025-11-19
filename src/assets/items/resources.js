@@ -172,8 +172,8 @@ export const refined = [
         type: "stone",
         tier: 1,
         visuals: {
-            background: "/images/tiers/tier-4.png",
-            display: "/images/resources/iron-ingot.png"
+            background: "/images/tiers/tier-1.png",
+            display: "/images/resources/sandstone-brick.png"
         },
         stats: [
             {
@@ -192,8 +192,8 @@ export const refined = [
         type: "stone",
         tier: 2,
         visuals: {
-            background: "/images/tiers/tier-4.png",
-            display: "/images/resources/iron-ingot.png"
+            background: "/images/tiers/tier-2.png",
+            display: "/images/resources/shale-brick.png"
         },
         stats: [
             {
@@ -212,8 +212,8 @@ export const refined = [
         type: "stone",
         tier: 3,
         visuals: {
-            background: "/images/tiers/tier-4.png",
-            display: "/images/resources/iron-ingot.png"
+            background: "/images/tiers/tier-3.png",
+            display: "/images/resources/dolomite-brick.png"
         },
         stats: [
             {
@@ -233,7 +233,7 @@ export const refined = [
         tier: 4,
         visuals: {
             background: "/images/tiers/tier-4.png",
-            display: "/images/resources/iron-ingot.png"
+            display: "/images/resources/obsidian-brick.png"
         },
         stats: [
             {

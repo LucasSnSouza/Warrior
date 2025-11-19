@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="8.9842386mm"
-   height="16.005562mm"
-   viewBox="0 0 8.9842386 16.005562"
+   width="16.328833mm"
+   height="13.967845mm"
+   viewBox="0 0 16.328833 13.967845"
    version="1.1"
    id="svg1"
    xml:space="preserve"
@@ -36,7 +36,15 @@
      inkscape:label="Camada 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-159.29442,-32.304576)"><path
-       style="opacity:1;fill:none;stroke:#000000;stroke-width:1.963;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:1.13386;paint-order:markers fill stroke"
-       d="m 160.27592,33.286075 7.02128,7.021282 -7.02128,7.021279"
-       id="path15" /></g></svg>
+     transform="translate(-135.55518,-33.702197)"><g
+       id="g14"
+       transform="matrix(3.87674,0,0,3.87674,-486.15562,-185.59417)"
+       inkscape:export-filename="crown-icon.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96"><path
+         style="opacity:1;fill:none;stroke:#000000;stroke-width:0.506353;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:1.13386;paint-order:markers fill stroke"
+         d="m 161.03439,59.095785 -0.41174,-2.080379 1.04019,0.801812 0.78014,-0.996847 0.78014,1.040188 1.1052,-0.845153 -0.39007,2.080379 z"
+         id="path11" /><path
+         style="opacity:1;fill:none;stroke:#000000;stroke-width:0.506353;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:1.13386;paint-order:markers fill stroke"
+         d="m 160.99105,59.917021 h 2.99054"
+         id="path14" /></g></g></svg>

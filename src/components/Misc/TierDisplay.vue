@@ -2,6 +2,7 @@
 
     <div 
         class="tier-display-wrapper aspect-ratio p-sm rounded-sm x-center y-center h-full"
+        :class="this.class"
         :style="{ backgroundImage: `url(${tiers_background_types[tier]})` }"
     >
         <p class="color-brand-two text-center">{{ getTierByNumber(tier) }}</p>
@@ -31,6 +32,10 @@ export default{
         }
     },
     props: {
+        class:{
+            type: String,
+            default: ""
+        },
         tier: {
             type: Number,
             default: 0
