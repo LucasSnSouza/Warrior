@@ -3,6 +3,7 @@
         class="input-basic-wrapper"
         :class="class"
     >
+        <slot name="start"/>
         <input 
             :type="type"
             :class="inputClass"
@@ -11,7 +12,7 @@
             :placeholder="placeholder"
             @input="(data) => { $emit('update:modelValue', data.target.value); }"
         >
-        <slot/>
+        <slot name="end"/>
     </div>
 </template>
 

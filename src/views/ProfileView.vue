@@ -6,7 +6,8 @@
             class="flex flex-column gap-sm color-brand-two"
             style="padding-top: var(--scale-brand-xlg);"
         >
-            <p class="font-xlg">Profiles</p>
+            <p class="font-xlg">{{ game_name }}</p>
+            <p class="font-md o-3-4">Bem vindo! junte-se a nós nessa aventura e desbravamento do novo mundo.</p>
         </div>
 
         <div 
@@ -46,6 +47,22 @@
                     :size="[15,15]"
                 />
             </ButtonBasic>
+            <MiscDivision class="w-3-4"/>
+            <ButtonBasic
+                class="flex justify-between p-lg w-full bg-none gap-md y-center"
+            >
+                <MiscIcon
+                    icon="theme-icon"
+                    class="bg-color-brand-three"
+                    :size="[20,20]"
+                />
+                <p class="text-start w-full">Trocar padrão de cores</p>
+                <MiscIcon
+                    icon="styled-arrow-icon"
+                    class="bg-color-brand-one o-half"
+                    :size="[15,15]"
+                />
+            </ButtonBasic>
 
         </div>
 
@@ -75,30 +92,31 @@
             </div>
             <div
                 v-else
-                class="w-full flex flex-column"
+                class="buttons-accounts w-full flex flex-column gap-md"
             >
-                <ButtonBasic
+                <div
                     v-for="(profile, profile_index) in list_profiles"
-                    class="flex justify-between w-full bg-none gap-md y-center"
-                    style="
-                        padding-right: var(--scale-brand-md);
-                    "
+                    class="flex flex-column y-center"
                     :index="profile_index"
-                    @click="$router.push({ path: '/exploration' })"
                 >
-                    <MiscTierDisplay
-                        :tier="profile.tier"
-                        style="
-                            width: 48px;
-                        "
-                    />
-                    <p class="font-md text-start w-full">{{ profile.name }}</p>
-                    <MiscIcon
-                        icon="styled-arrow-icon"
-                        class="bg-color-brand-one o-half"
-                        :size="[15,15]"
-                    />
-                </ButtonBasic>
+                    <ButtonBasic
+                        class="flex justify-between p-md w-full bg-none rounded gap-md y-center"
+                        @click="$router.push({ path: '/exploration' })"
+                    >
+                        <MiscTierDisplay
+                            :tier="profile.tier"
+                            style="
+                                width: 38px;
+                            "
+                        />
+                        <p class="font-md text-start w-full">{{ profile.name }}</p>
+                        <MiscIcon
+                            icon="styled-arrow-icon"
+                            class="bg-color-brand-one o-half"
+                            :size="[15,15]"
+                        />
+                    </ButtonBasic>
+                </div>
             </div>        
         </div>
 
@@ -118,10 +136,25 @@ export default{
         return{
             list_profiles: [
                 {
-                    name: "Usario 00",
+                    name: "Player 1",
                     power: 300,
                     tier: 2
-                }
+                },
+                {
+                    name: "Player 2",
+                    power: 500,
+                    tier: 3
+                },
+                {
+                    name: "Player 3",
+                    power: 150,
+                    tier: 1
+                },
+                {
+                    name: "Player 4",
+                    power: 900,
+                    tier: 4
+                },
             ],
             game_name: import.meta.env.VITE_GAME_NAME
         }

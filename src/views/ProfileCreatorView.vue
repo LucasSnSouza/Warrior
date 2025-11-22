@@ -1,42 +1,42 @@
 <template>
 
-    <div class="profile-creator flex flex-column gap-lg">
+    <div class="profile-creator flex flex-column x-end gap-lg">
+
 
         <div 
             class="flex flex-column gap-sm color-brand-two"
-            style="padding-top: var(--scale-brand-xlg);"
         >
-            <div class="flex y-end gap-md">
-                <div 
-                    class="rounded-sm p-lg bg-color-brand-two"
-                    style="transform: scaleX(-1);"
-                    @click="$router.push({ path: '/' })"
-                >
-                    <MiscIcon
-                        icon="styled-arrow-icon"
-                        class="bg-color-brand-one"
-                        :size="[16,16]"
-                    />
-                </div>
-                <p class="font-xlg">Criador de Profile</p>
-            </div>
-            <p class="font-sm">Crie seu novo profile aqui, todas as contas criadas estão salvas neste dispositivos.</p>
+            <p class="font-xlg">Novo Perfil</p>
+            <p class="font-md o-3-4">Precisamos de algumas informações para criar seu perfil.</p>
         </div>
 
-        <MiscDivision/>
+        <div class="w-full flex flex-column y-center">
+            <InputSelect
+            />
+        </div>
 
-        <InputBasic
-            v-model="profile_datas['name']"
-            class="w-full rounded-sm bg-color-brand-two p-lg"
-            placeholder="Nome de Personagem"
-            :value="profile_datas['name']"
-        />
-
-        <ButtonBasic
-            class="w-half bg-color-brand-two rounded-sm color-brand-three p-lg"
-        >
-            <p>Criar</p>
-        </ButtonBasic>
+        <div class="w-full flex flex-column y-center">
+            <ButtonBasic
+                class="p-lg w-full bg-color-brand-two font-md text-start rounded-md"
+                style="box-shadow: 2px 2px 8px #00000022; z-index: 2;"
+                @click="profile_form.usePassword = !profile_form.usePassword"
+            >
+                <p>Usar proteção de PIN</p>
+            </ButtonBasic>
+            <div
+                style="width: 90%;"
+                v-if="profile_form.usePassword"
+            >
+                <InputBasic
+                    class="w-full bg-color-brand-two p-lg"
+                    style="
+                        border-bottom-left-radius: var(--scale-brand-lg);
+                        border-bottom-right-radius: var(--scale-brand-lg);
+                    "
+                    placeholder="Insira um pin de 6 Digitos"
+                />
+            </div>
+        </div>
 
     </div>
 
@@ -53,7 +53,9 @@ import * as Misc from "@/components/Misc"
 export default{
     data(){
         return{
-            profile_datas: {},
+            profile_form: {
+                usePassword: false 
+            },
             list_profiles: [],
             game_name: import.meta.env.VITE_GAME_NAME
         }

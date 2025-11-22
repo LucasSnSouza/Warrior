@@ -9,50 +9,14 @@
                 class="flex p-xlg"
                 style="justify-content: space-between;"
             >
-                <ButtonBasic
-                    v-if="$route.meta.goback"
-                    class="p-lg rounded-md aspect-ratio"
-                    style="
-                        transform: scaleX(-1);
-                    "
-                    @click="$router.back()"
-                >
+                <div class="bg-color-brand-two rounded-lg p-lg">
                     <MiscIcon
                         icon="styled-arrow-icon"
-                        class="bg-color-brand-three"
-                        :size="[24,24]"
+                        class="bg-color-brand-three o-3-4"
+                        style="transform: scaleX(-1);"
+                        :size="[18,18]"
+                        @click="$router.back()"
                     />
-                </ButtonBasic>
-    
-                <div class="h-full x-center y-center flex flex-column gap-md">
-                    <p class="font-lg color-brand-two"></p>
-                </div>
-    
-                <div 
-                    v-if="$route.meta.configuration"
-                    class="flex gap-md"
-                >
-    
-                    <ButtonBasic
-                        class="p-lg rounded-md aspect-ratio"
-                    >
-                        <MiscIcon
-                            icon="market-icon"
-                            class="bg-color-brand-three"
-                            :size="[24,24]"
-                        />
-                    </ButtonBasic>
-    
-                    <ButtonBasic
-                        class="p-lg rounded-md aspect-ratio"
-                    >
-                        <MiscIcon
-                            icon="settings-icon"
-                            class="bg-color-brand-three"
-                            :size="[24,24]"
-                        />
-                    </ButtonBasic>
-    
                 </div>
             </div>
 
@@ -60,52 +24,6 @@
         
         <div class="app-information scroll-y h-full p-xlg">
             <RouterView/>
-        </div>
-
-        <div 
-            v-if="$route.meta.navigation"
-            class="app-navigation flex gap-md x-center p-xlg"
-        >
-
-            <ButtonBasic
-                class="p-lg rounded-md"
-                style="
-                    transform: scaleX(-1);
-                "
-            >
-                <MiscIcon
-                    icon="home-icon"
-                    class="bg-color-brand-three"
-                    :size="[24,24]"
-                />
-            </ButtonBasic>
-
-            <ButtonBasic
-                class="p-lg rounded-md"
-                style="
-                    transform: scaleX(-1);
-                "
-            >
-                <MiscIcon
-                    icon="inventory-icon"
-                    class="bg-color-brand-three"
-                    :size="[24,24]"
-                />
-            </ButtonBasic>
-
-            <ButtonBasic
-                class="p-lg rounded-md"
-                style="
-                    transform: scaleX(-1);
-                "
-            >
-                <MiscIcon
-                    icon="action-icon"
-                    class="bg-color-brand-three"
-                    :size="[24,24]"
-                />
-            </ButtonBasic>
-
         </div>
 
         <ModalBasic

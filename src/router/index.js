@@ -12,25 +12,25 @@ const router = createRouter({
       path: '/',
       name: 'Profile',
       component: ProfileView,
-      meta: { header: false, goback: false, configuration: false, navigation: false}
+      meta: { header: false, goback: false }
     },
     {
       path: '/profile-creator',
       name: 'Profile Creator',
       component: ProfileCreatorView,
-      meta: { header: false, goback: false, configuration: false, navigation: false}
+      meta: { header: true, goback: false }
     },
     {
       path: '/exploration',
       name: 'Exploration',
       component: ExplorationView,
-      meta: { header: true, goback: false, configuration: true, navigation: true }
+      meta: { header: true, goback: false }
     },
     {
       path: '/interaction',
       name: 'Interaction',
       component: InteractionView,
-      meta: { header: true, goback: true, configuration: true, navigation: true }
+      meta: { header: true, goback: true }
     },
   ],
 })

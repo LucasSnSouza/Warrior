@@ -4,10 +4,10 @@
 
         <div class="exploration-card relative w-full gap-md flex scroll-x">
 
-            <div class="exploration-card-controls flex w-full absolute">
+            <div class="exploration-card-controls flex w-3-4 absolute gap-md y-center">
 
                 <ButtonBasic
-                    class="p-lg rounded-md"
+                    class="p-lg rounded-md aspect-ratio h-full"
                     style="
                         transform: scaleX(-1);
                         margin-left: -15px;
@@ -17,12 +17,24 @@
                     <MiscIcon
                         icon="styled-arrow-icon"
                         class="bg-color-brand-three"
-                        :size="[16,16]"
+                        :size="[18,18]"
                     />
                 </ButtonBasic>
 
+                <div class="w-full p-md bg-color-brand-two rounded-md flex gap-md y-center">
+
+                    <MiscTierDisplay
+                        :tier="exploration_cards[exploration_index]?.tier"
+                        style="
+                            width: 34px;
+                        "
+                    />
+                    <p class="font-md">{{ exploration_cards[exploration_index]?.name }}</p>
+                    
+                </div>
+
                 <ButtonBasic
-                    class="p-lg rounded-md"
+                    class="p-lg rounded-md aspect-ratio h-full"
                     style="
                         margin-right: -15px;
                     "
@@ -31,7 +43,7 @@
                     <MiscIcon
                         icon="styled-arrow-icon"
                         class="bg-color-brand-three"
-                        :size="[16,16]"
+                        :size="[18,18]"
                     />
                 </ButtonBasic>
 
@@ -116,7 +128,7 @@ export default {
 
         .exploration-card-controls{
             justify-content: space-between;
-            top: 50%;
+            bottom: -12%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 2;
