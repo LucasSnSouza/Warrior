@@ -16,7 +16,7 @@
         >
 
             <ButtonBasic
-                class="flex justify-between p-lg w-full bg-none gap-md y-center"
+                class="flex justify-between p-lg w-full bg-none color-brand-one gap-md y-center"
             >
                 <MiscIcon
                     icon="crown-icon"
@@ -32,7 +32,7 @@
             </ButtonBasic>
             <MiscDivision class="w-3-4"/>
             <ButtonBasic
-                class="flex justify-between p-lg w-full bg-none gap-md y-center"
+                class="flex justify-between p-lg w-full bg-none color-brand-one gap-md y-center"
                 @click="$router.push({ path: '/profile-creator' })"
             >
                 <MiscIcon
@@ -49,7 +49,8 @@
             </ButtonBasic>
             <MiscDivision class="w-3-4"/>
             <ButtonBasic
-                class="flex justify-between p-lg w-full bg-none gap-md y-center"
+                class="flex justify-between p-lg w-full bg-none color-brand-one gap-md y-center"
+                @click="toggleTheme()"
             >
                 <MiscIcon
                     icon="theme-icon"
@@ -100,7 +101,7 @@
                     :index="profile_index"
                 >
                     <ButtonBasic
-                        class="flex justify-between p-md w-full bg-none rounded gap-md y-center"
+                        class="flex justify-between p-md w-full bg-none color-brand-one rounded gap-md y-center"
                         @click="$router.push({ path: '/exploration' })"
                     >
                         <MiscTierDisplay
@@ -126,6 +127,8 @@
 
 <script>
 
+import { useSystemStore } from '@/stores/system.js'
+
 import { Storage } from "@/utils/storage.js"
 
 import * as Button from "@/components/Button"
@@ -134,28 +137,7 @@ import * as Misc from "@/components/Misc"
 export default{
     data(){
         return{
-            list_profiles: [
-                {
-                    name: "Player 1",
-                    power: 300,
-                    tier: 2
-                },
-                {
-                    name: "Player 2",
-                    power: 500,
-                    tier: 3
-                },
-                {
-                    name: "Player 3",
-                    power: 150,
-                    tier: 1
-                },
-                {
-                    name: "Player 4",
-                    power: 900,
-                    tier: 4
-                },
-            ],
+            list_profiles: [],
             game_name: import.meta.env.VITE_GAME_NAME
         }
     },
@@ -163,8 +145,13 @@ export default{
         ...Button,
         ...Misc
     },
+    methods: {
+        toggleTheme(){
+            useSystemStore().toggleTheme()
+        }
+    },
     created(){
-        //this.list_profiles = Storage.get("game-system").data.profiles
+        this.list_profiles = Storage.get("game-system").data.profiles
     }
 }
 

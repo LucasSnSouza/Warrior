@@ -7,19 +7,20 @@
             class="input-value"
             @click="options_tab_opened = !options_tab_opened"
         >
-            <p class="o-half color-brand-two" v-if="!selected">{{ placeholder }}</p>
-            <p class="color-brand-two" v-else>{{ selected[reference] }}</p>
+            <p class="o-half" v-if="!selected">{{ placeholder }}</p>
+            <p class="" v-else>{{ selected[reference] }}</p>
         </div>
         <div 
             v-if="options_tab_opened"
             class="input-options absolute"
             :class="inputOptionsClass" 
         >
-            <slot 
-                v-for="(item, index) of items" 
+            <div 
+                v-for="(item, index) in items"
                 :key="index"
-                :item="item"
-            />
+            >
+                <slot :item="item"></slot>
+            </div>
         </div>
     </div>
 </template>

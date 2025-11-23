@@ -60,14 +60,14 @@ export default {
         opacity: 0.5;
         transform: translateX(-50%);
         left: 50%;
-        border-radius: var(--scale-brand-lg);
+        border-radius: var(--scale-brand-xlg);
     }
     
     .card-wrapper{
 
         height: 355px;
         width: 100%;
-        border-radius: var(--scale-brand-md);
+        border-radius: var(--scale-brand-xlg);
         scroll-snap-align: center;
         background-size: 105%;
         background-position: center;

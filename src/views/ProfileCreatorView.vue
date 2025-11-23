@@ -4,38 +4,61 @@
 
 
         <div 
-            class="flex flex-column gap-sm color-brand-two"
+            class="flex flex-column gap-sm color-brand-one"
         >
             <p class="font-xlg">Novo Perfil</p>
-            <p class="font-md o-3-4">Precisamos de algumas informações para criar seu perfil.</p>
+            <p class="font-md o-3-4 w-half">Precisamos de algumas informações para criar seu novo perfil.</p>
         </div>
 
         <div class="w-full flex flex-column y-center">
-            <InputSelect
+            <InputBasic
+                v-model="profile_form['name']"
+                class="p-lg w-full bg-color-brand-two color-brand-three ghost font-md text-start rounded-md flex"
+                input-class="p-sm font-md"
+                placeholder="Insira do personagem ..."
+                :value="profile_form['name']"
             />
         </div>
 
         <div class="w-full flex flex-column y-center">
             <ButtonBasic
-                class="p-lg w-full bg-color-brand-two font-md text-start rounded-md"
+                class="p-lg w-full bg-color-brand-two font-md text-start rounded-md flex y-center gap-md"
                 style="box-shadow: 2px 2px 8px #00000022; z-index: 2;"
                 @click="profile_form.usePassword = !profile_form.usePassword"
             >
-                <p>Usar proteção de PIN</p>
+                <MiscIcon
+                    icon="padlock-icon"
+                    class="bg-color-brand-three"
+                    :size="[16,16]"
+                />
+                <p class="p-sm" style="margin-top: 3px;">Usar proteção de PIN</p>
             </ButtonBasic>
             <div
-                style="width: 90%;"
                 v-if="profile_form.usePassword"
+                class="w-full"
+                style=""
             >
                 <InputBasic
-                    class="w-full bg-color-brand-two p-lg"
+                    v-model="profile_form['password']"
+                    class="w-full bg-color-brand-three color-brand-one p-lg"
+                    input-class="color-brand-two"
                     style="
                         border-bottom-left-radius: var(--scale-brand-lg);
                         border-bottom-right-radius: var(--scale-brand-lg);
                     "
-                    placeholder="Insira um pin de 6 Digitos"
+                    :value="profile_form['password']"
                 />
             </div>
+        </div>
+
+        <div class="w-full flex flex-column y-start">
+            <ButtonBasic
+                class="p-lg w-half bg-color-brand-three color-brand-two font-md text-start rounded-md flex y-center gap-md"
+                style="box-shadow: 2px 2px 8px #00000022; z-index: 2;"
+                @click="createAccount(), $router.push({ path: '/' })"
+            >
+                <p class="p-sm">Criar</p>
+            </ButtonBasic>
         </div>
 
     </div>
@@ -57,6 +80,16 @@ export default{
                 usePassword: false 
             },
             list_profiles: [],
+            list_languages: [
+                {
+                    name: "Portugues",
+                    shortname: "pt-br",
+                },
+                {
+                    name: "English",
+                    shortname: "us",
+                }
+            ],
             game_name: import.meta.env.VITE_GAME_NAME
         }
     },
@@ -65,6 +98,11 @@ export default{
         ...Misc,
         ...Input
     },
+    methods: {
+        createAccount(){
+            Storage.get("game-system").push("profiles", this.profile_form).save()
+        }
+    },  
     created(){
         this.list_profiles = Storage.get("game-system").data.profiles
     }

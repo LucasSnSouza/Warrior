@@ -1,7 +1,9 @@
 <template>
 
-    <div class="app h-full flex flex-column bg-color-brand-three">
-
+    <div 
+        class="app h-full flex flex-column"
+        :class="getTheme, $route.meta.background"
+    >
         <div class="app-header">
 
             <div
@@ -9,7 +11,10 @@
                 class="flex p-xlg"
                 style="justify-content: space-between;"
             >
-                <div class="bg-color-brand-two rounded-lg p-lg">
+                <div 
+                    class="bg-color-brand-two rounded-lg p-lg"
+                    style="box-shadow: 2px 2px 8px #00000022;"
+                >
                     <MiscIcon
                         icon="styled-arrow-icon"
                         class="bg-color-brand-three o-3-4"
@@ -85,10 +90,13 @@ export default {
     computed: {
         selectedItem(){
             return useItemsStore().getSelectedItem
+        },
+        getTheme(){
+            return useSystemStore().getTheme
         }
     },
     mounted(){
-        if(Storage.get("game-system")){
+        if(!Storage.exists("game-system")){
             Storage
             .create("game-system")
             .merge({

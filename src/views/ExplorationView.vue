@@ -7,7 +7,7 @@
             <div class="exploration-card-controls flex w-3-4 absolute gap-md y-center">
 
                 <ButtonBasic
-                    class="p-lg rounded-md aspect-ratio h-full"
+                    class="bg-color-brand-two p-lg rounded-md aspect-ratio h-full"
                     style="
                         transform: scaleX(-1);
                         margin-left: -15px;
@@ -34,7 +34,7 @@
                 </div>
 
                 <ButtonBasic
-                    class="p-lg rounded-md aspect-ratio h-full"
+                    class="bg-color-brand-two p-lg rounded-md aspect-ratio h-full"
                     style="
                         margin-right: -15px;
                     "

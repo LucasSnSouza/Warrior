@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const useSystemStore = defineStore('system', {
     state: () => ({
-        theme: '',
+        theme: 'white',
         language: {label: "english", value: "en"},
         languages: [
             { label: "portuguese", value: "pt" },
@@ -10,7 +10,10 @@ export const useSystemStore = defineStore('system', {
         ],
         themes: [
             "",
-            "white"
+            "light-gray",
+            "light-red",
+            "light-orange",
+            "light-green",
         ],
     }),
     getters: {

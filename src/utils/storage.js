@@ -4,6 +4,11 @@ export const Storage = {
             key,
             data,
 
+            push(field, value){
+                this.data[field].push(value)
+                return this;
+            },
+
             set(field, value) {
                 this.data[field] = value;
                 return this;
@@ -55,5 +60,10 @@ export const Storage = {
         const data = {};
         localStorage.setItem(key, JSON.stringify(data));
         return this._make(key, data);
-    }
+    },
+
+    exists(key) {
+        return localStorage.getItem(key) !== null;
+    },
+
 };
