@@ -4,7 +4,10 @@
 
         <div class="exploration-card relative w-full gap-md flex scroll-x">
 
-            <div class="exploration-card-controls flex w-3-4 absolute gap-md y-center">
+            <div 
+                v-if="!getAwait"
+                class="exploration-card-controls flex w-3-4 absolute gap-md y-center"
+            >
 
                 <ButtonBasic
                     class="bg-color-brand-two p-lg rounded-md aspect-ratio h-full"
@@ -66,6 +69,9 @@
 <script>
 
 import { useExplorationStore } from "@/stores/exploration.js"
+import { useSystemStore } from "@/stores/system.js"
+
+import { sleep } from "@/scripts/time.js"
 
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"
@@ -84,13 +90,15 @@ export default {
         ...Button
     },
     methods: {
-        nextCard() {
+        async nextCard() {
+            await sleep(1500);
             this.exploration_index++;
             if (this.exploration_index >= this.exploration_cards.length) {
                 this.exploration_index = 0;
             }
         },
-        previousCard() {
+        async previousCard() {
+            await sleep(1500);
             this.exploration_index--;
             if (this.exploration_index < 0) {
                 this.exploration_index = this.exploration_cards.length - 1;
@@ -101,6 +109,9 @@ export default {
         }
     },
     computed: {
+        getAwait(){
+            return useSystemStore().getAwait
+        }
     },
     async mounted(){
         this.exploration_cards = await useExplorationStore().fetchRegion("granhelm")

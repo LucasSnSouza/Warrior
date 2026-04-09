@@ -61,6 +61,8 @@ export default{
 
 .modal-basic-wrapper{
     background-color: rgba(0, 0, 0, 0.2);
+    top: 0;
+    left: 0;
     z-index: 5;
 
     .modal-basic-panel{

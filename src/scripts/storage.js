@@ -24,6 +24,16 @@ export const Storage = {
                 return this;
             },
 
+            replaceInList(field, key, value, newItem) {
+                const index = this.data[field].findIndex(item => item[key] === value);
+
+                if (index !== -1) {
+                    this.data[field].splice(index, 1, newItem);
+                }
+
+                return this;
+            },
+
             all() {
                 return this.data;
             },

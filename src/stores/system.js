@@ -8,6 +8,7 @@ export const useSystemStore = defineStore('system', {
             { label: "portuguese", value: "pt" },
             { label: "english", value: "en" },
         ],
+        isAwait: false,
         themes: [
             "",
             "light-gray",
@@ -21,8 +22,12 @@ export const useSystemStore = defineStore('system', {
         getCurrentLanguage: (state) => state.language,
         getLanguages: (state) => state.languages,
         getThemes: (state) => state.themes,
+        getAwait: (state) => state.isAwait
     },
     actions: {
+        setAwait(value){
+            this.isAwait = value
+        },
         toggleLanguage(language){
             this.language = language;
         },

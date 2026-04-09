@@ -10,11 +10,12 @@
                 />
             </div>
             <div class="w-full flex flex-column x-center y-start">
-                <p class="font-lg">{{ item?.name }}</p>
+                <p class="font-md">{{ item?.name }}</p>
                 <p v-if="item?.author" class="font-sm o-3-4">{{ item?.author }}</p>
             </div>
             <div class="flex gap-md">
                 <div 
+                    v-if="allowedActions.includes('details')"
                     class="bg-color-brand-three p-md rounded-sm h-full aspect-ratio flex x-center y-center"
                     @click="setItemInStorage(item, 'details')"
                 >
@@ -25,6 +26,7 @@
                     />
                 </div>
                 <div 
+                    v-if="allowedActions.includes('craft')"
                     class="bg-color-brand-three p-md rounded-sm h-full aspect-ratio flex x-center y-center"
                     @click="setItemInStorage(item, 'crafting')"
                 >
@@ -58,6 +60,10 @@ export default{
             type: Object,
             default: () => {}
         },
+        allowedActions: {
+            type: Array,
+            default: () => []
+        }
     },
     components: {
         ...Misc,

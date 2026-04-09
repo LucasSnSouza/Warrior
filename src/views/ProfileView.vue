@@ -30,7 +30,6 @@
                     :size="[15,15]"
                 />
             </ButtonBasic>
-            <MiscDivision class="w-3-4"/>
             <ButtonBasic
                 class="flex justify-between p-lg w-full bg-none color-brand-one gap-md y-center"
                 @click="$router.push({ path: '/profile-creator' })"
@@ -47,7 +46,6 @@
                     :size="[15,15]"
                 />
             </ButtonBasic>
-            <MiscDivision class="w-3-4"/>
             <ButtonBasic
                 class="flex justify-between p-lg w-full bg-none color-brand-one gap-md y-center"
                 @click="toggleTheme()"
@@ -102,7 +100,7 @@
                 >
                     <ButtonBasic
                         class="flex justify-between p-md w-full bg-none color-brand-one rounded gap-md y-center"
-                        @click="$router.push({ path: '/exploration' })"
+                        @click="$router.push({ path: '/exploration' }), setSelectedProfile(profile)"
                     >
                         <MiscTierDisplay
                             :tier="profile.tier"
@@ -128,8 +126,9 @@
 <script>
 
 import { useSystemStore } from '@/stores/system.js'
+import { useGameStore } from '@/stores/game.js'
 
-import { Storage } from "@/utils/storage.js"
+import { Storage } from "@/scripts/storage.js"
 
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"
@@ -148,6 +147,9 @@ export default{
     methods: {
         toggleTheme(){
             useSystemStore().toggleTheme()
+        },
+        setSelectedProfile(profile){
+            useGameStore().setSelectedProfile(profile)
         }
     },
     created(){

@@ -23,6 +23,7 @@
     <div class="flex gap-md">
         <ButtonBasic
             class="p-lg bg-color-brand-three rounded-md aspect-ratio h-full"
+            @click="amount--"
         >
             <MiscIcon
                 icon="minus-icon"
@@ -31,17 +32,19 @@
             />
         </ButtonBasic>
         <InputBasic
+            v-model="amount"
             class="font-md rounded-md p-md w-full"
             input-class="text-center"
-            :value="0"
             type="number"
             style="
                 border: 1px solid var(--color-brand-three);
                 box-shadow: 2px 2px 8px #00000022;
             "
+            :value="amount"
         />
         <ButtonBasic
             class="p-lg bg-color-brand-three rounded-md aspect-ratio h-full"
+            @click="amount++"
         >
             <MiscIcon
                 icon="plus-icon"
@@ -63,13 +66,21 @@ import * as Input from "@/components/Input"
 export default{
     data(){
         return{
-
+            amount: 0
         }
     },
     props:{
         item: {
             type: Object,
             default: () => {}
+        }
+    },
+    emits: [
+        "amount-change"
+    ],
+    watch: {
+        amount(newValue) {
+            this.$emit('amount-change', newValue)
         }
     },
     components: {

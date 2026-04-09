@@ -67,7 +67,7 @@
 
 <script>
 
-import { Storage } from "@/utils/storage.js"
+import { Storage } from "@/scripts/storage.js"
 
 import * as Button from "@/components/Button"
 import * as Input from "@/components/Input"
@@ -100,7 +100,15 @@ export default{
     },
     methods: {
         createAccount(){
-            Storage.get("game-system").push("profiles", this.profile_form).save()
+            Storage
+            .get("game-system")
+            .push("profiles", 
+                {
+                    ...this.profile_form,
+                    uid: crypto.randomUUID(),
+                    inventory: []
+                })
+            .save()
         }
     },  
     created(){

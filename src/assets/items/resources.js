@@ -56,6 +56,7 @@ export const refined = [
         description: "Metal facilmente maleavel e em abundancia torna essa Barra barata de se produzir.",
         type: "metal",
         tier: 1,
+        production_time: 5,
         visuals: {
             background: "/images/tiers/tier-1.png",
             display: "/images/resources/tin-ingot.png"
@@ -85,6 +86,7 @@ export const refined = [
         description: "Um Metal duro porém menos resistente que o ferro, para barras intermediarias de qualidade",
         type: "metal",
         tier: 2,
+        production_time: 10,
         visuals: {
             background: "/images/tiers/tier-2.png",
             display: "/images/resources/cooper-ingot.png"
@@ -118,6 +120,7 @@ export const refined = [
         description: "Reconhecido por muitos por sua resistencia incrivel e durabilidade.",
         type: "metal",
         tier: 3,
+        production_time: 15,
         visuals: {
             background: "/images/tiers/tier-3.png",
             display: "/images/resources/iron-ingot.png"
@@ -151,6 +154,7 @@ export const refined = [
         description: "",
         type: "metal",
         tier: 4,
+        production_time: 20,
         visuals: {
             background: "/images/tiers/tier-4.png",
             display: "/images/resources/iron-ingot.png"

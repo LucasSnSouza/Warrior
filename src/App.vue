@@ -31,27 +31,6 @@
             <RouterView/>
         </div>
 
-        <ModalBasic
-            v-if="selectedItem?.display == 'details'"
-            cancel-button="Voltar"
-            @cancel-action="removeSelectedItemOnStorage"
-        >
-            <ViewModalDetails
-                :item="selectedItem"
-            />
-        </ModalBasic>
-
-        <ModalBasic
-            v-if="selectedItem?.display == 'crafting'"
-            cancel-button="Voltar"
-            confirm-button="Criar"
-            @cancel-action="removeSelectedItemOnStorage"
-        >
-            <ViewModalCraft
-                :item="selectedItem"
-            />
-        </ModalBasic>
-
     </div>
 
 </template>
@@ -59,10 +38,12 @@
 <script>
 
 import { RouterLink, RouterView } from 'vue-router'
+
 import { useSystemStore } from '@/stores/system.js'
 import { useItemsStore } from '@/stores/items.js'
+import { useGameStore } from '@/stores/game.js'
 
-import { Storage } from '@/utils/storage.js'
+import { Storage } from '@/scripts/storage.js'
 
 import * as Button from "@/components/Button"
 import * as Modal from "@/components/Modal"
@@ -83,14 +64,8 @@ export default {
         ...View
     },
     methods: {
-        removeSelectedItemOnStorage(){
-            useItemsStore().removeSelectedItem()
-        }
     },
     computed: {
-        selectedItem(){
-            return useItemsStore().getSelectedItem
-        },
         getTheme(){
             return useSystemStore().getTheme
         }
@@ -109,6 +84,33 @@ export default {
         }
     },
     created(){
+        // Every 1 Second
+        window.setInterval(() => {
+            if(useGameStore().getCraftQueue.length > 0){
+                useGameStore().getCraftQueue.forEach((item, index) => {
+                    if(Date.now() >= item.readyAt){
+                        useGameStore().completeCraftQueueItem(
+                            { 
+                                ...item, 
+                                equiped: false 
+                            }
+                        )
+                    }
+                })
+            }
+        }, 1000);
+        // When game exit
+        window.addEventListener("beforeunload", () => {
+            Storage
+                .get('game-system')
+                .replaceInList(
+                    "profiles", 
+                    "uid", 
+                    useGameStore().getSelectedProfile.uid,
+                    useGameStore().getSelectedProfile
+                )
+                .save()
+        });
     }
 }
 

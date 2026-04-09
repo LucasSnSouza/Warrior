@@ -5,14 +5,33 @@
         <div class="card-amount"></div>
         <div 
             class="card-wrapper flex relative bg-color-brand-three"
+            style="
+                overflow: hidden;
+            "
             :style="{ backgroundImage: `url(${background})` }"
         >
-            <div class="card-information flex x-center y-center w-full">
-                <img 
-                    class="h-3-4"
-                    :src="display"
-                >
-                </img>
+            <div
+                v-if="getAwait"
+                class="bg-color-brand-three w-full h-full flex flex-column gap-md y-center x-center"
+            >
+                <MiscIcon
+                    icon="walking-icon"
+                    class="bg-color-brand-two"
+                    :size="[60,60]"
+                />
+                <p class="font-md color-brand-two">Caminhando</p>                              
+            </div>
+            <div
+                v-else
+                class="w-full h-full"
+            >
+                <div class="card-information flex x-center y-center w-full h-full">
+                    <img 
+                        class="h-3-4"
+                        :src="display"
+                    >
+                    </img>
+                </div>
             </div>
         </div>
         <div class="card-shadow"></div>
@@ -21,6 +40,10 @@
 </template>
 
 <script>
+
+import { useSystemStore } from "@/stores/system.js"
+
+import * as Misc from "@/components/Misc"
 
 export default {
     data(){
@@ -36,10 +59,14 @@ export default {
         },
     },
     components: {
+        ...Misc,
     },
     methods: {
     },
     computed: {
+        getAwait(){
+            return useSystemStore().getAwait
+        }
     },
     created(){
     }
@@ -47,7 +74,7 @@ export default {
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 .card{
 
@@ -73,7 +100,6 @@ export default {
         background-position: center;
         border: var(--scale-brand-md) solid white;
         z-index: 1;
-        animation: swap 0.5s;
         
         .card-information{
             z-index: 2;    
