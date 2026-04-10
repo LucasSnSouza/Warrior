@@ -26,8 +26,8 @@
                 <p class="text-start w-full">Atualizar para o Premium</p>
                 <MiscIcon
                     icon="styled-arrow-icon"
-                    class="bg-color-brand-one o-half"
-                    :size="[15,15]"
+                    class="bg-color-brand-one o-1-4"
+                    :size="[12,12]"
                 />
             </ButtonBasic>
             <ButtonBasic
@@ -37,13 +37,13 @@
                 <MiscIcon
                     icon="fire-icon"
                     class="bg-color-brand-three"
-                    :size="[20,20]"
+                    :size="[18,18]"
                 />
                 <p class="text-start w-full">Criar nova conta</p>
                 <MiscIcon
                     icon="styled-arrow-icon"
-                    class="bg-color-brand-one o-half"
-                    :size="[15,15]"
+                    class="bg-color-brand-one o-1-4"
+                    :size="[12,12]"
                 />
             </ButtonBasic>
             <ButtonBasic
@@ -53,13 +53,13 @@
                 <MiscIcon
                     icon="theme-icon"
                     class="bg-color-brand-three"
-                    :size="[20,20]"
+                    :size="[18,18]"
                 />
                 <p class="text-start w-full">Trocar padrão de cores</p>
                 <MiscIcon
                     icon="styled-arrow-icon"
-                    class="bg-color-brand-one o-half"
-                    :size="[15,15]"
+                    class="bg-color-brand-one o-1-4"
+                    :size="[12,12]"
                 />
             </ButtonBasic>
 
@@ -111,8 +111,8 @@
                         <p class="font-md text-start w-full">{{ profile.name }}</p>
                         <MiscIcon
                             icon="styled-arrow-icon"
-                            class="bg-color-brand-one o-half"
-                            :size="[15,15]"
+                            class="bg-color-brand-one o-1-4"
+                            :size="[12,12]"
                         />
                     </ButtonBasic>
                 </div>

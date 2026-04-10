@@ -15,11 +15,11 @@
                 class="bg-color-brand-three w-full h-full flex flex-column gap-md y-center x-center"
             >
                 <MiscIcon
-                    icon="walking-icon"
+                    icon="foots-icon"
                     class="bg-color-brand-two"
                     :size="[60,60]"
                 />
-                <p class="font-md color-brand-two">Caminhando</p>                              
+                <p class="font-md color-brand-two w-3-4 text-center">Indo para o novo local, aguarde alguns instantes.</p>                              
             </div>
             <div
                 v-else

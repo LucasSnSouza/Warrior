@@ -9,6 +9,7 @@ export const useSystemStore = defineStore('system', {
             { label: "english", value: "en" },
         ],
         isAwait: false,
+        isComplementary: false,
         themes: [
             "",
             "light-gray",
@@ -22,11 +23,15 @@ export const useSystemStore = defineStore('system', {
         getCurrentLanguage: (state) => state.language,
         getLanguages: (state) => state.languages,
         getThemes: (state) => state.themes,
-        getAwait: (state) => state.isAwait
+        getAwait: (state) => state.isAwait,
+        getComplementary: (state) => state.isComplementary
     },
     actions: {
         setAwait(value){
             this.isAwait = value
+        },
+        toggleComplementary(){
+            this.isComplementary = !this.isComplementary
         },
         toggleLanguage(language){
             this.language = language;
