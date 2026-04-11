@@ -12,7 +12,7 @@
         >
             <div
                 v-if="getAwait"
-                class="bg-color-brand-three w-full h-full flex flex-column gap-md y-center x-center"
+                class="walking-warning bg-color-brand-three w-full h-full flex flex-column gap-md y-center x-center"
             >
                 <MiscIcon
                     icon="foots-icon"
@@ -100,6 +100,10 @@ export default {
         background-position: center;
         border: var(--scale-brand-md) solid white;
         z-index: 1;
+
+        .walking-warning{
+            animation: fade-in 0.25s ease;
+        }
         
         .card-information{
             z-index: 2;    
@@ -118,6 +122,15 @@ export default {
     }
 
 
+}
+
+@keyframes fade-in {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }
 
 @keyframes swap {

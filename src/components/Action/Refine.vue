@@ -3,10 +3,34 @@
     <div class="refine-wrapper w-full flex flex-column gap-md">
         <div
             v-if="refines_list.length > 0"
-            class="w-full flex flex-column gap-md"
+            class="w-full flex flex-column gap-lg"
         >
-            <p class="color-brand-two font-md">Refinamento</p>
-            <div class="flex flex-column w-full gap-md">
+            <div 
+                class="flex x-start y-center gap-lg"
+                @click="refine_list_status = !refine_list_status"
+            >
+                <p 
+                    class="color-brand-three font-md"
+                    style="
+                        letter-spacing: 2px;
+                    "
+                >
+                    Refinamento
+                </p>
+                <MiscIcon
+                    icon="styled-arrow-icon"
+                    class="bg-color-brand-three"
+                    style="margin-top: 4px;"
+                    :style="{
+                        transform: refine_list_status ? 'rotate(-90deg)' : 'rotate(90deg)'
+                    }"
+                    :size="[12,12]"
+                />
+            </div>
+            <div 
+                v-if="refine_list_status"
+                class="flex flex-column w-full gap-md"
+            >
                 <ButtonItem
                     v-for="(item, index) in refines_list"
                     :item="item"
@@ -19,8 +43,32 @@
             v-if="getCraftQueue.length > 0"
             class="w-full flex flex-column gap-md"
         >
-            <p class="color-brand-two font-md"> Fila de Processamento</p>
-            <div class="flex flex-column w-full gap-md">
+            <div 
+                class="flex x-start y-center gap-lg"
+                @click="process_queue_status = !process_queue_status"
+            >
+                <p 
+                    class="color-brand-three font-md"
+                    style="
+                        letter-spacing: 2px;
+                    "
+                >
+                    Refinamento
+                </p>
+                <MiscIcon
+                    icon="styled-arrow-icon"
+                    class="bg-color-brand-three"
+                    style="margin-top: 4px;"
+                    :style="{
+                        transform: process_queue_status ? 'rotate(-90deg)' : 'rotate(90deg)'
+                    }"
+                    :size="[12,12]"
+                />
+            </div>
+            <div 
+                v-if="process_queue_status"
+                class="flex flex-column w-full gap-md"
+            >
                 <ButtonItem
                     v-for="(item, index) in getCraftQueue"
                     :item="item"
@@ -49,7 +97,9 @@ import * as Misc from "@/components/Misc"
 export default{
     data(){
         return{
-            refines_list: []
+            refines_list: [],
+            refine_list_status: false,
+            process_queue_status: false,
         }
     },
     props: {

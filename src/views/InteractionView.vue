@@ -1,6 +1,6 @@
 <template>
 
-    <div class="interaction scroll-y w-full h-full flex flex-column gap-xlg">
+    <div class="interaction scroll-y w-full h-full flex flex-column gap-lg">
 
         <CardOverview
             v-if="false"
@@ -8,10 +8,22 @@
             :display="getSelectedCard?.internal.display"
         />
 
-        <div class="interaction-basic-information w-full flex bg-color-brand-two rounded-md p-md gap-lg">
-            <MiscTierDisplay
-                :tier="getSelectedCard?.tier"
-            />
+        <div 
+            class="interaction-basic-information w-full flex bg-color-brand-three color-brand-two rounded-lg p-md gap-lg"
+            style="
+                border: 1px solid var(--color-brand-four);
+                height: 60px;
+            "
+        >
+            <div class="flex h-full aspect-ratio">
+                <MiscTierDisplay
+                    :tier="getSelectedCard?.tier"
+                    class="rounded-md"
+                    style="
+                        border: 3px solid var(--color-brand-two);
+                    "
+                />
+            </div>
             <div class="flex flex-column">
                 <p class="font-lg">{{ getSelectedCard?.name }}</p>
                 <p class="font-sm o-3-4">{{ getSelectedCard?.author }}</p>

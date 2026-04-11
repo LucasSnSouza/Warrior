@@ -3,7 +3,7 @@
     <div class="modal-basic-wrapper p-xlg absolute w-full h-full y-center flex">
 
         <div class="modal-basic-panel w-full">
-            <div class="modal-basic-informations flex flex-column h-full p-md gap-lg">
+            <div class="modal-basic-informations flex flex-column h-full p-xlg gap-lg">
                 <slot/>
             </div>
             <div class="modal-basic-actions flex gap-md p-md">

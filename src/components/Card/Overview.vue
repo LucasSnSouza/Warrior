@@ -62,7 +62,7 @@ export default {
         scroll-snap-align: center;
         background-size: 100% 100%;
         background-position: top;
-        border: var(--scale-brand-md) solid white;
+        border: var(--scale-brand-sm) solid white;
         z-index: 1;
         
         .card-information{

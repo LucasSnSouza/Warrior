@@ -3,39 +3,37 @@
     <button
         class="button-item w-full flex flex-column gap-md bg-none"
     >
-        <div class="flex bg-color-brand-two rounded-md p-md gap-md">
-            <div class="">
+        <div 
+            class="flex bg-color-brand-two rounded-lg p-sm gap-md"
+            style="
+                border: 1px solid var(--color-brand-four);
+                height: 52px;
+            "
+        >
+            <div 
+                class="h-full aspect-ratio hidden rounded-md"
+                style="
+                    border: 4px solid var(--color-brand-four);
+                "
+            >
                 <MiscTierDisplay
                     :tier="item?.tier"
                 />
             </div>
-            <div class="w-full flex flex-column x-center y-start">
+            <div class="h-full w-3-4 flex flex-column x-center y-start">
                 <p class="font-md">{{ item?.name }}</p>
                 <p v-if="item?.author" class="font-sm o-3-4">{{ item?.author }}</p>
             </div>
-            <div class="flex gap-md">
-                <div 
-                    v-if="allowedActions.includes('details')"
-                    class="bg-color-brand-three p-md rounded-sm h-full aspect-ratio flex x-center y-center"
-                    @click="setItemInStorage(item, 'details')"
-                >
-                    <MiscIcon
-                        icon="details-icon"
-                        class="bg-color-brand-two"
-                        :size="[20,20]"
-                    />
-                </div>
-                <div 
-                    v-if="allowedActions.includes('craft')"
-                    class="bg-color-brand-three p-md rounded-sm h-full aspect-ratio flex x-center y-center"
-                    @click="setItemInStorage(item, 'crafting')"
-                >
-                    <MiscIcon
-                        icon="fire-icon"
-                        class="bg-color-brand-two"
-                        :size="[20,20]"
-                    />
-                </div>
+            <div 
+                class="flex gap-md"
+                @click="setItemInStorage(item, 'details')"
+            >
+                <MiscIcon
+                    icon="external-link-icon"
+                    class="bg-color-brand-one o-half"
+                    style="margin-top: 5px;"
+                    :size="[12,12]"
+                />
             </div>
         </div>
     </button>
@@ -81,7 +79,7 @@ export default{
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 .button-item{
     border: none;

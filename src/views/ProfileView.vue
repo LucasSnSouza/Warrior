@@ -6,7 +6,15 @@
             class="flex flex-column gap-sm color-brand-two"
             style="padding-top: var(--scale-brand-xlg);"
         >
-            <p class="font-xlg">{{ game_name }}</p>
+            <p 
+                class="w-half"
+                style="
+                    font-size: 60px;
+                    font-weight: bold;
+                "
+            >
+                {{ game_name }}
+            </p>
             <p class="font-md o-3-4">Bem vindo! junte-se a nós nessa aventura e desbravamento do novo mundo.</p>
         </div>
 
@@ -104,8 +112,10 @@
                     >
                         <MiscTierDisplay
                             :tier="profile.tier"
+                            class="rounded-md"
                             style="
-                                width: 38px;
+                                width: 50px;
+                                border: 3px solid var(--color-brand-four);
                             "
                         />
                         <p class="font-md text-start w-full">{{ profile.name }}</p>

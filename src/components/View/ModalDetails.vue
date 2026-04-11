@@ -6,7 +6,7 @@
             :display="item?.visuals.display"
             style="
                 width: 30%;
-                margin-top: -15%;
+                margin-top: -20%;
                 box-shadow: 2px 2px 4px #00000011;
             "
         />

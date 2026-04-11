@@ -2,6 +2,20 @@
 
     <div class="profile-creator flex flex-column x-end gap-lg">
 
+        <div class="flex" style="padding-top: var(--scale-brand-xlg);">
+            <ButtonBasic 
+                class="bg-color-brand-two rounded-lg p-lg"
+                style="box-shadow: 2px 2px 8px #00000022;"
+                @click="$router.back()"
+            >
+                <MiscIcon
+                    icon="styled-arrow-icon"
+                    class="bg-color-brand-three o-3-4"
+                    style="transform: scaleX(-1);"
+                    :size="[18,18]"
+                />
+            </ButtonBasic>
+        </div>
 
         <div 
             class="flex flex-column gap-sm color-brand-one"
