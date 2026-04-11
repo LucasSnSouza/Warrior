@@ -25,7 +25,7 @@
                 <p v-if="item?.author" class="font-sm o-3-4">{{ item?.author }}</p>
             </div>
             <div 
-                class="flex gap-md"
+                class="flex gap-md x-end"
                 @click="setItemInStorage(item, 'details')"
             >
                 <MiscIcon
