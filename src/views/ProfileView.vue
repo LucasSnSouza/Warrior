@@ -38,6 +38,7 @@
                     :size="[12,12]"
                 />
             </ButtonBasic>
+
             <ButtonBasic
                 class="flex justify-between p-lg w-full bg-none color-brand-one gap-md y-center"
                 @click="$router.push({ path: '/profile-creator' })"
@@ -47,23 +48,24 @@
                     class="bg-color-brand-three"
                     :size="[18,18]"
                 />
-                <p class="text-start w-full">Criar nova conta</p>
+                <p class="text-start w-full">Criar novo personagem</p>
                 <MiscIcon
                     icon="styled-arrow-icon"
                     class="bg-color-brand-one o-1-4"
                     :size="[12,12]"
                 />
             </ButtonBasic>
+
             <ButtonBasic
                 class="flex justify-between p-lg w-full bg-none color-brand-one gap-md y-center"
-                @click="toggleTheme()"
+                @click="$router.push({ path: '/world-creator' })"
             >
                 <MiscIcon
-                    icon="theme-icon"
+                    icon="place-icon"
                     class="bg-color-brand-three"
                     :size="[18,18]"
                 />
-                <p class="text-start w-full">Trocar padrão de cores</p>
+                <p class="text-start w-full">Criar novo mundo</p>
                 <MiscIcon
                     icon="styled-arrow-icon"
                     class="bg-color-brand-one o-1-4"
@@ -72,8 +74,6 @@
             </ButtonBasic>
 
         </div>
-
-        
 
         <div 
             class="profiles-controller-buttons hidden bg-color-brand-two rounded-lg p-md flex flex-column y-center"
@@ -108,7 +108,7 @@
                 >
                     <ButtonBasic
                         class="flex justify-between p-md w-full bg-none color-brand-one rounded gap-md y-center"
-                        @click="$router.push({ path: '/exploration' }), setSelectedProfile(profile)"
+                        @click="isWorldChoicesOpened = true, setSelectedProfile(profile)"
                     >
                         <MiscTierDisplay
                             :tier="profile.tier"
@@ -129,6 +129,34 @@
             </div>        
         </div>
 
+        <div class="modals">
+
+            <ModalBasic
+                v-if="isWorldChoicesOpened"
+                cancel-button="Voltar"
+                @cancel-action="isWorldChoicesOpened = false"
+            >
+                <div>
+                    <h1 class="font-lg color-brand-three">Mundos</h1>
+                    <p class="font-md o-half">Escolha o mundo em que deseja vincular seu personagem</p>
+                </div>
+                <div class="flex flex-column gap-md w-full">
+                    <div
+                        v-for="(item, index) in list_worlds"
+                        class="p-lg rounded-md"
+                        style="
+                            border: 1px solid var(--color-brand-four);
+                        "
+                        :index="index"
+                        @click="$router.push({ path: '/exploration' })"
+                    >
+                        <p class="font-md">{{ item.name }}</p>
+                    </div>
+                </div>                
+            </ModalBasic>
+
+        </div>
+
     </div>
 
 </template>
@@ -142,17 +170,21 @@ import { Storage } from "@/scripts/storage.js"
 
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"
+import * as Modal from "@/components/Modal"
 
 export default{
     data(){
         return{
             list_profiles: [],
+            list_worlds: [],
+            isWorldChoicesOpened: false,
             game_name: import.meta.env.VITE_GAME_NAME
         }
     },
     components: {
         ...Button,
-        ...Misc
+        ...Misc,
+        ...Modal
     },
     methods: {
         toggleTheme(){
@@ -164,6 +196,7 @@ export default{
     },
     created(){
         this.list_profiles = Storage.get("game-system").data.profiles
+        this.list_worlds = Storage.get("game-system").data.worlds
     }
 }
 

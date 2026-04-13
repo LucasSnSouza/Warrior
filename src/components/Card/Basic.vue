@@ -4,7 +4,7 @@
 
         <div class="card-amount"></div>
         <div 
-            class="card-wrapper flex relative bg-color-brand-three"
+            class="card-wrapper flex relative bg-color-brand-three aspect-ratio"
             style="
                 overflow: hidden;
             "
@@ -91,8 +91,7 @@ export default {
     }
     
     .card-wrapper{
-
-        height: 355px;
+    
         width: 100%;
         border-radius: var(--scale-brand-xlg);
         scroll-snap-align: center;

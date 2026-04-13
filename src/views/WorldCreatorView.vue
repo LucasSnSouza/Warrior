@@ -20,27 +20,27 @@
         <div 
             class="flex flex-column gap-sm color-brand-one"
         >
-            <p class="font-xlg">Novo Perfil</p>
-            <p class="font-md o-3-4 w-half">Precisamos de algumas informações para criar seu novo perfil.</p>
+            <p class="font-xlg">Novo mundo</p>
+            <p class="font-md o-3-4 w-half">Você podera associar seus personagens a esse novo mundo.</p>
         </div>
 
         <div class="w-full flex flex-column y-center">
             <InputBasic
-                v-model="profile_form['name']"
+                v-model="world_form['name']"
                 class="p-lg w-full bg-color-brand-two color-brand-three ghost font-md text-start rounded-md flex"
                 input-class="p-sm font-md"
-                placeholder="Insira do personagem ..."
-                :value="profile_form['name']"
+                placeholder="Insira o nome do mundo ..."
+                :value="world_form['name']"
             />
         </div>
 
-        <div class="w-full flex gap-md y-center">
+        <div class="w-full flex y-center">
             <ButtonBasic
                 class="p-lg w-full bg-color-brand-two font-md text-start rounded-md flex y-center gap-md"
                 :style="{
-                    border: profile_form?.usePassword ? '3px solid var(--color-brand-three)' : '1px solid var(--color-brand-four)'
+                    border: world_form?.useAging ? '3px solid var(--color-brand-three)' : '1px solid var(--color-brand-four)'
                 }"
-                @click="profile_form.usePassword = !profile_form.usePassword"
+                @click="world_form.useAging = !world_form.useAging"
             >
                 <MiscIcon
                     icon="padlock-icon"
@@ -56,30 +56,18 @@
                             white-space: nowrap;
                         "
                     >
-                        Usar proteção de PIN
+                        Usar sistema de envelhecimento
                     </p>
-                    <p class="font-sm o-half">Proteger profile com senha</p>
+                    <p class="font-sm o-half">Você morrera de velhice em 30 dias</p>
                 </div>
             </ButtonBasic>
-            <div
-                v-if="profile_form.usePassword"
-                class="w-full"
-                style=""
-            >
-                <InputBasic
-                    v-model="profile_form['password']"
-                    class="w-full h-full bg-color-brand-three color-brand-one p-lg rounded-md"
-                    input-class="color-brand-two"
-                    :value="profile_form['password']"
-                />
-            </div>
         </div>
 
         <div class="w-full flex flex-column y-start">
             <ButtonBasic
                 class="p-lg w-half bg-color-brand-three color-brand-two font-md text-start rounded-md flex y-center gap-md"
                 style="box-shadow: 2px 2px 8px #00000022; z-index: 2;"
-                @click="createAccount(), $router.push({ path: '/' })"
+                @click="createWorld()"
             >
                 <p class="p-sm">Criar</p>
             </ButtonBasic>
@@ -100,21 +88,8 @@ import * as Misc from "@/components/Misc"
 export default{
     data(){
         return{
-            profile_form: {
-                usePassword: false 
+            world_form: {
             },
-            list_profiles: [],
-            list_languages: [
-                {
-                    name: "Portugues",
-                    shortname: "pt-br",
-                },
-                {
-                    name: "English",
-                    shortname: "us",
-                }
-            ],
-            game_name: import.meta.env.VITE_GAME_NAME
         }
     },
     components: {
@@ -123,23 +98,22 @@ export default{
         ...Input
     },
     methods: {
-        createAccount(){
+        createWorld(){
             Storage
             .get("game-system")
-            .push("profiles", 
+            .push("worlds", 
                 {
-                    name: this.profile_form.name,
+                    name: this.world_form.name,
                     uid: crypto.randomUUID(),
-                    inventory: [],
                     settings: {
-                        usePassword: this.profile_form?.usePassword || false
+                        useAging: this.world_form?.useAging || false
                     }
                 })
             .save()
+            this.$router.push({ path: '/' })
         }
     },  
     created(){
-        this.list_profiles = Storage.get("game-system").data.profiles
     }
 }
 

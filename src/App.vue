@@ -156,7 +156,13 @@ export default {
                 {
                     name: "Inventario",
                     icon: "inventory-icon",
-                    redirect: "/",
+                    redirect: "/inventory",
+                    selected: false
+                },
+                {
+                    name: "Construção",
+                    icon: "hammer-icon",
+                    redirect: "/building",
                     selected: false
                 }
             ]
@@ -195,7 +201,8 @@ export default {
                 game: import.meta.env.VITE_GAME_NAME,
                 version: import.meta.env.VITE_GAME_VERSION,
                 last_profile: "",
-                profiles: []
+                profiles: [],
+                worlds: []
             })
             .save()
         }

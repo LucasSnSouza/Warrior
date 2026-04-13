@@ -1,25 +1,48 @@
 <template>
 
     <div 
-        class="tier-display-wrapper aspect-ratio p-sm x-center y-center h-full w-full"
+        class="tier-display-wrapper aspect-ratio p-sm flex x-center y-center h-full w-full"
         :class="this.class"
         :style="{ backgroundImage: `url(${tiers_background_types[tier]})` }"
     >
+        <MiscIcon
+            :icon="getTierByNumber(tier).reference"
+            class="bg-color-brand-two"
+            :size="getTierByNumber(tier).size"
+            :key="tier"
+        />
     </div>
 
 </template>
 
 <script>
 
+import MiscIcon from "./Icon.vue"
+
 export default{
     data(){
         return{
-            tiers_letters_types: [
-                "I",
-                "II",
-                "III",
-                "IV",
-                "V"
+            tiers_icons_registry: [
+                {
+                    reference: "tierA-icon",
+                    size: [12,12]
+                },
+                {
+                    reference: "tierB-icon",
+                    size: [12,12]
+                },
+                {
+                    reference: "tierC-icon",
+                    size: [16,16]
+                },
+                {
+                    reference: "tierD-icon",
+                    size: [16,16]
+                },
+                {
+                    reference: "tierE-icon",
+                    size: [14,14]
+                },
             ],
             tiers_background_types: [
                 "/images/tiers/tier-0.png",
@@ -29,6 +52,9 @@ export default{
                 "/images/tiers/tier-4.png"
             ]
         }
+    },
+    components: {
+        MiscIcon
     },
     props: {
         class:{
@@ -42,7 +68,7 @@ export default{
     },
     methods:{
         getTierByNumber(tier){
-            return this.tiers_letters_types[tier]
+            return this.tiers_icons_registry[tier]
         }
     }
 }

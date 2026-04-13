@@ -10,19 +10,21 @@
                 height: 52px;
             "
         >
-            <div 
-                class="h-full aspect-ratio hidden rounded-md"
-                style="
-                    border: 4px solid var(--color-brand-four);
-                "
-            >
-                <MiscTierDisplay
-                    :tier="item?.tier"
-                />
-            </div>
-            <div class="h-full w-3-4 flex flex-column x-center y-start">
-                <p class="font-md">{{ item?.name }}</p>
-                <p v-if="item?.author" class="font-sm o-3-4">{{ item?.author }}</p>
+            <div class="flex w-full gap-md">
+                <div 
+                    class="h-full aspect-ratio hidden rounded-md"
+                    style="
+                        border: 4px solid var(--color-brand-four);
+                    "
+                >
+                    <MiscTierDisplay
+                        :tier="item?.tier"
+                    />
+                </div>
+                <div class="h-full w-3-4 flex flex-column x-center y-start">
+                    <p class="font-md">{{ item?.name }}</p>
+                    <p v-if="item?.author" class="font-sm o-3-4">{{ item?.author }}</p>
+                </div>
             </div>
             <div 
                 class="flex gap-md x-end"
@@ -31,7 +33,7 @@
                 <MiscIcon
                     icon="external-link-icon"
                     class="bg-color-brand-one o-half"
-                    style="margin-top: 5px;"
+                    style="margin-top: 5px;margin-right: 5px;"
                     :size="[12,12]"
                 />
             </div>

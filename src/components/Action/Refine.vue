@@ -98,7 +98,7 @@ export default{
     data(){
         return{
             refines_list: [],
-            refine_list_status: false,
+            refine_list_status: true,
             process_queue_status: false,
         }
     },
