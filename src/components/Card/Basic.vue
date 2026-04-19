@@ -41,7 +41,7 @@
 
 <script>
 
-import { useSystemStore } from "@/stores/system.js"
+import { useSystemStore } from "@/stores/system.store.js"
 
 import * as Misc from "@/components/Misc"
 

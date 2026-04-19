@@ -18,10 +18,10 @@
 
 <script>
 
-import { useExplorationStore } from "@/stores/exploration.js"
-import { useSystemStore } from '@/stores/system.js'
-import { useItemsStore } from '@/stores/items.js'
-import { useGameStore } from '@/stores/game.js'
+import { useExplorationStore } from "@/stores/exploration.store.js"
+import { useSystemStore } from '@/stores/system.store.js'
+import { useItemStore } from '@/stores/item.store.js'
+import { useGameStore } from '@/stores/game.store.js'
 
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"
@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         removeSelectedItemOnStorage(){
-            useItemsStore().removeSelectedItem()
+            useItemStore().removeSelectedItem()
         },
         addItemTodo(item, amount){
             const data = {
@@ -68,7 +68,7 @@ export default {
             return useExplorationStore().getSelectedCard
         },
         selectedItem(){
-            return useItemsStore().getSelectedItem
+            return useItemStore().getSelectedItem
         },
         getCraftQueue(){
             return useGameStore().getCraftQueue

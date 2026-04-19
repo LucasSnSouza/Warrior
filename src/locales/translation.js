@@ -1,4 +1,4 @@
-import { useSystemStore } from '@/stores/system.js'
+import { useSystemStore } from '@/stores/system.store.js'
 
 import pt from "./pt";
 import en from "./en";

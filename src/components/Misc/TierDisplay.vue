@@ -45,11 +45,11 @@ export default{
                 },
             ],
             tiers_background_types: [
-                "/images/tiers/tier-0.png",
-                "/images/tiers/tier-1.png",
-                "/images/tiers/tier-2.png",
-                "/images/tiers/tier-3.png",
-                "/images/tiers/tier-4.png"
+                "/Images/Tiers/tier-0.png",
+                "/Images/Tiers/tier-1.png",
+                "/Images/Tiers/tier-2.png",
+                "/Images/Tiers/tier-3.png",
+                "/Images/Tiers/tier-4.png"
             ]
         }
     },

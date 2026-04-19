@@ -90,6 +90,7 @@
                     <div 
                         class="frame-actions bg-color-brand-two rounded-lg x-center y-center flex shadow-sm"
                         style="
+                            justify-content: space-between;
                             border: 1px solid var(--color-brand-four);
                             padding: 8px;
                             gap: 40px;
@@ -131,9 +132,9 @@
 
 import { RouterLink, RouterView } from 'vue-router'
 
-import { useSystemStore } from '@/stores/system.js'
-import { useItemsStore } from '@/stores/items.js'
-import { useGameStore } from '@/stores/game.js'
+import { useSystemStore } from '@/stores/system.store.js'
+import { useItemStore } from '@/stores/item.store.js'
+import { useGameStore } from '@/stores/game.store.js'
 
 import { Storage } from '@/scripts/storage.js'
 
@@ -152,6 +153,12 @@ export default {
                     icon: "foots-icon",
                     redirect: "/exploration",
                     selected: true
+                },
+                {
+                    name: "Navegação",
+                    icon: "foots-icon",
+                    redirect: "/navigation",
+                    selected: false
                 },
                 {
                     name: "Inventario",
@@ -191,9 +198,44 @@ export default {
         },
         getComplementary(){
             return useSystemStore().getComplementary
+        },
+        getGame(){
+            return useGameStore().getGame
         }
     },
     mounted(){
+        // When game created
+        useGameStore().setGame();
+
+        setInterval(() => {
+            Storage
+            .get('game-system')
+            .replace(
+                this.getGame
+            )
+            .save()
+        }, 1000);
+
+        setInterval(() => {
+            Storage
+            .get('game-system')
+            .replace(
+                this.getGame
+            )
+            .save()
+        }, 60000);
+
+        // When game exit
+        // window.addEventListener("beforeunload", () => {
+        //     Storage
+        //     .get('game-system')
+        //     .replace(
+        //         this.getGame
+        //     )
+        //     .save()
+        // });        
+    },
+    created(){
         if(!Storage.exists("game-system")){
             Storage
             .create("game-system")
@@ -206,35 +248,6 @@ export default {
             })
             .save()
         }
-    },
-    created(){
-        // Every 1 Second
-        window.setInterval(() => {
-            if(useGameStore().getCraftQueue.length > 0){
-                useGameStore().getCraftQueue.forEach((item, index) => {
-                    if(Date.now() >= item.readyAt){
-                        useGameStore().completeCraftQueueItem(
-                            { 
-                                ...item, 
-                                equiped: false 
-                            }
-                        )
-                    }
-                })
-            }
-        }, 1000);
-        // When game exit
-        window.addEventListener("beforeunload", () => {
-            Storage
-                .get('game-system')
-                .replaceInList(
-                    "profiles", 
-                    "uid", 
-                    useGameStore().getSelectedProfile.uid,
-                    useGameStore().getSelectedProfile
-                )
-                .save()
-        });
     }
 }
 

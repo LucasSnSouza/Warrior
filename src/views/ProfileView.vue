@@ -80,12 +80,12 @@
             style="box-shadow: 4px 4px 10px #00000022;"
         >
             <div 
-                v-if="list_profiles.length == 0"
+                v-if="getProfiles.length == 0"
                 class="w-full flex flex-column gap-md y-center p-lg"
             >
                 <img 
                     class="w-half"
-                    src="/arts/warning-no-profiles.png">
+                    src="/Arts/warning-no-profiles.png">
                 </img>
                 <p class="o-half font-sm text-center">
                     Infelizmente não encontramos nenhuma conta vinculado a este dispositivo, crie uma agora e embarque nessa aventura.
@@ -102,13 +102,14 @@
                 class="buttons-accounts w-full flex flex-column gap-md"
             >
                 <div
-                    v-for="(profile, profile_index) in list_profiles"
+                    v-for="(profile, profile_index) in getProfiles"
                     class="flex flex-column y-center"
                     :index="profile_index"
+                    @click="setProfile(profile_index)"
                 >
                     <ButtonBasic
                         class="flex justify-between p-md w-full bg-none color-brand-one rounded gap-md y-center"
-                        @click="isWorldChoicesOpened = true, setSelectedProfile(profile)"
+                        @click="isWorldChoicesOpened = true"
                     >
                         <MiscTierDisplay
                             :tier="profile.tier"
@@ -142,15 +143,15 @@
                 </div>
                 <div class="flex flex-column gap-md w-full">
                     <div
-                        v-for="(item, index) in list_worlds"
+                        v-for="(world, world_index) in getWorlds"
                         class="p-lg rounded-md"
                         style="
                             border: 1px solid var(--color-brand-four);
                         "
-                        :index="index"
-                        @click="$router.push({ path: '/exploration' })"
+                        :index="world_index"
+                        @click="setWorld(world_index), $router.push({ path: '/exploration' })"
                     >
-                        <p class="font-md">{{ item.name }}</p>
+                        <p class="font-md">{{ world.name }}</p>
                     </div>
                 </div>                
             </ModalBasic>
@@ -163,8 +164,10 @@
 
 <script>
 
-import { useSystemStore } from '@/stores/system.js'
-import { useGameStore } from '@/stores/game.js'
+import { useSystemStore } from '@/stores/system.store.js'
+import { useGameStore } from '@/stores/game.store.js'
+import { useProfileStore } from '@/stores/profile.store.js'
+import { useWorldStore } from '@/stores/world.store.js'
 
 import { Storage } from "@/scripts/storage.js"
 
@@ -175,8 +178,6 @@ import * as Modal from "@/components/Modal"
 export default{
     data(){
         return{
-            list_profiles: [],
-            list_worlds: [],
             isWorldChoicesOpened: false,
             game_name: import.meta.env.VITE_GAME_NAME
         }
@@ -186,16 +187,28 @@ export default{
         ...Misc,
         ...Modal
     },
+    computed: {
+        getProfiles(){
+            return useProfileStore().getProfiles
+        },
+        getWorlds(){
+            return useWorldStore().getWorlds
+        }
+    },
     methods: {
         toggleTheme(){
             useSystemStore().toggleTheme()
         },
-        setSelectedProfile(profile){
-            useGameStore().setSelectedProfile(profile)
+        setProfile(profile_index){
+            useProfileStore().setProfile(profile_index)
+        },
+        setWorld(world_index){
+            useWorldStore().setWorld(world_index)
+            useWorldStore().cleanupWorld();
+            useWorldStore().populateWorld(5);
         }
     },
     created(){
-        this.list_profiles = Storage.get("game-system").data.profiles
         this.list_worlds = Storage.get("game-system").data.worlds
     }
 }

@@ -44,7 +44,7 @@
 
 <script>
 
-import { useItemsStore } from '@/stores/items.js'
+import { useItemStore } from '@/stores/item.store.js'
 
 import * as Misc from "@/components/Misc"
 import * as Card from "@/components/Card"
@@ -71,7 +71,7 @@ export default{
     },
     methods:{
         setItemInStorage(item, display_reference){
-            useItemsStore().setSelectedItem({
+            useItemStore().setSelectedItem({
                 ...item,
                 display: display_reference
             })

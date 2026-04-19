@@ -1,4 +1,4 @@
-import { useSystemStore } from "@/stores/system.js"
+import { useSystemStore } from "@/stores/system.store.js"
 
 export function sleep(ms) {
     useSystemStore().setAwait(true)

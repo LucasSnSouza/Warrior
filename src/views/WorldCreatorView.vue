@@ -34,35 +34,6 @@
             />
         </div>
 
-        <div class="w-full flex y-center">
-            <ButtonBasic
-                class="p-lg w-full bg-color-brand-two font-md text-start rounded-md flex y-center gap-md"
-                :style="{
-                    border: world_form?.useAging ? '3px solid var(--color-brand-three)' : '1px solid var(--color-brand-four)'
-                }"
-                @click="world_form.useAging = !world_form.useAging"
-            >
-                <MiscIcon
-                    icon="padlock-icon"
-                    class="bg-color-brand-three"
-                    :size="[16,16]"
-                />
-                <div class="flex flex-column x-start">
-                    <p
-                        style="
-                            margin-top: 3px;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                            white-space: nowrap;
-                        "
-                    >
-                        Usar sistema de envelhecimento
-                    </p>
-                    <p class="font-sm o-half">Você morrera de velhice em 30 dias</p>
-                </div>
-            </ButtonBasic>
-        </div>
-
         <div class="w-full flex flex-column y-start">
             <ButtonBasic
                 class="p-lg w-half bg-color-brand-three color-brand-two font-md text-start rounded-md flex y-center gap-md"
@@ -78,6 +49,8 @@
 </template>
 
 <script>
+
+import { useWorldStore } from "@/stores/world.store.js"
 
 import { Storage } from "@/scripts/storage.js"
 
@@ -99,17 +72,15 @@ export default{
     },
     methods: {
         createWorld(){
-            Storage
-            .get("game-system")
-            .push("worlds", 
+            useWorldStore().addWorld(
                 {
                     name: this.world_form.name,
                     uid: crypto.randomUUID(),
                     settings: {
-                        useAging: this.world_form?.useAging || false
-                    }
-                })
-            .save()
+                    },
+                    locations: []
+                }
+            );
             this.$router.push({ path: '/' })
         }
     },  

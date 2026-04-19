@@ -2,12 +2,6 @@
 
     <div class="interaction scroll-y w-full h-full flex flex-column gap-lg">
 
-        <CardOverview
-            v-if="false"
-            :background="getSelectedCard?.internal.background"
-            :display="getSelectedCard?.internal.display"
-        />
-
         <div 
             class="interaction-basic-information w-full flex bg-color-brand-three color-brand-two rounded-lg p-md gap-lg"
             style="
@@ -17,7 +11,7 @@
         >
             <div class="flex h-full aspect-ratio">
                 <MiscTierDisplay
-                    :tier="getSelectedCard?.tier"
+                    :tier="getSelectedNode?.tier"
                     class="rounded-md"
                     style="
                         border: 3px solid var(--color-brand-two);
@@ -25,26 +19,30 @@
                 />
             </div>
             <div class="flex flex-column">
-                <p class="font-lg">{{ getSelectedCard?.name }}</p>
-                <p class="font-sm o-3-4">{{ getSelectedCard?.author }}</p>
+                <p class="font-lg">{{ getSelectedNode?.name }}</p>
+                <p class="font-sm o-3-4">{{ getSelectedNode?.author }}</p>
             </div>
         </div>
 
         <ActionTravel
-            v-if="getSelectedCard?.interactions?.travel"
+            v-if="getSelectedNode?.interaction?.type === 'travel'"
         />
 
         <ActionRefine
-            v-if="getSelectedCard?.interactions?.refine"
-            :refineTier="getSelectedCard?.tier"
-            :refineTypes="getSelectedCard?.refine_types || []"
+            v-if="getSelectedNode?.interaction?.type === 'refine'"
+            :refineTier="getSelectedNode?.tier"
+            :refineTypes="getSelectedNode?.refine_types || []"
         />
 
         <ActionCraft
-            v-if="getSelectedCard?.interactions?.craft"
+            v-if="getSelectedNode?.interaction?.type === 'craft'"
         />
 
-        <ModalBasic
+        <GameHold
+            v-if="getSelectedNode?.interaction?.type === 'hold'"
+        />
+
+        <!-- <ModalBasic
             v-if="selectedItem?.display == 'details'"
             cancel-button="Voltar"
             @cancel-action="removeSelectedItemOnStorage"
@@ -65,7 +63,7 @@
                 :item="selectedItem"
                 @amount-change="amount_craft_item = $event"
             />
-        </ModalBasic>
+        </ModalBasic> -->
 
     </div>
 
@@ -73,10 +71,10 @@
 
 <script>
 
-import { useExplorationStore } from "@/stores/exploration.js"
-import { useSystemStore } from '@/stores/system.js'
-import { useItemsStore } from '@/stores/items.js'
-import { useGameStore } from '@/stores/game.js'
+import { useExplorationStore } from "@/stores/exploration.store.js"
+import { useSystemStore } from '@/stores/system.store.js'
+import { useItemStore } from '@/stores/item.store.js'
+import { useGameStore } from '@/stores/game.store.js'
 
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"
@@ -84,6 +82,7 @@ import * as Card from "@/components/Card"
 import * as Action from "@/components/Action"
 import * as Modal from "@/components/Modal"
 import * as View from "@/components/View"
+import * as Game from "@/components/Game"
 
 export default {
     data(){
@@ -97,37 +96,14 @@ export default {
         ...Button,
         ...Action,
         ...Modal,
-        ...View
+        ...View,
+        ...Game
     },
     methods: {
-        removeSelectedItemOnStorage(){
-            useItemsStore().removeSelectedItem()
-        },
-        addItemTodo(item, amount){
-            const data = {
-                ...item,
-                uid: crypto.randomUUID(),
-                amount: amount,
-                author: useGameStore().getSelectedProfile?.name,
-                createdAt: Date.now(),
-                readyAt: this.generateCraftingTime(amount, item?.tier, item?.production_time),
-            }
-            useGameStore().addCraftQueue(data)
-        },
-        generateCraftingTime(amount, tier, production_time){
-            const createdAt = Date.now()
-            return createdAt + ((production_time * amount * tier) * 1000)
-        }
     },
     computed: {
-        getSelectedCard(){
-            return useExplorationStore().getSelectedCard
-        },
-        selectedItem(){
-            return useItemsStore().getSelectedItem
-        },
-        getCraftQueue(){
-            return useGameStore().getCraftQueue
+        getSelectedNode(){
+            return useExplorationStore().getSelectedNode
         }
     },
     created(){

@@ -2,7 +2,10 @@
 
     <div class="exploration w-full h-full flex flex-column gap-xlg">
 
-        <div class="exploration-card relative w-full gap-md flex scroll-x">
+        <div 
+            v-if="getSelectedRegion"
+            class="exploration-card relative w-full gap-md flex scroll-x"
+        >
 
             <div 
                 v-if="!getAwait"
@@ -15,7 +18,7 @@
                         transform: scaleX(-1);
                         margin-left: -15px;
                     "
-                    @click="previousCard()"
+                    @click="previousPlace()"
                 >
                     <MiscIcon
                         icon="styled-arrow-icon"
@@ -34,7 +37,10 @@
                             width: 34px;
                         "
                     />
-                    <p class="font-md">{{ exploration_cards[exploration_index]?.name }}</p>
+                    <div class="flex flex-column">
+                        <p class="font-md">{{ getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex].name }}</p>
+                        <p class="font-sm o-half">{{ getSelectedRegion.places[getPlaceIndex].name }}</p>
+                    </div>
                     
                 </div>
 
@@ -43,7 +49,7 @@
                     style="
                         margin-right: -15px;
                     "
-                    @click="nextCard()"
+                    @click="nextPlace()"
                 >
                     <MiscIcon
                         icon="styled-arrow-icon"
@@ -56,10 +62,10 @@
 
             <CardBasic
                 style="margin-top: 10px;"
-                :background="exploration_cards[exploration_index]?.external.background"
-                :display="exploration_cards[exploration_index]?.external.display"
-                :key="exploration_index"
-                @click="$router.push( { path: '/interaction' } ), storeSelectedCard(exploration_cards[exploration_index])"
+                :background="getSelectedRegion.places[getPlaceIndex].background"
+                :display="getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex].image"
+                :key="getPlaceIndex"
+                @click="$router.push( { path: '/interaction' } ), storeSelectedNode(getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex])"
             />
 
         </div>
@@ -70,8 +76,9 @@
 
 <script>
 
-import { useExplorationStore } from "@/stores/exploration.js"
-import { useSystemStore } from "@/stores/system.js"
+import { useExplorationStore } from "@/stores/exploration.store.js"
+import { useWorldStore } from "@/stores/world.store.js"
+import { useSystemStore } from "@/stores/system.store.js"
 
 import { sleep } from "@/scripts/time.js"
 
@@ -92,40 +99,37 @@ export default {
         ...Button
     },
     methods: {
-        async nextCard() {
-            await sleep(1500);
-            this.exploration_index++;
-            if (this.exploration_index >= this.exploration_cards.length) {
-                this.exploration_index = 0;
-            }
+        nextPlace(){
+            useWorldStore().nextPlace();
         },
-        async previousCard() {
-            await sleep(1500);
-            this.exploration_index--;
-            if (this.exploration_index < 0) {
-                this.exploration_index = this.exploration_cards.length - 1;
-            }
+        previousPlace(){
+            useWorldStore().previousPlace();
         },
-        storeSelectedCard(card){
-            useExplorationStore().setSelectedCard(card)
+        storeSelectedNode(node){
+            useExplorationStore().setSelectedNode(node)
         }
     },
     computed: {
         getAwait(){
             return useSystemStore().getAwait
-        }
-    },
-    async mounted(){
-        this.exploration_cards = await useExplorationStore().fetchRegion("granhelm")
-        if(useExplorationStore().getSelectedCard){
-            const selectedCard = useExplorationStore().getSelectedCard
-            this.exploration_index = this.exploration_cards.findIndex(
-                card => card.name === selectedCard.name
-            )
+        },
+        getSelectedRegion(){
+            return useWorldStore().getSelectedRegion
+        },
+        getPlaceIndex(){
+            return useWorldStore().getPlaceIndex
+        },
+        getNodeIndex(){
+            return useWorldStore().getNodeIndex
         }
     },
     created(){
         
+    },
+    async mounted(){
+        if(!this.getSelectedRegion){
+            this.$router.push({ path: '/navigation' })
+        }
     }
 }
 

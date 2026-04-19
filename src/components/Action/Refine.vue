@@ -87,9 +87,9 @@
 
 <script>
 
-import { raw, refined } from "@/assets/items/resources.js"
+import { raw, refined } from "@/assets/types/resources.js"
 
-import { useGameStore } from '@/stores/game.js'
+import { useGameStore } from '@/stores/game.store.js'
 
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"

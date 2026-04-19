@@ -4,6 +4,7 @@ import ProfileView from '../views/ProfileView.vue'
 import ProfileCreatorView from '../views/ProfileCreatorView.vue'
 import WorldCreatorView from '../views/WorldCreatorView.vue'
 import ExplorationView from '../views/ExplorationView.vue'
+import NavigationView from '../views/NavigationView.vue'
 import InteractionView from '../views/InteractionView.vue'
 import InventoryView from '../views/InventoryView.vue'
 import DuelView from '../views/DuelView.vue'
@@ -39,6 +40,12 @@ const router = createRouter({
       path: '/interaction',
       name: 'Interaction',
       component: InteractionView,
+      meta: { header: true, goback: true, background: "bg-color-brand-five" }
+    },
+    {
+      path: '/navigation',
+      name: 'Navigation',
+      component: NavigationView,
       meta: { header: true, goback: true, background: "bg-color-brand-five" }
     },
     {
