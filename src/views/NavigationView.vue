@@ -6,7 +6,7 @@
             
             <ButtonBasic
                 v-for="(region, region_index) in getWorld?.locations"
-                class="p-sm rounded-md gap-md bg-color-brand-two w-full flex x-start"
+                class="p-sm rounded-md gap-md bg-color-brand-two w-full flex justify-between"
                 style="
                     border: 1px solid var(--color-brand-four);
                     height: 50px;
@@ -15,10 +15,19 @@
                 @click="setSelectedRegion(region), $router.push({ path: '/exploration' })"
             >
                 <div class="flex gap-md y-center">
+                    <div class="h-full aspect-ratio">
+                        <MiscTierDisplay
+                            :tier="region?.tier"
+                            class="rounded-md"
+                            style="
+                                border: 2px solid var(--color-brand-four);
+                                width: 100%;
+                            "
+                        />
+                    </div>
                     <div
                         class="rounded"
                         style="
-                            margin-left: 5px;
                             padding: 2px;
                             height: 50%;
                             background-color: color-mix(in srgb, red 50%, transparent);
@@ -39,7 +48,12 @@
                     </div>
                 </div>
                 <div>
-
+                    <MiscIcon
+                        icon="external-link-icon"
+                        class="bg-color-brand-one o-half"
+                        style="margin-top: 5px;margin-right: 5px;"
+                        :size="[12,12]"
+                    />
                 </div>
             </ButtonBasic>
 

@@ -2,7 +2,11 @@
 
     <div class="minigame-hold relative w-full flex flex-column x-center">
         <div 
-            class="minigame-hold-view relative bg-color-brand-four rounded-lg hidden w-full aspect-ratio flex y-center x-center"
+            class="minigame-hold-view relative rounded-lg bg-color-brand-four hidden w-full aspect-ratio flex y-center x-center"
+            style="
+                background-image: radial-gradient(circle, #00000022, transparent 2px);
+                background-size: 40px 40px;
+            "
             @contextmenu.prevent
             @pointerdown="initCharging()"
             @pointerup="stopCharging()"
@@ -11,6 +15,7 @@
                 class="minigame-max-level absolute rounded flex y-center x-center"
                 style="
                     background-color: color-mix(in srgb, var(--color-brand-three) 50%, transparent);
+                    box-shadow: 2px 2px 12px #00000022;
                 "
                 :style="{
                     width: `${charging_target_max_size}%`,
@@ -31,7 +36,12 @@
             >
             </div>
             <div
-                class="minigame-pointer absolute rounded bg-color-brand-one"
+                class="minigame-pointer absolute rounded"
+                style="
+                    background-color: color-mix(in srgb, var(--color-brand-one) 50%, transparent);
+                    border: 1px solid var(--color-brand-one);
+                    box-shadow: 2px 2px 12px #00000022;
+                "
                 :style="{
                     width: `${charging_size}%`,
                     height: `${charging_size}%`
@@ -58,7 +68,7 @@ export default{
     methods: {
         generate_random_target(){
             this.charging_target_min_size = Math.floor(Math.random() * 80)
-            this.charging_target_max_size = this.charging_target_min_size + (Math.floor(Math.random() * 10) + 2)
+            this.charging_target_max_size = this.charging_target_min_size + (Math.floor(Math.random() * 20) + 3)
         },
         initCharging(){
             this.is_charging = true;
@@ -104,8 +114,10 @@ export default{
 
     .minigame-hold-view{
 
+        z-index: 2;
+
         .minigame-pointer{
-            transition: .01s;
+            transition: .05s;
         }
 
     }
@@ -115,7 +127,7 @@ export default{
         bottom: -10px;
         width: 100%;
         height: 10px;
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 0, 0.2);
         border-radius: 50%;
         filter: blur(10px);
     }
