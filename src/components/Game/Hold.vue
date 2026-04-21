@@ -10,6 +10,7 @@
             @contextmenu.prevent
             @pointerdown="initCharging()"
             @pointerup="stopCharging()"
+            @pointerleave="stopCharging()"
         >
             <div 
                 class="minigame-max-level absolute rounded flex y-center x-center"
@@ -51,13 +52,60 @@
         <div class="minigame-hold-shadow"></div>
     </div>
 
+    <div 
+        v-if="drops_list.length > 0"
+        class="w-full flex flex-column gap-md"
+    >
+        <div 
+            class="flex x-start y-center gap-lg"
+            @click="drops_status = !drops_status"
+        >
+            <p 
+                class="color-brand-three font-md"
+                style="
+                    letter-spacing: 2px;
+                "
+            >
+                Coletaveis
+            </p>
+            <MiscIcon
+                icon="styled-arrow-icon"
+                class="bg-color-brand-three"
+                style="margin-top: 4px;"
+                :style="{
+                    transform: drops_status ? 'rotate(-90deg)' : 'rotate(90deg)'
+                }"
+                :size="[12,12]"
+            />
+        </div>
+        <div
+            v-if="drops_status"
+            class="flex flex-column gap-sm"
+        >
+            <ButtonItem
+                v-for="(item, index) in drops_list"
+                :item="item"
+                :index="index"
+            />
+        </div>
+    </div>
+
 </template>
 
 <script>
 
+import { raw } from "@/assets/types/resources.js"
+
+import Utils from "@/scripts/utilities.js"
+
+import * as Button from "@/components/Button"
+import * as Misc from "@/components/Misc"
+
 export default{
     data(){
         return{
+            drops_status: true,
+            drops_list: [],
             charging_size: 2,
             charging_target_min_size: 25,
             charging_target_max_size: 30,
@@ -65,7 +113,20 @@ export default{
             interval_reference: null,
         }
     },
+    props: {
+        drops: {
+            type: Array,
+            default: () => []
+        }
+    },
+    components: {
+        ...Misc,
+        ...Button
+    },
     methods: {
+        get_item_by_uid(uid){
+            return raw.find(item => item?.uid === uid) || null;
+        },
         generate_random_target(){
             this.charging_target_min_size = Math.floor(Math.random() * 80)
             this.charging_target_max_size = this.charging_target_min_size + (Math.floor(Math.random() * 20) + 3)
@@ -90,7 +151,10 @@ export default{
                 this.charging_size <= this.charging_target_max_size && 
                 this.charging_size >= this.charging_target_min_size
             ){
-                console.log('Acertou')
+                let item = this.get_item_by_uid(Utils.choice_by_weight(this.drops).uid)
+                if(item){
+                    this.drops_list.push(item)
+                }
             }
             this.is_charging = false;
             this.resetCharging();
@@ -131,7 +195,6 @@ export default{
         border-radius: 50%;
         filter: blur(10px);
     }
-
 
 }
 

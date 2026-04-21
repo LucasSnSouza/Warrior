@@ -1,6 +1,6 @@
 <template>
 
-    <div class="navigation scroll-y w-full h-full flex flex-column gap-lg">
+    <div class="navigation default-side-padding scroll-y w-full h-full flex flex-column gap-lg">
 
         <div class="w-full flex flex-column gap-md">
             
@@ -30,15 +30,20 @@
                         style="
                             padding: 2px;
                             height: 50%;
-                            background-color: color-mix(in srgb, red 50%, transparent);
-                        " 
+                            border: 1px solid var(--color-brand-four);
+                        "
+                        :style="{
+                            backgroundColor: `color-mix(in srgb, ${getRegionDangerousTypes[region.danger]?.color} 25%, transparent)`
+                        }"
                     >
                         <div
                             class="rounded h-full"
                             style="
                                 padding: 2px;
-                                background-color: red;
                             "
+                            :style="{
+                                backgroundColor: getRegionDangerousTypes[region.danger]?.color
+                            }"
                         >
     
                         </div>
@@ -64,6 +69,8 @@
 </template>
 
 <script>
+
+import { regions_dangerous_types } from "@/assets/types/regions.js"
 
 import { useExplorationStore } from "@/stores/exploration.store.js"
 import { useSystemStore } from '@/stores/system.store.js'
@@ -99,6 +106,9 @@ export default {
     computed: {
         getWorld(){
             return useWorldStore().getWorld
+        },
+        getRegionDangerousTypes(){
+            return regions_dangerous_types
         }
     },
     created(){

@@ -48,7 +48,7 @@ export const useWorldStore = defineStore('world', {
         },
         populateWorld(amount = 1){
             for(let i=0;i < amount;i++){
-                this.world.locations.push(Generator.generate_region(0, Math.floor(Math.random() * 2) ))
+                this.world.locations.push(Generator.generate_region(0, Math.floor(Math.random() * 3) ))
             }
         },
         setWorld(world_index){

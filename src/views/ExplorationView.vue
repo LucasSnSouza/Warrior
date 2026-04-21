@@ -1,6 +1,6 @@
 <template>
 
-    <div class="exploration w-full h-full flex flex-column gap-xlg">
+    <div class="exploration default-side-padding w-full h-full flex flex-column gap-xlg">
 
         <div 
             v-if="getSelectedRegion"

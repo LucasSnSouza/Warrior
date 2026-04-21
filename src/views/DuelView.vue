@@ -1,6 +1,6 @@
 <template>
 
-    <div class="inventory scroll-y w-full h-full flex flex-column gap-lg">
+    <div class="duel default-side-padding scroll-y w-full h-full flex flex-column gap-lg">
 
         <ModalBasic
             v-if="selectedItem?.display == 'details'"

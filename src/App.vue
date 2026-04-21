@@ -26,7 +26,7 @@
             </div>
 
             <div
-                class="app-container h-full scroll-y shadow-sm"
+                class="app-container flex flex-column h-full shadow-sm"
                 style="
                     min-width: 100%;
                 "
@@ -76,12 +76,12 @@
 
                     </div>
                 </div>
-                <div class="app-information p-xlg">
+                <div class="app-information h-full scroll-y">
                     <RouterView/>
                 </div>
                 <div 
                     v-if="$route.meta.header && !getComplementary"
-                    class="app-actions absolute w-full p-xlg"
+                    class="app-actions w-full p-xlg"
                     style="
                         bottom: 0;
                         left: 0;
@@ -327,11 +327,6 @@ export default {
 
         }
 
-    }
-
-    .app-information{
-        padding-top: 0px;
-        padding-bottom: 0px;
     }
 
 }

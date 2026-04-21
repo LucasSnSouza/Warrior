@@ -1,6 +1,6 @@
 <template>
 
-    <div class="interaction scroll-y w-full h-full flex flex-column gap-lg">
+    <div class="interaction default-side-padding scroll-y w-full h-full flex flex-column gap-lg">
 
         <div 
             class="interaction-basic-information w-full flex bg-color-brand-three color-brand-two rounded-lg p-md gap-lg"
@@ -40,6 +40,7 @@
 
         <GameHold
             v-if="getSelectedNode?.interaction?.type === 'hold'"
+            :drops="getSelectedNode?.drops || []"
         />
 
         <!-- <ModalBasic

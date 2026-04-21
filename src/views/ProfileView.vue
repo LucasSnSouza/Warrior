@@ -1,6 +1,6 @@
 <template>
 
-    <div class="profile flex flex-column gap-xlg">
+    <div class="profile default-side-padding flex flex-column gap-xlg">
 
         <div 
             class="flex flex-column gap-sm color-brand-two"

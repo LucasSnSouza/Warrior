@@ -1,6 +1,6 @@
 <template>
 
-    <div class="profile-creator flex flex-column x-end gap-lg">
+    <div class="profile-creator default-side-padding flex flex-column x-end gap-lg">
 
         <div class="flex" style="padding-top: var(--scale-brand-xlg);">
             <ButtonBasic 
