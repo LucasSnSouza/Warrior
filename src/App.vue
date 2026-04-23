@@ -133,7 +133,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 
 import { useSystemStore } from '@/stores/system.store.js'
-import { useItemStore } from '@/stores/item.store.js'
+import { useInteractionStore } from '@/stores/interaction.store.js'
 import { useGameStore } from '@/stores/game.store.js'
 
 import { Storage } from '@/scripts/storage.js'

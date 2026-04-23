@@ -10,7 +10,7 @@
         >
             <div class="card-information flex x-center y-center w-full">
                 <img 
-                    class="h-half"
+                    class="h-full"
                     :src="display"
                 >
                 </img>

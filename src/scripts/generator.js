@@ -26,10 +26,12 @@ export default{
     generate_node(target_tier, target_biome){
 
         let nodes_by_biome = nodes_types.filter(node => node.tier == target_tier &&  node.biomes.includes(target_biome))
+        let node = structuredClone(Utils.choice(nodes_by_biome))
 
         return {
-            ...Utils.choice(nodes_by_biome),
-            uid: crypto.randomUUID()
+            ...node,
+            uid: crypto.randomUUID(),
+            amount: Math.floor(Math.random() * 5 + 1)
         }
 
     },
@@ -44,7 +46,7 @@ export default{
         }
 
         return {
-            ...Utils.choice(landscape_by_biome),
+            ...structuredClone(Utils.choice(landscape_by_biome)),
             uid: crypto.randomUUID(),
             name: this.landscapes_names(target_biome),
             nodes: nodes_list
@@ -62,7 +64,7 @@ export default{
         }
 
         return {
-            ...region_type,
+            ...structuredClone(region_type),
             uid: crypto.randomUUID(),
             name: this.region_names(region_type?.biome),
             tier: region_tier,

@@ -8,6 +8,7 @@
             @cancel-action="removeSelectedItemOnStorage"
         >
             <ViewModalDetails
+                
                 :item="selectedItem"
             />
         </ModalBasic>
@@ -20,7 +21,7 @@
 
 import { useExplorationStore } from "@/stores/exploration.store.js"
 import { useSystemStore } from '@/stores/system.store.js'
-import { useItemStore } from '@/stores/item.store.js'
+import { useInteractionStore } from '@/stores/interaction.store.js'
 import { useGameStore } from '@/stores/game.store.js'
 
 import * as Button from "@/components/Button"
@@ -44,35 +45,8 @@ export default {
         ...View
     },
     methods: {
-        removeSelectedItemOnStorage(){
-            useItemStore().removeSelectedItem()
-        },
-        addItemTodo(item, amount){
-            const data = {
-                ...item,
-                uid: crypto.randomUUID(),
-                amount: amount,
-                author: useGameStore().getSelectedProfile?.name,
-                createdAt: Date.now(),
-                readyAt: this.generateCraftingTime(amount, item?.tier, item?.production_time),
-            }
-            useGameStore().addCraftQueue(data)
-        },
-        generateCraftingTime(amount, tier, production_time){
-            const createdAt = Date.now()
-            return createdAt + ((production_time * amount * tier) * 1000)
-        }
     },
     computed: {
-        getSelectedCard(){
-            return useExplorationStore().getSelectedCard
-        },
-        selectedItem(){
-            return useItemStore().getSelectedItem
-        },
-        getCraftQueue(){
-            return useGameStore().getCraftQueue
-        }
     },
     created(){
     }

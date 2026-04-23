@@ -19,35 +19,39 @@
             {{ item?.description }}
         </p>
     </div>
-    <MiscDivision/>
     <div 
-        v-if="item?.stats"
+        v-if="item?.attributes"
+        class="flex flex-column gap-md"
     >
-        <p class="font-md text-center" >Estatisticas</p>
-        <ButtonBasic
-            v-for="(stat, stat_index) in item.stats"
-            class="flex bg-none p-md y-center"
+        <p class="font-md text-center" >Atributos</p>
+        <div
+            class="flex x-center gap-md"
         >
-            <div 
-                class="bg-color-brand-three p-md rounded-md color-brand-two"
-                style="
-                    border-top-right-radius: 0px;
-                    border-bottom-right-radius: 0px;
-                "
+            <ButtonBasic
+                v-for="(attribute, attribute_index) in item?.attributes"
+                class="flex bg-none y-center"
             >
-                <p>{{ stat.name }}</p>
-            </div>
-            <div 
-                class="p-md rounded-md"
-                style="
-                    border-top-left-radius: 0px;
-                    border-bottom-left-radius: 0px;
-                    background: rgb(245, 245, 245);
-                "
-            >
-                <p>{{ stat.value }}</p>
-            </div>
-        </ButtonBasic>
+                <div 
+                    class="bg-color-brand-three p-md rounded-md color-brand-two"
+                    style="
+                        border-top-right-radius: 0px;
+                        border-bottom-right-radius: 0px;
+                    "
+                >
+                    <p>{{ attribute.name }}</p>
+                </div>
+                <div 
+                    class="p-md rounded-md"
+                    style="
+                        border-top-left-radius: 0px;
+                        border-bottom-left-radius: 0px;
+                        background: rgb(245, 245, 245);
+                    "
+                >
+                    <p>{{ attribute.value }}</p>
+                </div>
+            </ButtonBasic>
+        </div>
     </div>
 
 </template>

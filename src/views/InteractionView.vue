@@ -40,31 +40,22 @@
 
         <GameHold
             v-if="getSelectedNode?.interaction?.type === 'hold'"
-            :drops="getSelectedNode?.drops || []"
         />
 
-        <!-- <ModalBasic
-            v-if="selectedItem?.display == 'details'"
+        <ModalBasic
+            v-if="getSelectedItem"
             cancel-button="Voltar"
-            @cancel-action="removeSelectedItemOnStorage"
+            @cancel-action="removeSelectedItem()"
         >
             <ViewModalDetails
-                :item="selectedItem"
+                v-if="getSelectedItem.display_types.includes('overview')"
+                :item="getSelectedItem"
+            />
+            <ViewModalCollect
+                v-if="getSelectedItem.display_types.includes('collect')"
+                :item="getSelectedItem"
             />
         </ModalBasic>
-
-        <ModalBasic
-            v-if="selectedItem?.display == 'crafting'"
-            cancel-button="Voltar"
-            confirm-button="Criar"
-            @cancel-action="removeSelectedItemOnStorage"
-            @confirm-action="addItemTodo(selectedItem, amount_craft_item)"
-        >
-            <ViewModalCraft
-                :item="selectedItem"
-                @amount-change="amount_craft_item = $event"
-            />
-        </ModalBasic> -->
 
     </div>
 
@@ -74,7 +65,7 @@
 
 import { useExplorationStore } from "@/stores/exploration.store.js"
 import { useSystemStore } from '@/stores/system.store.js'
-import { useItemStore } from '@/stores/item.store.js'
+import { useInteractionStore } from '@/stores/interaction.store.js'
 import { useGameStore } from '@/stores/game.store.js'
 
 import * as Button from "@/components/Button"
@@ -101,10 +92,16 @@ export default {
         ...Game
     },
     methods: {
+        removeSelectedItem(){
+            return useInteractionStore().removeSelectedItem();
+        }
     },
     computed: {
         getSelectedNode(){
             return useExplorationStore().getSelectedNode
+        },
+        getSelectedItem(){
+            return useInteractionStore().getSelectedItem
         }
     },
     created(){

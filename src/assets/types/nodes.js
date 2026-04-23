@@ -5,6 +5,7 @@ export const nodes_types = [
         tier: 0,
         author: "World",
         biomes: ["plain", "florest"],
+        storage: [],
         interaction: {
             type: "hold",
         },
@@ -21,6 +22,7 @@ export const nodes_types = [
         tier: 0,
         author: "World",
         biomes: ["plain", "florest"],
+        storage: [],
         interaction: {
             type: "hold",
         }

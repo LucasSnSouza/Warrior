@@ -75,7 +75,7 @@ import { regions_dangerous_types } from "@/assets/types/regions.js"
 import { useExplorationStore } from "@/stores/exploration.store.js"
 import { useSystemStore } from '@/stores/system.store.js'
 import { useWorldStore } from '@/stores/world.store.js'
-import { useItemStore } from '@/stores/item.store.js'
+import { useInteractionStore } from '@/stores/interaction.store.js'
 import { useGameStore } from '@/stores/game.store.js'
 
 import * as Button from "@/components/Button"

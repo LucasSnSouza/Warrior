@@ -17,6 +17,7 @@ export const useWorldStore = defineStore('world', {
         getWorlds: (state) => state.worlds,
         getWorld: (state) => state.world,
         getSelectedRegion: (state) => state.selected_region,
+        getCurrentPlace: (state) => { return state.selected_region[state.place_index] },
         getPlaceIndex: (state) => state.place_index,
         getNodeIndex: (state) => state.node_index
     },

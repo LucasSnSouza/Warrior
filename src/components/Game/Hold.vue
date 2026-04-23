@@ -1,7 +1,7 @@
 <template>
 
     <div class="minigame-hold relative w-full flex flex-column x-center">
-        <div 
+        <div
             class="minigame-hold-view relative rounded-lg bg-color-brand-four hidden w-full aspect-ratio flex y-center x-center"
             style="
                 background-image: radial-gradient(circle, #00000022, transparent 2px);
@@ -10,7 +10,6 @@
             @contextmenu.prevent
             @pointerdown="initCharging()"
             @pointerup="stopCharging()"
-            @pointerleave="stopCharging()"
         >
             <div 
                 class="minigame-max-level absolute rounded flex y-center x-center"
@@ -48,12 +47,32 @@
                     height: `${charging_size}%`
                 }"
             ></div>
+            <div
+                v-if="charging_disabled"
+                class="absolute w-full h-full flex x-center y-center color-brand-two"
+                style="
+                    background-color: color-mix(in srgb, var(--color-brand-three) 95%, transparent);
+                "
+            >
+                <p>Esgotado</p>
+            </div>
+            <div
+                class="absolute aspect-ratio rounded-md flex x-center y-center bg-color-brand-three shadow-sm"
+                style="
+                    top: 10px;
+                    left: 10px;
+                    width: 40px;
+                    border: 1px solid var(--color-brand-four);
+                "
+            >
+                <p class="color-brand-two font-md">{{ getSelectedNode?.amount }}</p>
+            </div>
         </div>
         <div class="minigame-hold-shadow"></div>
     </div>
 
     <div 
-        v-if="drops_list.length > 0"
+        v-if="getSelectedNode.storage.length > 0"
         class="w-full flex flex-column gap-md"
     >
         <div 
@@ -83,9 +102,10 @@
             class="flex flex-column gap-sm"
         >
             <ButtonItem
-                v-for="(item, index) in drops_list"
+                v-for="(item, index) in getSelectedNode.storage"
                 :item="item"
                 :index="index"
+                @click="setSelectedItem(item)"
             />
         </div>
     </div>
@@ -96,16 +116,20 @@
 
 import { raw } from "@/assets/types/resources.js"
 
+import { useInteractionStore } from '@/stores/interaction.store.js'
+import { useExplorationStore } from "@/stores/exploration.store.js"
+
 import Utils from "@/scripts/utilities.js"
 
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"
+import { useWorldStore } from "@/stores/world.store"
 
 export default{
     data(){
         return{
             drops_status: true,
-            drops_list: [],
+            charging_disabled: false,
             charging_size: 2,
             charging_target_min_size: 25,
             charging_target_max_size: 30,
@@ -114,28 +138,44 @@ export default{
         }
     },
     props: {
-        drops: {
-            type: Array,
-            default: () => []
-        }
     },
     components: {
         ...Misc,
         ...Button
     },
+    watch:{
+        'getSelectedNode.amount'(value){
+            if(value <= 0){
+                this.charging_disabled = true;
+            }
+        }
+    },  
+    computed: {
+        getSelectedNode(){
+            return useExplorationStore().getSelectedNode
+        },
+        getNodeIndex(){
+            return useWorldStore().getNodeIndex
+        },
+        getCurrentPlace(){
+            return useWorldStore().getCurrentPlace
+        }
+    },
     methods: {
-        get_item_by_uid(uid){
-            return raw.find(item => item?.uid === uid) || null;
+        setSelectedItem(item){
+            useInteractionStore().setSelectedItem({ ...item, display_types: ['overview', 'collect'] })
         },
         generate_random_target(){
             this.charging_target_min_size = Math.floor(Math.random() * 80)
             this.charging_target_max_size = this.charging_target_min_size + (Math.floor(Math.random() * 20) + 3)
         },
         initCharging(){
-            this.is_charging = true;
-            this.interval_reference = setInterval(() => {
-                this.charging();
-            }, 100);
+            if(!this.charging_disabled){
+                this.is_charging = true;
+                this.interval_reference = setInterval(() => {
+                    this.charging();
+                }, 100);
+            }
         },
         charging(){
             if(this.is_charging){
@@ -147,17 +187,20 @@ export default{
             }
         },
         stopCharging(){
-            if(
-                this.charging_size <= this.charging_target_max_size && 
-                this.charging_size >= this.charging_target_min_size
-            ){
-                let item = this.get_item_by_uid(Utils.choice_by_weight(this.drops).uid)
-                if(item){
-                    this.drops_list.push(item)
+            if(!this.charging_disabled){
+                if(
+                    this.charging_size <= this.charging_target_max_size && 
+                    this.charging_size >= this.charging_target_min_size
+                ){
+                    let item = Utils.get_item_by_uid(raw, Utils.choice_by_weight(this.getSelectedNode.drops).uid)
+                    if(item){
+                        Utils.set_stackable_item_to_array(this.getSelectedNode.storage, item)
+                    }
                 }
+                this.is_charging = false;
+                this.resetCharging();
+                this.getSelectedNode.amount--
             }
-            this.is_charging = false;
-            this.resetCharging();
         },
         resetCharging(){
             clearInterval(this.interval_reference);
@@ -167,6 +210,9 @@ export default{
     },
     created(){
         this.generate_random_target();
+        if(this.getSelectedNode?.amount <= 0){
+            this.charging_disabled = true
+        }
     }
 }
 

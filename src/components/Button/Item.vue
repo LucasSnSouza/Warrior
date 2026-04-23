@@ -10,7 +10,13 @@
                 height: 52px;
             "
         >
-            <div class="flex w-full gap-md">
+            <div class="flex w-full gap-md relative">
+                <div
+                    v-if="item?.amount > 1"
+                    class="stack flex x-center y-center absolute shadow-sm"
+                >
+                    <p>{{ item?.amount }}</p>
+                </div>
                 <div 
                     class="h-full aspect-ratio hidden rounded-md"
                     style="
@@ -44,7 +50,7 @@
 
 <script>
 
-import { useItemStore } from '@/stores/item.store.js'
+import { useInteractionStore } from '@/stores/interaction.store.js'
 
 import * as Misc from "@/components/Misc"
 import * as Card from "@/components/Card"
@@ -71,7 +77,7 @@ export default{
     },
     methods:{
         setItemInStorage(item, display_reference){
-            useItemStore().setSelectedItem({
+            useInteractionStore().setSelectedItem({
                 ...item,
                 display: display_reference
             })
@@ -85,6 +91,25 @@ export default{
 
 .button-item{
     border: none;
+
+    .stack{
+
+        width: 20px;
+        height: 20px;
+        border-radius: var(--scale-brand-sm);
+        background-color: var(--color-brand-three);
+        border: 1px solid var(--color-brand-four);
+        top: -10px;
+        left: -10px;
+
+        p{
+            font-size: 12px;
+            color: var(--color-brand-two);
+            margin-top: -2px;
+        }
+        
+    }
+    
 }
 
 </style>

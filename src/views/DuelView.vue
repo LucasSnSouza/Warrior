@@ -20,7 +20,7 @@
 
 import { useExplorationStore } from "@/stores/exploration.store.js"
 import { useSystemStore } from '@/stores/system.store.js'
-import { useItemStore } from '@/stores/item.store.js'
+import { useInteractionStore } from '@/stores/interaction.store.js'
 import { useGameStore } from '@/stores/game.store.js'
 
 import * as Button from "@/components/Button"
@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         removeSelectedItemOnStorage(){
-            useItemStore().removeSelectedItem()
+            useInteractionStore().removeSelectedItem()
         },
         addItemTodo(item, amount){
             const data = {
@@ -68,7 +68,7 @@ export default {
             return useExplorationStore().getSelectedCard
         },
         selectedItem(){
-            return useItemStore().getSelectedItem
+            return useInteractionStore().getSelectedItem
         },
         getCraftQueue(){
             return useGameStore().getCraftQueue

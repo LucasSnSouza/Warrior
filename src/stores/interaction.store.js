@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 
-export const useItemStore = defineStore('item', {
+export const useInteractionStore = defineStore('interaction', {
     state: () => ({
         selected_item: null,
         last_selected_item: null

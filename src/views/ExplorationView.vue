@@ -61,6 +61,7 @@
             </div>
 
             <CardBasic
+                v-if="getSelectedRegion.places.length > 0"
                 style="margin-top: 10px;"
                 :background="getSelectedRegion.places[getPlaceIndex].background"
                 :display="getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex].image"
