@@ -108,7 +108,13 @@
                 @click="setSelectedItem(item)"
             />
         </div>
+
     </div>
+
+    <MiscNotice
+        v-else
+        information="A coleta está vazia, complete o minigame para obter recompensas"
+    />
 
 </template>
 
@@ -118,12 +124,12 @@ import { raw } from "@/assets/types/resources.js"
 
 import { useInteractionStore } from '@/stores/interaction.store.js'
 import { useExplorationStore } from "@/stores/exploration.store.js"
+import { useWorldStore } from "@/stores/world.store.js"
 
 import Utils from "@/scripts/utilities.js"
 
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"
-import { useWorldStore } from "@/stores/world.store"
 
 export default{
     data(){

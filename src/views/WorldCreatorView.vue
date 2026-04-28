@@ -72,7 +72,7 @@ export default{
     },
     methods: {
         createWorld(){
-            useWorldStore().addWorld(
+            useWorldStore().createWorld(
                 {
                     name: this.world_form.name,
                     uid: crypto.randomUUID(),

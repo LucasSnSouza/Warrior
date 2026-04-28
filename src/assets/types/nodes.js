@@ -11,7 +11,7 @@ export const nodes_types = [
         },
         drops: [
             {
-                uid: "57b97065-0b06-4c68-a57c-1a8184049cd2",
+                uid: "976d3dc4-fed5-468d-ab86-491019089313",
                 weight: 80
             }
         ]
@@ -25,6 +25,12 @@ export const nodes_types = [
         storage: [],
         interaction: {
             type: "hold",
-        }
+        },
+        drops: [
+            {
+                uid: "9ffbb22a-5b09-4e81-8b68-1d27668fcf99",
+                weight: 80
+            }
+        ]
     }
 ]

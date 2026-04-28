@@ -3,6 +3,10 @@
     <div class="navigation default-side-padding scroll-y w-full h-full flex flex-column gap-lg">
 
         <div class="w-full flex flex-column gap-md">
+
+            <MiscNotice
+                information="O tier de uma região define o grau de coleta dentro dela, enquanto as cores indicam o nível de perigo da região."
+            />
             
             <ButtonBasic
                 v-for="(region, region_index) in getWorld?.locations"
@@ -72,11 +76,7 @@
 
 import { regions_dangerous_types } from "@/assets/types/regions.js"
 
-import { useExplorationStore } from "@/stores/exploration.store.js"
-import { useSystemStore } from '@/stores/system.store.js'
 import { useWorldStore } from '@/stores/world.store.js'
-import { useInteractionStore } from '@/stores/interaction.store.js'
-import { useGameStore } from '@/stores/game.store.js'
 
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"

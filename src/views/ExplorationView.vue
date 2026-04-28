@@ -61,7 +61,7 @@
             </div>
 
             <CardBasic
-                v-if="getSelectedRegion.places.length > 0"
+                v-if="getSelectedRegion.places.length > 0 && getSelectedRegion.places[getPlaceIndex]"
                 style="margin-top: 10px;"
                 :background="getSelectedRegion.places[getPlaceIndex].background"
                 :display="getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex].image"
@@ -90,6 +90,7 @@ import * as Card from "@/components/Card"
 export default {
     data(){
         return{
+            exploration_tick_service: null,
             exploration_index: 0,
             exploration_cards: []
         }
@@ -128,8 +129,17 @@ export default {
         
     },
     async mounted(){
+        
         if(!this.getSelectedRegion){
             this.$router.push({ path: '/navigation' })
+        }
+        this.exploration_tick_service = setInterval(() => {
+        }, 5000);
+
+    },
+    unmounted(){
+        if(this.exploration_tick_service){
+            clearInterval(this.exploration_tick_service)
         }
     }
 }

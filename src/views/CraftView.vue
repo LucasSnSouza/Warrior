@@ -1,18 +1,18 @@
 <template>
 
-    <div class="inventory default-side-padding scroll-y w-full h-full flex flex-column gap-lg">
+    <div class="craft default-side-padding scroll-y w-full h-full flex flex-column gap-lg">
+
+        <MiscNotice
+            information="Aqui você pode criar material basico em suas viagens ou descidir sua proxima construção."
+        />
 
         <div
             class="w-full flex flex-column gap-md"
         >
 
-            <MiscNotice
-                information="Uma lista com todos os itens no seu inventario pessoal"
-            />
-
             <div 
                 class="flex x-start y-center gap-lg"
-                @click="equiped_status = !equiped_status"
+                @click="tools_status = !tools_status"
             >
                 <p 
                     class="color-brand-three font-md"
@@ -20,28 +20,28 @@
                         letter-spacing: 2px;
                     "
                 >
-                    Equipados
+                    Ferramentas
                 </p>
                 <MiscIcon
                     icon="styled-arrow-icon"
                     class="bg-color-brand-three"
                     style="margin-top: 4px;"
                     :style="{
-                        transform: equiped_status ? 'rotate(-90deg)' : 'rotate(90deg)'
+                        transform: tools_status ? 'rotate(-90deg)' : 'rotate(90deg)'
                     }"
                     :size="[12,12]"
                 />
             </div>
 
             <div 
-                v-if="equiped_status"
+                v-if="tools_status"
                 class="flex flex-column gap-md"
             >
                 <ButtonItem
-                    v-for="(item, index) in getEquipedInventory"
-                    :item="item"
-                    :index="index"
-                    @click="setSelectedItem(item)"
+                    v-for="(tool, tool_index) in getTools"
+                    :item="tool"
+                    :index="tool_index"
+                    @click="setSelectedItem(tool)"
                 />
             </div>
 
@@ -53,7 +53,7 @@
 
             <div 
                 class="flex x-start y-center gap-lg"
-                @click="inventory_status = !inventory_status"
+                @click="weapons_status = !weapons_status"
             >
                 <p 
                     class="color-brand-three font-md"
@@ -61,28 +61,28 @@
                         letter-spacing: 2px;
                     "
                 >
-                    Inventario
+                    Armas
                 </p>
                 <MiscIcon
                     icon="styled-arrow-icon"
                     class="bg-color-brand-three"
                     style="margin-top: 4px;"
                     :style="{
-                        transform: inventory_status ? 'rotate(-90deg)' : 'rotate(90deg)'
+                        transform: weapons_status ? 'rotate(-90deg)' : 'rotate(90deg)'
                     }"
                     :size="[12,12]"
                 />
             </div>
 
             <div 
-                v-if="inventory_status"
+                v-if="weapons_status"
                 class="flex flex-column gap-md"
             >
                 <ButtonItem
-                    v-for="(item, index) in getNotEquipedInventory"
-                    :item="item"
-                    :index="index"
-                    @click="setSelectedItem(item)"
+                    v-for="(weapon, weapon_index) in getWeapons"
+                    :item="weapon"
+                    :index="weapon_index"
+                    @click="setSelectedItem(weapon)"
                 />
             </div>
 
@@ -104,8 +104,10 @@
 
 <script>
 
+import { tools } from "@/assets/types/tools.js"
+import { weapons } from "@/assets/types/weapons.js"
+
 import { useSystemStore } from '@/stores/system.store.js'
-import { useProfileStore } from '@/stores/profile.store.js'
 import { useInteractionStore } from '@/stores/interaction.store.js'
 
 import * as Button from "@/components/Button"
@@ -118,8 +120,8 @@ import * as View from "@/components/View"
 export default {
     data(){
         return{
-            equiped_status: true,
-            inventory_status: true,
+            tools_status: true,
+            weapons_status: true,
         }
     },
     components: {
@@ -142,14 +144,11 @@ export default {
         getSelectedItem(){
             return useInteractionStore().getSelectedItem
         },
-        getInventory(){
-            return useProfileStore().getInventory
+        getTools(){
+            return tools.filter(tool => tool.tier === 0)
         },
-        getEquipedInventory(){
-            return useProfileStore().getEquipedInventory
-        },
-        getNotEquipedInventory(){
-            return useProfileStore().getNotEquipedInventory
+        getWeapons(){
+            return weapons.filter(tool => tool.tier === 0)
         }
     },
     created(){

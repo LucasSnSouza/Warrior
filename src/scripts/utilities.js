@@ -26,7 +26,7 @@ export default{
     set_stackable_item_to_array(array, item){
         let item_aready_exist = array.find(i => i.uid === item.uid)
         if(item_aready_exist){
-            item_aready_exist.amount = (item_aready_exist.amount || 1) + 1
+            item_aready_exist.amount = (item_aready_exist.amount || 1) + item?.amount
         }else{
             array.push({ ...item, amount: 1 })
         }

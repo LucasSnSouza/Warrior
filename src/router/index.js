@@ -7,6 +7,7 @@ import ExplorationView from '../views/ExplorationView.vue'
 import NavigationView from '../views/NavigationView.vue'
 import InteractionView from '../views/InteractionView.vue'
 import InventoryView from '../views/InventoryView.vue'
+import CraftView from '../views/CraftView.vue'
 import DuelView from '../views/DuelView.vue'
 
 const router = createRouter({
@@ -52,6 +53,12 @@ const router = createRouter({
       path: '/inventory',
       name: 'Inventory',
       component: InventoryView,
+      meta: { header: true, goback: true, background: "bg-color-brand-five" }
+    },
+    {
+      path: '/craft',
+      name: 'Craft',
+      component: CraftView,
       meta: { header: true, goback: true, background: "bg-color-brand-five" }
     },
     {

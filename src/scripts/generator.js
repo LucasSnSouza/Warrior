@@ -49,6 +49,7 @@ export default{
             ...structuredClone(Utils.choice(landscape_by_biome)),
             uid: crypto.randomUUID(),
             name: this.landscapes_names(target_biome),
+            events: [],
             nodes: nodes_list
         }
 

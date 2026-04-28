@@ -24,22 +24,22 @@
             </div>
         </div>
 
-        <ActionTravel
-            v-if="getSelectedNode?.interaction?.type === 'travel'"
+        <GameHold
+            v-if="getSelectedNode?.interaction?.type === 'hold'"
         />
 
         <ActionRefine
-            v-if="getSelectedNode?.interaction?.type === 'refine'"
+            v-else-if="getSelectedNode?.interaction?.type === 'refine'"
             :refineTier="getSelectedNode?.tier"
             :refineTypes="getSelectedNode?.refine_types || []"
         />
 
         <ActionCraft
-            v-if="getSelectedNode?.interaction?.type === 'craft'"
+            v-else-if="getSelectedNode?.interaction?.type === 'craft'"
         />
 
-        <GameHold
-            v-if="getSelectedNode?.interaction?.type === 'hold'"
+        <ActionTravel
+            v-else-if="getSelectedNode?.interaction?.type === 'travel'"
         />
 
         <ModalBasic

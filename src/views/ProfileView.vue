@@ -204,8 +204,6 @@ export default{
         },
         setWorld(world_index){
             useWorldStore().setWorld(world_index)
-            useWorldStore().cleanupWorld();
-            useWorldStore().populateWorld(5);
         }
     },
     created(){

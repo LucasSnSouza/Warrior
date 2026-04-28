@@ -2,6 +2,7 @@
     <div class="flex gap-md x-center y-center">
         <ButtonBasic
             class="bg-color-brand-three p-md rounded-md w-half"
+            @click="addItem()"
         >
             <p class="color-brand-two font-md">Coletar</p>
         </ButtonBasic>
@@ -12,6 +13,7 @@
 <script>
 
 import { useInteractionStore } from '@/stores/interaction.store.js'
+import { useProfileStore } from '@/stores/profile.store.js'
 
 import * as Card from "@/components/Card"
 import * as Misc from "@/components/Misc"
@@ -41,6 +43,11 @@ export default{
             return useInteractionStore().getSelectedItem
         }
     },
+    methods: {
+        addItem(){
+            useProfileStore().addItemToInventory(this.getSelectedItem)
+        }
+    }
 }
 
 </script>

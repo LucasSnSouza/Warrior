@@ -143,6 +143,7 @@ import * as Modal from "@/components/Modal"
 import * as Card from "@/components/Card"
 import * as Misc from "@/components/Misc"
 import * as View from "@/components/View"
+import { useWorldStore } from './stores/world.store'
 
 export default {
     data(){
@@ -156,7 +157,7 @@ export default {
                 },
                 {
                     name: "Navegação",
-                    icon: "foots-icon",
+                    icon: "planet-icon",
                     redirect: "/navigation",
                     selected: false
                 },
@@ -169,7 +170,7 @@ export default {
                 {
                     name: "Construção",
                     icon: "hammer-icon",
-                    redirect: "/building",
+                    redirect: "/craft",
                     selected: false
                 }
             ]
@@ -248,6 +249,7 @@ export default {
             })
             .save()
         }
+        useWorldStore().watchers();
     }
 }
 
