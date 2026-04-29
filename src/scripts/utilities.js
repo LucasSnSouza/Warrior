@@ -23,12 +23,34 @@ export default{
         return array.some(item => item.uid === uid)
     },
 
-    set_stackable_item_to_array(array, item){
-        let item_aready_exist = array.find(i => i.uid === item.uid)
-        if(item_aready_exist){
-            item_aready_exist.amount = (item_aready_exist.amount || 1) + item?.amount
-        }else{
-            array.push({ ...item, amount: 1 })
+    has_required_items(array, requires){
+        return requires.every(require => {
+            const item = this.get_item_by_uid(array, require.uid)
+            return item.amount >= require.amount
+        })
+    },
+
+    deduct_required_items(array, requires){
+        requires.forEach(require => {
+            const item = this.get_item_by_uid(array, require.uid)
+            if(item){
+                item.amount -= require.amount
+            }
+        })
+    },
+
+    set_stackable_item_to_array(array, item) {
+        const existing = array.find(i => i.uid === item.uid)
+
+        const amountToAdd = item?.amount ?? 1
+
+        if (existing) {
+            existing.amount = (existing.amount ?? 0) + amountToAdd
+        } else {
+            array.push({
+                ...item,
+                amount: amountToAdd
+            })
         }
     }
 

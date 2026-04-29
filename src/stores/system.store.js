@@ -17,6 +17,7 @@ export const useSystemStore = defineStore('system', {
             "light-orange",
             "light-green",
         ],
+        toasts: []
     }),
     getters: {
         getTheme: (state) => state.theme,
@@ -24,7 +25,8 @@ export const useSystemStore = defineStore('system', {
         getLanguages: (state) => state.languages,
         getThemes: (state) => state.themes,
         getAwait: (state) => state.isAwait,
-        getComplementary: (state) => state.isComplementary
+        getComplementary: (state) => state.isComplementary,
+        getToasts: (state) => state.toasts
     },
     actions: {
         setAwait(value){
@@ -44,5 +46,13 @@ export const useSystemStore = defineStore('system', {
             }
             this.theme = this.themes[theme_index + 1];
         },
+        setToast(text, duration = 1){
+            this.toasts.push({
+                value: text
+            })
+            setTimeout(() => {
+                this.toasts.splice(1,1)
+            }, duration)
+        }
     }
 })

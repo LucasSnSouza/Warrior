@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import { useGameStore } from "./game.store.js"
 import { useWorldStore } from "./world.store.js"
 
-import Utils from "@/scripts/utilities.js"
+import utils from "@/scripts/utilities.js"
 
 export const useProfileStore = defineStore('profile', {
     state: () => ({
@@ -30,8 +30,14 @@ export const useProfileStore = defineStore('profile', {
                 createdAt: new Date()
             })
         },
+        updateInventory(updated_inventory){
+            this.profile.inventory = updated_inventory
+        },
+        cleanupInventory(){
+            this.profile.inventory = this.profile.inventory.filter(item => item?.amount > 0)
+        },
         addItemToInventory(item){
-            Utils.set_stackable_item_to_array(this.profile.inventory, item)
+            utils.set_stackable_item_to_array(this.profile.inventory, item)
             useWorldStore().getCurrentNode.storage =
             useWorldStore().getCurrentNode.storage.filter(
                 storage_item => storage_item.uid !== item.uid

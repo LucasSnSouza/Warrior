@@ -1,7 +1,7 @@
 export const raw = [
     {
         uid: "976d3dc4-fed5-468d-ab86-491019089313",
-        name: "Madeira de Carvalho",
+        name: "Carvalho",
         author: "World",
         description: "Um recurso abundante em todas as regiões e escencial para a produção das primeiras ferramentas.",
         type: "wood",
@@ -25,7 +25,7 @@ export const raw = [
     },
     {
         uid: "9ffbb22a-5b09-4e81-8b68-1d27668fcf99",
-        name: "Aglomerado de Pedras",
+        name: "Pedra",
         author: "World",
         description: "Um recurso abundante em todas as regiões e escencial para a produção das primeiras ferramentas.",
         type: "stone",

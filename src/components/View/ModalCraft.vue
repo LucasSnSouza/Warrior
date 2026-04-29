@@ -1,62 +1,60 @@
 <template>
 
-    <div class="flex x-center">
-        <CardOverview
-            :background="item?.visuals.background"
-            :display="item?.visuals.display"
-            style="
-                width: 30%;
-                margin-top: -25%;
-                box-shadow: 2px 2px 4px #00000011;
-            "
-        />
-    </div>
-    <div class="flex flex-column">
-        <p class="font-lg text-center color-brand-three">
-            {{ item?.name }}
-        </p>
-        <p class="font-md text-center color-brand-one o-half">
-            {{ item?.description }}
-        </p>
-    </div>
-    <MiscDivision/>
-    <div class="flex gap-md">
-        <ButtonBasic
-            class="p-lg bg-color-brand-three rounded-md aspect-ratio h-full"
-            @click="amount--"
+    <div class="w-full flex flex-column gap-md">
+
+        <p class="font-md text-center" >Requisitos</p>
+
+        <div 
+            v-if="item?.requires"
+            class="flex gap-xlg x-center"
         >
-            <MiscIcon
-                icon="minus-icon"
-                class="bg-color-brand-two"
-                :size="[16,16]"
-            />
-        </ButtonBasic>
-        <InputBasic
-            v-model="amount"
-            class="font-md rounded-md p-md w-full"
-            input-class="text-center"
-            type="number"
-            style="
-                border: 1px solid var(--color-brand-three);
-                box-shadow: 2px 2px 8px #00000022;
-            "
-            :value="amount"
-        />
+
+            <div
+                v-for="(item, index) in getProcessedItems"
+                class="bg-color-brand-three color-brand-two rounded-md flex x-start y-center gap-md"
+                style="
+                    height: 38px;
+                    padding: 3px;
+                    padding-right: 12px;
+                "
+                :index="index"
+            >
+                <div
+                    class="aspect-ratio bg-color-brand-two rounded-md flex y-center x-center shadow-sm"
+                    style="
+                        margin-left: -18px;
+                        border: 1px solid var(--color-brand-four);
+                        height: 100%;
+                    "
+                >
+                    <p class="font-sm color-brand-one" style="margin-top: -2px;">{{ item.require_amount }}</p>
+                </div>
+                <p class="font-sm">{{ item.name }}</p>        
+            </div>
+
+        </div>
+
         <ButtonBasic
-            class="p-lg bg-color-brand-three rounded-md aspect-ratio h-full"
-            @click="amount++"
+            class="bg-color-brand-two p-md rounded-md w-full"
+            style="
+                border: 1px solid var(--color-brand-four);
+            "
+            @click="createSelectedItem()"
         >
-            <MiscIcon
-                icon="plus-icon"
-                class="bg-color-brand-two"
-                :size="[16,16]"
-            />
+            <p class="color-brand-three font-md">Criar</p>
         </ButtonBasic>
+
     </div>
 
 </template>
 
 <script>
+
+import { raw, refined } from "@/assets/types/resources.js"
+
+import utils from "@/scripts/utilities.js"
+
+import { useInteractionStore } from '@/stores/interaction.store.js'
 
 import * as Card from "@/components/Card"
 import * as Misc from "@/components/Misc"
@@ -75,19 +73,35 @@ export default{
             default: () => {}
         }
     },
-    emits: [
-        "amount-change"
-    ],
-    watch: {
-        amount(newValue) {
-            this.$emit('amount-change', newValue)
-        }
-    },
     components: {
         ...Card,
         ...Misc,
         ...Button,
         ...Input
+    },
+    computed: {
+        getProcessedItems() {
+            return this.item.requires.map(require => {
+                let itemFound = utils.get_item_by_uid(raw, require.uid)
+
+                if (!itemFound) {
+                    itemFound = utils.get_item_by_uid(refined, require.uid)
+                }
+
+                if (!itemFound) {
+                    return null
+                }
+                return {
+                    ...itemFound,
+                    require_amount: require.amount
+                }
+            }).filter(Boolean)
+        }
+    },
+    methods: {
+        createSelectedItem(){
+            useInteractionStore().createSelectedItem();
+        }
     }
 }
 

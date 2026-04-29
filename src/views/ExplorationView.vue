@@ -71,6 +71,29 @@
 
         </div>
 
+        <div 
+            v-if="getSelectedRegion.places[getPlaceIndex].nodes.length > 1"
+            class="w-full rounded-lg bg-color-brand-two p-lg flex x-center flex-column gap-md"
+        >
+            <div class="flex x-center">
+                <p 
+                    class="font-md color-brand-three bg-color-brand-two rounded-md shadow-sm"
+                    style="
+                        border: 1px solid var(--color-brand-four);
+                        padding: var(--scale-brand-sm) 36px var(--scale-brand-sm) 36px;
+                    "
+                >
+                    Redondezas
+                </p>
+            </div>
+            <ButtonItem
+                v-for="(item, index) in getSelectedRegion.places[getPlaceIndex].nodes"
+                :item="item"
+                :index="index"
+                @click="setNodeIndex(index)"
+            />
+        </div>
+
     </div>
 
 </template>
@@ -108,7 +131,10 @@ export default {
             useWorldStore().previousPlace();
         },
         storeSelectedNode(node){
-            useExplorationStore().setSelectedNode(node)
+            useExplorationStore().setSelectedNode(node);
+        },
+        setNodeIndex(node_index){
+            useWorldStore().setNodeIndex(node_index);
         }
     },
     computed: {

@@ -78,6 +78,10 @@
                 </div>
                 <div class="app-information h-full scroll-y">
                     <RouterView/>
+                    <MiscToast
+                        v-for="(item, index) in getToasts"
+                        :index="index"
+                    />
                 </div>
                 <div 
                     v-if="$route.meta.header && !getComplementary"
@@ -122,7 +126,6 @@
             </div>
             
         </div>
-
 
     </div>
 
@@ -202,6 +205,9 @@ export default {
         },
         getGame(){
             return useGameStore().getGame
+        },
+        getToasts(){
+            return useSystemStore().getToasts
         }
     },
     mounted(){

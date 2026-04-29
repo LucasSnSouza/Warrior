@@ -149,7 +149,7 @@
                             border: 1px solid var(--color-brand-four);
                         "
                         :index="world_index"
-                        @click="setWorld(world_index), $router.push({ path: '/exploration' })"
+                        @click="setWorld(world_index), $router.push({ path: '/navigation' })"
                     >
                         <p class="font-md">{{ world.name }}</p>
                     </div>

@@ -50,6 +50,15 @@ export const useWorldStore = defineStore('world', {
         setSelectedRegion(region){
             this.selected_region = region
         },
+        setPlaceIndex(place_index){
+            this.place_index = place_index
+        },
+        setNodeIndex(node_index){
+            this.node_index = node_index
+        },
+        setWorld(world_index){
+            this.world = this.worlds[world_index]
+        },
         cleanupRegions(){
             this.world.locations = this.world.locations.filter(
                 region => region?.delete
@@ -65,22 +74,19 @@ export const useWorldStore = defineStore('world', {
                 this.world.locations.push(Generator.generate_region(0, Math.floor(Math.random() * 3) ))
             }
         },
-
-        setWorld(world_index){
-            this.world = this.worlds[world_index]
-        },
         createWorld(world){
             this.worlds.push({
                 ...world,
                 createdAt: new Date()
             })
         },
-
         watchers(){
             watch(
                 () => this.world,
                 (value) => {
                     
+                    console.log('ENGINE: World watch update')
+
                     this.restorePlaceIndex();
                     this.restoreNodeIndex();
 
@@ -88,10 +94,11 @@ export const useWorldStore = defineStore('world', {
                     this.populateWorld(5);
                     
                 }
-            ),
+            )
             watch(
                 () => this.selected_region,
                 (value) => {
+                    console.log('ENGINE: Region watch update')
                     this.restorePlaceIndex();
                     this.cleanupNodes();
                 }
@@ -99,7 +106,14 @@ export const useWorldStore = defineStore('world', {
             watch(
                 () => this.place_index,
                 (value) => {
+                    console.log('ENGINE: Place watch update')
                     this.restoreNodeIndex();
+                }
+            )
+            watch(
+                () => this.node_index,
+                (value) => {
+                    console.log('ENGINE: Node watch update')
                 }
             )
         }

@@ -96,6 +96,9 @@
             <ViewModalDetails
                 :item="getSelectedItem"
             />
+            <ViewModalCraft
+                :item="getSelectedItem"
+            />
         </ModalBasic>
 
     </div>

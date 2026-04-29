@@ -126,7 +126,7 @@ import { useInteractionStore } from '@/stores/interaction.store.js'
 import { useExplorationStore } from "@/stores/exploration.store.js"
 import { useWorldStore } from "@/stores/world.store.js"
 
-import Utils from "@/scripts/utilities.js"
+import utils from "@/scripts/utilities.js"
 
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"
@@ -198,9 +198,9 @@ export default{
                     this.charging_size <= this.charging_target_max_size && 
                     this.charging_size >= this.charging_target_min_size
                 ){
-                    let item = Utils.get_item_by_uid(raw, Utils.choice_by_weight(this.getSelectedNode.drops).uid)
+                    let item = utils.get_item_by_uid(raw, utils.choice_by_weight(this.getSelectedNode.drops).uid)
                     if(item){
-                        Utils.set_stackable_item_to_array(this.getSelectedNode.storage, item)
+                        utils.set_stackable_item_to_array(this.getSelectedNode.storage, item)
                     }
                 }
                 this.is_charging = false;

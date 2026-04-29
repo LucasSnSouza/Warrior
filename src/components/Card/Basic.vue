@@ -87,13 +87,13 @@ export default {
         opacity: 0.5;
         transform: translateX(-50%);
         left: 50%;
-        border-radius: var(--scale-brand-xlg);
+        border-radius: var(--scale-brand-lg);
     }
     
     .card-wrapper{
     
         width: 100%;
-        border-radius: var(--scale-brand-xlg);
+        border-radius: var(--scale-brand-lg);
         scroll-snap-align: center;
         background-size: 105%;
         background-position: center;

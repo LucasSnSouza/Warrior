@@ -7,7 +7,7 @@ import {
     landscape_names 
 } from "@/assets/types/names.js"
 
-import Utils from "@/scripts/utilities.js"
+import utils from "@/scripts/utilities.js"
 
 export default{
     
@@ -16,17 +16,17 @@ export default{
     },
 
     region_names(region_type){
-        return `${Utils.choice(region_names[region_type].sufix)} ${Utils.choice(region_names[region_type].names)}`
+        return `${utils.choice(region_names[region_type].sufix)} ${utils.choice(region_names[region_type].names)}`
     },
 
     landscapes_names(region_type){
-        return `${Utils.choice(landscape_names[region_type].sufix)} ${Utils.choice(landscape_names[region_type].names)}`
+        return `${utils.choice(landscape_names[region_type].sufix)} ${utils.choice(landscape_names[region_type].names)}`
     },
 
     generate_node(target_tier, target_biome){
 
         let nodes_by_biome = nodes_types.filter(node => node.tier == target_tier &&  node.biomes.includes(target_biome))
-        let node = structuredClone(Utils.choice(nodes_by_biome))
+        let node = structuredClone(utils.choice(nodes_by_biome))
 
         return {
             ...node,
@@ -46,7 +46,7 @@ export default{
         }
 
         return {
-            ...structuredClone(Utils.choice(landscape_by_biome)),
+            ...structuredClone(utils.choice(landscape_by_biome)),
             uid: crypto.randomUUID(),
             name: this.landscapes_names(target_biome),
             events: [],
@@ -57,7 +57,7 @@ export default{
 
     generate_region(region_tier = 0, region_danger = 0, places_amount = 10){
 
-        let region_type = { ...Utils.choice(regions_types) }
+        let region_type = { ...utils.choice(regions_types) }
         let places_list = []
 
         for(let i = 0; i < places_amount; i++){

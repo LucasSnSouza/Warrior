@@ -27,30 +27,28 @@
         <div
             class="flex x-center gap-md"
         >
-            <ButtonBasic
-                v-for="(attribute, attribute_index) in item?.attributes"
-                class="flex bg-none y-center"
+            <div
+                v-for="(item, index) in item?.attributes"
+                class="bg-color-brand-three color-brand-two rounded-md flex x-start y-center gap-md"
+                style="
+                    height: 38px;
+                    padding: 3px;
+                    padding-right: 12px;
+                "
+                :index="index"
             >
-                <div 
-                    class="bg-color-brand-three p-md rounded-md color-brand-two"
+                <div
+                    class="aspect-ratio bg-color-brand-two rounded-md flex y-center x-center shadow-sm"
                     style="
-                        border-top-right-radius: 0px;
-                        border-bottom-right-radius: 0px;
+                        margin-left: -18px;
+                        border: 1px solid var(--color-brand-four);
+                        height: 100%;
                     "
                 >
-                    <p>{{ attribute.name }}</p>
+                    <p class="font-sm color-brand-one" style="margin-top: -2px;">{{ item.value }}</p>
                 </div>
-                <div 
-                    class="p-md rounded-md"
-                    style="
-                        border-top-left-radius: 0px;
-                        border-bottom-left-radius: 0px;
-                        background: rgb(245, 245, 245);
-                    "
-                >
-                    <p>{{ attribute.value }}</p>
-                </div>
-            </ButtonBasic>
+                <p class="font-sm">{{ item.name }}</p>        
+            </div>
         </div>
     </div>
 

@@ -1,12 +1,14 @@
 <template>
     <div class="flex gap-md x-center y-center">
         <ButtonBasic
-            class="bg-color-brand-three p-md rounded-md w-half"
+            class="bg-color-brand-two p-md rounded-md w-full"
+            style="
+                border: 1px solid var(--color-brand-four);
+            "
             @click="addItem()"
         >
-            <p class="color-brand-two font-md">Coletar</p>
+            <p class="color-brand-three font-md">Coletar</p>
         </ButtonBasic>
-        <p class="font-md o-half text-start">{{ getSelectedItem?.amount || 1 }} items na lista</p>
     </div>
 </template>
 
