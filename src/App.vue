@@ -76,7 +76,7 @@
 
                     </div>
                 </div>
-                <div class="app-information h-full scroll-y">
+                <div ref="app-information" class="app-information h-full scroll-y">
                     <RouterView/>
                     <MiscToast
                         v-for="(item, index) in getToasts"
@@ -103,9 +103,9 @@
                         <div 
                             v-for="(item, index) in navigations"
                             class="action flex relative x-center y-center"
-                            :class="{ 'selected': item?.selected}"
+                            :class="{ 'selected': item.redirect == $route.path}"
                             :index="index"
-                            @click="toggleSelectedAction(index), $router.push({ 'path': item.redirect })"
+                            @click="$router.push({ 'path': item.redirect })"
                         >
                             <MiscIcon
                                 :icon="item.icon"
@@ -194,6 +194,9 @@ export default {
             this.navigations.forEach((item, index) => {
                 item.selected = index === selected_index;
             });
+        },
+        setScrollReference(){
+            useSystemStore().setScrollReference(this.$refs["app-information"])
         }
     },
     computed: {
@@ -221,16 +224,9 @@ export default {
                 this.getGame
             )
             .save()
-        }, 1000);
+        }, 2000);
 
-        setInterval(() => {
-            Storage
-            .get('game-system')
-            .replace(
-                this.getGame
-            )
-            .save()
-        }, 60000);
+        this.setScrollReference()
 
         // When game exit
         // window.addEventListener("beforeunload", () => {
@@ -243,6 +239,7 @@ export default {
         // });        
     },
     created(){
+
         if(!Storage.exists("game-system")){
             Storage
             .create("game-system")
@@ -255,7 +252,10 @@ export default {
             })
             .save()
         }
+
         useWorldStore().watchers();
+        useInteractionStore().watchers();
+
     }
 }
 

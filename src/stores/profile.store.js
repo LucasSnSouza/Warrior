@@ -13,7 +13,9 @@ export const useProfileStore = defineStore('profile', {
     getters: {
         getProfiles: (state) => state.profiles,
         getProfile: (state) => state.profile,
-        getInventory: (state) => state.profile.inventory,
+        getQueue: (state) => state.profile?.queue,
+        getEquipped: (state) => state.profile?.inventory.filter(item => item.equipped) || [],
+        getInventory: (state) => state.profile?.inventory,
         getEquipedInventory: (state) => state.profile?.inventory?.filter(item => item?.equipped),
         getNotEquipedInventory: (state) => state.profile?.inventory?.filter(item => !item?.equipped)
     },
@@ -24,11 +26,14 @@ export const useProfileStore = defineStore('profile', {
         setProfile(profile_index){
             this.profile = this.profiles[profile_index]
         },
-        addProfile(profile){
+        createProfile(profile){
             this.profiles.push({
                 ...profile,
-                createdAt: new Date()
+                createdAt: Date.now()
             })
+        },
+        addProficiencePoints(proficience_name, points){
+            this.profile.proficience[proficience_name] += points
         },
         updateInventory(updated_inventory){
             this.profile.inventory = updated_inventory

@@ -41,15 +41,14 @@ export default{
 
     set_stackable_item_to_array(array, item) {
         const existing = array.find(i => i.uid === item.uid)
-
         const amountToAdd = item?.amount ?? 1
-
         if (existing) {
             existing.amount = (existing.amount ?? 0) + amountToAdd
         } else {
             array.push({
                 ...item,
-                amount: amountToAdd
+                amount: amountToAdd,
+                updatedAt: Date.now()
             })
         }
     }

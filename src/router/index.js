@@ -1,7 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import { useInteractionStore } from "@/stores/interaction.store.js"
+import { useProfileStore } from "@/stores/profile.store.js"
+
 import ProfileView from '../views/ProfileView.vue'
 import ProfileCreatorView from '../views/ProfileCreatorView.vue'
+import SettingsView from '../views/SettingsView.vue'
 import WorldCreatorView from '../views/WorldCreatorView.vue'
 import ExplorationView from '../views/ExplorationView.vue'
 import NavigationView from '../views/NavigationView.vue'
@@ -11,63 +15,77 @@ import CraftView from '../views/CraftView.vue'
 import DuelView from '../views/DuelView.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/',
-      name: 'Profile',
-      component: ProfileView,
-      meta: { header: false, goback: false, background: "bg-color-brand-three" }
-    },
-    {
-      path: '/profile-creator',
-      name: 'Profile Creator',
-      component: ProfileCreatorView,
-      meta: { header: false, goback: false, background: "bg-color-brand-five"}
-    },
-    {
-      path: '/world-creator',
-      name: 'World Creator',
-      component: WorldCreatorView,
-      meta: { header: false, goback: false, background: "bg-color-brand-five"}
-    },
-    {
-      path: '/exploration',
-      name: 'Exploration',
-      component: ExplorationView,
-      meta: { header: true, goback: false, background: "bg-color-brand-three"}
-    },
-    {
-      path: '/interaction',
-      name: 'Interaction',
-      component: InteractionView,
-      meta: { header: true, goback: true, background: "bg-color-brand-five" }
-    },
-    {
-      path: '/navigation',
-      name: 'Navigation',
-      component: NavigationView,
-      meta: { header: true, goback: true, background: "bg-color-brand-five" }
-    },
-    {
-      path: '/inventory',
-      name: 'Inventory',
-      component: InventoryView,
-      meta: { header: true, goback: true, background: "bg-color-brand-five" }
-    },
-    {
-      path: '/craft',
-      name: 'Craft',
-      component: CraftView,
-      meta: { header: true, goback: true, background: "bg-color-brand-five" }
-    },
-    {
-      path: '/duel',
-      name: 'Duel',
-      component: DuelView,
-      meta: { header: true, goback: true, background: "bg-color-brand-five" }
-    },
-  ],
+	history: createWebHistory(import.meta.env.BASE_URL),
+	routes: [
+		{
+			path: '/',
+			name: 'Profile',
+			component: ProfileView,
+			meta: { header: false, background: "bg-color-brand-three" }
+		},
+		{
+			path: '/settings',
+			name: 'Settings',
+			component: SettingsView,
+			meta: { header: false, background: "bg-color-brand-five" }
+		},
+		{
+			path: '/profile-creator',
+			name: 'Profile Creator',
+			component: ProfileCreatorView,
+			meta: { header: false, background: "bg-color-brand-five" }
+		},
+		{
+			path: '/world-creator',
+			name: 'World Creator',
+			component: WorldCreatorView,
+			meta: { header: false, background: "bg-color-brand-five" }
+		},
+		{
+			path: '/exploration',
+			name: 'Exploration',
+			component: ExplorationView,
+			meta: { header: true, background: "bg-color-brand-three" }
+		},
+		{
+			path: '/interaction',
+			name: 'Interaction',
+			component: InteractionView,
+			meta: { header: true, background: "bg-color-brand-five" }
+		},
+		{
+			path: '/navigation',
+			name: 'Navigation',
+			component: NavigationView,
+			meta: { header: true, background: "bg-color-brand-five" }
+		},
+		{
+			path: '/inventory',
+			name: 'Inventory',
+			component: InventoryView,
+			meta: { header: true, background: "bg-color-brand-five" }
+		},
+		{
+			path: '/craft',
+			name: 'Craft',
+			component: CraftView,
+			meta: { header: true, background: "bg-color-brand-five" }
+		},
+		{
+			path: '/duel',
+			name: 'Duel',
+			component: DuelView,
+			meta: { header: false, background: "bg-color-brand-five" }
+		},
+	],
+})
+
+router.afterEach((to, from) => {
+
+	if(to.path != "/"){
+		useInteractionStore().resolveQueueItems(useProfileStore().getQueue, useProfileStore().getInventory)
+	}
+
 })
 
 export default router

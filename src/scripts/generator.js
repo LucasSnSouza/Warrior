@@ -1,6 +1,7 @@
 import { regions_types } from "@/assets/types/regions.js"
 import { landscapes_types } from "@/assets/types/landscapes.js"
 import { nodes_types } from "@/assets/types/nodes.js"
+import { animals_types } from "@/assets/types/animals.js"
 
 import { 
     region_names, 
@@ -23,26 +24,44 @@ export default{
         return `${utils.choice(landscape_names[region_type].sufix)} ${utils.choice(landscape_names[region_type].names)}`
     },
 
+    generate_animal(target_tier, target_biome){
+
+        let animals_by_biome = animals_types.filter(animal => animal.tier == target_tier && animal.biomes.includes(target_biome))
+        let animal = structuredClone(utils.choice(animals_by_biome))
+
+        return {
+            ...animal,
+            uid: crypto.randomUUID(),
+            createdAt: Date.now()
+        }
+        
+    },
+
     generate_node(target_tier, target_biome){
 
-        let nodes_by_biome = nodes_types.filter(node => node.tier == target_tier &&  node.biomes.includes(target_biome))
+        let nodes_by_biome = nodes_types.filter(node => node.tier == target_tier && node.biomes.includes(target_biome))
         let node = structuredClone(utils.choice(nodes_by_biome))
 
         return {
             ...node,
             uid: crypto.randomUUID(),
-            amount: Math.floor(Math.random() * 5 + 1)
+            amount: Math.floor(Math.random() * 5 + 1),
+            createdAt: Date.now()
         }
 
     },
 
-    generate_landscape(target_tier, target_biome, nodes_amount = 1){
+    generate_place(target_tier, target_biome, nodes_amount = 1){
         
         let landscape_by_biome = landscapes_types.filter(landscape => landscape.biome == target_biome);
         let nodes_list = []
 
-        for(let i = 0; i < Math.floor(Math.random() * 3) + 1; i++){
+        for(let i = 0; i < Math.floor(Math.random() * 6); i++){
             nodes_list.push(this.generate_node(target_tier, target_biome))
+        }
+
+        for(let i = 0; i < Math.floor(Math.random() * 3); i++){
+            nodes_list.push(this.generate_animal(target_tier, target_biome))
         }
 
         return {
@@ -50,7 +69,8 @@ export default{
             uid: crypto.randomUUID(),
             name: this.landscapes_names(target_biome),
             events: [],
-            nodes: nodes_list
+            nodes: nodes_list,
+            createdAt: Date.now()
         }
 
     },
@@ -61,7 +81,7 @@ export default{
         let places_list = []
 
         for(let i = 0; i < places_amount; i++){
-            places_list.push(this.generate_landscape(region_tier, region_type.biome))
+            places_list.push(this.generate_place(region_tier, region_type.biome))
         }
 
         return {
@@ -70,7 +90,8 @@ export default{
             name: this.region_names(region_type?.biome),
             tier: region_tier,
             danger: region_danger,
-            places: places_list
+            places: places_list,
+            createdAt: Date.now()
         }
 
     }

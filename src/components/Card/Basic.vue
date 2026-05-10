@@ -27,8 +27,9 @@
             >
                 <div class="card-information flex x-center y-center w-full h-full">
                     <img 
-                        class="h-3-4"
+                        class="card-node h-3-4"
                         :src="display"
+                        :key="uid"
                     >
                     </img>
                 </div>
@@ -57,6 +58,9 @@ export default {
         display: {
             type: String,
         },
+        uid: {
+            type: String
+        }
     },
     components: {
         ...Misc,
@@ -105,7 +109,12 @@ export default {
         }
         
         .card-information{
-            z-index: 2;    
+            z-index: 2;
+
+            .card-node{
+                animation: fade-scane-in 0.5s ease;
+            }
+
         }
 
     }
@@ -121,6 +130,17 @@ export default {
     }
 
 
+}
+
+@keyframes fade-scane-in {
+    from{
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 @keyframes fade-in {

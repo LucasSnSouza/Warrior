@@ -54,6 +54,7 @@
             <ViewModalCollect
                 v-if="getSelectedItem.display_types.includes('collect')"
                 :item="getSelectedItem"
+                @collected="removeSelectedItem()"
             />
         </ModalBasic>
 

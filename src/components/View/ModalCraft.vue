@@ -55,6 +55,7 @@ import { raw, refined } from "@/assets/types/resources.js"
 import utils from "@/scripts/utilities.js"
 
 import { useInteractionStore } from '@/stores/interaction.store.js'
+import { useProfileStore } from '@/stores/profile.store.js'
 
 import * as Card from "@/components/Card"
 import * as Misc from "@/components/Misc"
@@ -96,11 +97,14 @@ export default{
                     require_amount: require.amount
                 }
             }).filter(Boolean)
+        },
+        getProfilequeue(){
+            return useProfileStore().getQueue
         }
     },
     methods: {
         createSelectedItem(){
-            useInteractionStore().createSelectedItem();
+            useInteractionStore().createSelectedItem(this.getProfilequeue);
         }
     }
 }

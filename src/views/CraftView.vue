@@ -6,6 +6,21 @@
             information="Aqui você pode criar material basico em suas viagens ou descidir sua proxima construção."
         />
 
+        <div class="buttons-tool flex gap-md">
+
+            <ButtonBasic
+                class="button-tool bg-color-brand-three p-md flex x-center y-center aspect-ratio rounded-md"
+                @click="queue_status = true"
+            >
+                <MiscIcon
+                    icon="time-icon"
+                    class="bg-color-brand-two"
+                    :size="[16,16]"
+                />
+            </ButtonBasic>
+
+        </div>
+
         <div
             class="w-full flex flex-column gap-md"
         >
@@ -101,6 +116,20 @@
             />
         </ModalBasic>
 
+        <ModalBasic 
+            v-if="queue_status"
+            cancel-button="Voltar"
+            @cancel-action="queue_status = false"
+        >
+            <ButtonItem
+                v-for="(queue_item, queue_index) in getQueue"
+                :item="queue_item"
+                :index="queue_index"
+            >
+                <p class="font-sm o-half">{{ getComputedData(new Date(queue_item.craftedAt)) }}</p>
+            </ButtonItem>            
+        </ModalBasic>
+
     </div>
 
 </template>
@@ -110,10 +139,14 @@
 import { tools } from "@/assets/types/tools.js"
 import { weapons } from "@/assets/types/weapons.js"
 
+import { item_types } from "@/assets/types/types.js"
+
 import { useSystemStore } from '@/stores/system.store.js'
 import { useInteractionStore } from '@/stores/interaction.store.js'
+import { useProfileStore } from '@/stores/profile.store.js'
 
 import * as Button from "@/components/Button"
+import * as Input from "@/components/Input"
 import * as Misc from "@/components/Misc"
 import * as Card from "@/components/Card"
 import * as Action from "@/components/Action"
@@ -123,6 +156,7 @@ import * as View from "@/components/View"
 export default {
     data(){
         return{
+            queue_status: false,
             tools_status: true,
             weapons_status: true,
         }
@@ -133,6 +167,7 @@ export default {
         ...Button,
         ...Action,
         ...Modal,
+        ...Input,
         ...View
     },
     methods: {
@@ -141,6 +176,12 @@ export default {
         },
         removeSelectedItem(){
             useInteractionStore().removeSelectedItem();
+        },
+        getComputedData(date){
+            return date.toLocaleString('pt-BR', {
+                dateStyle: 'short',
+                timeStyle: 'medium'
+            });
         }
     },
     computed: {
@@ -152,6 +193,12 @@ export default {
         },
         getWeapons(){
             return weapons.filter(tool => tool.tier === 0)
+        },
+        getItemTypes(){
+            return item_types
+        },
+        getQueue(){
+            return useProfileStore().getQueue
         }
     },
     created(){
@@ -161,5 +208,13 @@ export default {
 </script>
 
 <style lang="scss">
+
+.buttons-tool{
+
+    .button-tool{
+        height: 40px;
+    }
+
+}
 
 </style>

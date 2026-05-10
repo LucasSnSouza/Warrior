@@ -7,9 +7,20 @@ import { translate } from '@/locales/translation';
 import App from './App.vue'
 import router from './router'
 
+const PROFICIENCE_TIERS = [
+    100,
+    1000,
+    5000,
+    15000,
+    50000
+]
+
 const app = createApp(App)
 
 app.config.globalProperties.$translate = translate;
+app.config.globalProperties.$proficience = (tier, current_value) => {
+    return current_value >= PROFICIENCE_TIERS[tier]
+}
 app.config.globalProperties.$money = (value) => {
     return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 };

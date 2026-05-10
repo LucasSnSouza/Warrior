@@ -5,7 +5,7 @@
             style="
                 border: 1px solid var(--color-brand-four);
             "
-            @click="addItem()"
+            @click="addItem(), $emit('collected')"
         >
             <p class="color-brand-three font-md">Coletar</p>
         </ButtonBasic>
@@ -28,6 +28,9 @@ export default{
             amount: 0
         }
     },
+    emits: [
+        'collected'
+    ],
     props:{
         item: {
             type: Object,

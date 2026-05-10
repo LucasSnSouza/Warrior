@@ -5,6 +5,7 @@
     >
         <slot name="start"/>
         <input 
+            class="font-md"
             :type="type"
             :class="inputClass"
             :disabled="disabled"

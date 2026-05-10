@@ -61,19 +61,26 @@
             </div>
 
             <CardBasic
-                v-if="getSelectedRegion.places.length > 0 && getSelectedRegion.places[getPlaceIndex]"
+                v-if="getSelectedRegion && getSelectedRegion.places.length > 0 && getSelectedRegion.places[getPlaceIndex]"
                 style="margin-top: 10px;"
                 :background="getSelectedRegion.places[getPlaceIndex].background"
                 :display="getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex].image"
+                :uid="getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex]?.uid"
                 :key="getPlaceIndex"
-                @click="$router.push( { path: '/interaction' } ), storeSelectedNode(getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex])"
+                @click="
+                    setRouteByNode(getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex]), 
+                    storeSelectedNode(getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex])
+                "
             />
 
         </div>
 
         <div 
-            v-if="getSelectedRegion.places[getPlaceIndex].nodes.length > 1"
+            v-if="getSelectedRegion && getSelectedRegion.places[getPlaceIndex].nodes.length > 1"
             class="w-full rounded-lg bg-color-brand-two p-lg flex x-center flex-column gap-md"
+            style="
+                margin-top: var(--scale-brand-sm);
+            "
         >
             <div class="flex x-center">
                 <p 
@@ -90,7 +97,7 @@
                 v-for="(item, index) in getSelectedRegion.places[getPlaceIndex].nodes"
                 :item="item"
                 :index="index"
-                @click="setNodeIndex(index)"
+                @click="setNodeIndex(index), resetScroll()"
             />
         </div>
 
@@ -135,6 +142,17 @@ export default {
         },
         setNodeIndex(node_index){
             useWorldStore().setNodeIndex(node_index);
+        },
+        setRouteByNode(node){
+            if(node.interaction.type == "duel"){
+                this.$router.push( { path: '/duel' } )
+            }else{
+                this.$router.push( { path: '/interaction' } )
+            }
+            
+        },
+        resetScroll(){
+            window.scrollTo(0,0)
         }
     },
     computed: {
@@ -152,16 +170,14 @@ export default {
         }
     },
     created(){
-        
-    },
-    async mounted(){
-        
         if(!this.getSelectedRegion){
             this.$router.push({ path: '/navigation' })
         }
+    },
+    async mounted(){
         this.exploration_tick_service = setInterval(() => {
-        }, 5000);
 
+        }, 5000);
     },
     unmounted(){
         if(this.exploration_tick_service){

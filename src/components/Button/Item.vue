@@ -30,6 +30,7 @@
                 <div class="h-full w-3-4 flex flex-column x-center y-start">
                     <p class="font-md">{{ item?.name }}</p>
                     <p v-if="item?.author" class="font-sm o-3-4">{{ item?.author }}</p>
+                    <slot></slot>
                 </div>
             </div>
             <div 
@@ -81,7 +82,7 @@ export default{
                 ...item,
                 display: display_reference
             })
-        }
+        },
     }
 }
 
@@ -94,7 +95,7 @@ export default{
 
     .stack{
 
-        width: 20px;
+        width: 28px;
         height: 20px;
         border-radius: var(--scale-brand-sm);
         background-color: var(--color-brand-three);

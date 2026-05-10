@@ -19,7 +19,17 @@ export const weapons = [
         settings: {
             isStackable: false,
             isEquippable: true,
-        }
+        },
+        requires: [
+            {
+                uid: "976d3dc4-fed5-468d-ab86-491019089313",
+                amount: 15
+            },
+            {
+                uid: "9ffbb22a-5b09-4e81-8b68-1d27668fcf99",
+                amount: 3
+            }
+        ]
     },
     {
         name: "Arco Iniciante",
@@ -41,6 +51,16 @@ export const weapons = [
         settings: {
             isStackable: false,
             isEquippable: true,
-        }
+        },
+        requires: [
+            {
+                uid: "976d3dc4-fed5-468d-ab86-491019089313",
+                amount: 15
+            },
+            {
+                uid: "9ffbb22a-5b09-4e81-8b68-1d27668fcf99",
+                amount: 3
+            }
+        ]
     }
 ]

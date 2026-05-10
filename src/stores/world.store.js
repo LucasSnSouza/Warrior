@@ -1,6 +1,9 @@
 import { defineStore } from "pinia";
 
 import { useGameStore } from "./game.store.js"
+import { useInteractionStore } from "./interaction.store.js"
+import { useProfileStore } from "./profile.store.js"
+import { useSystemStore } from "./system.store.js"
 
 import { sleep } from "@/scripts/time.js"
 import Generator from "@/scripts/generator.js"
@@ -77,7 +80,7 @@ export const useWorldStore = defineStore('world', {
         createWorld(world){
             this.worlds.push({
                 ...world,
-                createdAt: new Date()
+                createdAt: Date.now()
             })
         },
         watchers(){
@@ -108,12 +111,19 @@ export const useWorldStore = defineStore('world', {
                 (value) => {
                     console.log('ENGINE: Place watch update')
                     this.restoreNodeIndex();
+                    useInteractionStore().resolveQueueItems(this.getCurrentNode?.queue, this.getCurrentNode?.storage)
+                    useSystemStore().resetScroll()
                 }
             )
             watch(
                 () => this.node_index,
                 (value) => {
                     console.log('ENGINE: Node watch update')
+                    this.getCurrentPlace.nodes.forEach((node, index) => {
+                        if(node?.type == 'animal' || node?.type == 'enemy'){
+                        }
+                    })
+                    useSystemStore().resetScroll()
                 }
             )
         }

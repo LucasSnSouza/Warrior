@@ -17,7 +17,7 @@
             </ButtonBasic>
         </div>
 
-        <div 
+        <div
             class="flex flex-column gap-sm color-brand-one"
         >
             <p class="font-xlg">Novo Perfil</p>
@@ -32,6 +32,64 @@
                 placeholder="Insira do personagem ..."
                 :value="profile_form['name']"
             />
+        </div>
+
+        <div class="flex gap-md justify-between wrap">
+
+            <div 
+                class="h-full w-full gap-md"
+                style="
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                "
+            >
+                <ButtonBasic
+                    class="w-full h-full aspect-ratio rounded-lg relative p-md bg-none flex flex-column y-start"
+                    style="
+                        border: 1px solid var(--color-brand-four);
+                        height: 51px;
+                    "
+                >
+                    <p class="font-sm o-half absolute">Dano</p>
+                    <div class="flex h-full w-full x-end y-center">
+                        <h1 class="font-md">10</h1>
+                    </div>
+                </ButtonBasic>
+
+                <ButtonBasic
+                    class="w-full h-full aspect-ratio rounded-lg relative p-md bg-none flex flex-column y-start"
+                    style="
+                        border: 1px solid var(--color-brand-four);
+                        height: 51px;
+                    "
+                >
+                    <p class="font-sm o-half absolute">Agilidade</p>
+                    <div class="flex h-full w-full x-end y-center">
+                        <h1 class="font-md">10</h1>
+                    </div>
+                </ButtonBasic>
+
+                <ButtonBasic
+                    class="w-full h-full aspect-ratio rounded-lg relative p-md bg-none flex flex-column y-start"
+                    style="
+                        border: 1px solid var(--color-brand-four);
+                        height: 51px;
+                    "
+                >
+                    <p class="font-sm o-half absolute">Resistencia</p>
+                    <div class="flex h-full w-full x-end y-center">
+                        <h1 class="font-md">10</h1>
+                    </div>
+                </ButtonBasic>
+            </div>
+
+            <ButtonBasic
+                class="p-lg w-full bg-color-brand-three color-brand-two font-md text-start rounded-md flex y-center gap-md"
+                style="box-shadow: 2px 2px 8px #00000022; z-index: 2;"
+            >
+                <p class="p-sm">Embaralhar</p>
+            </ButtonBasic>
+
         </div>
 
         <div class="w-full flex gap-md y-center">
@@ -133,11 +191,25 @@ export default{
     },
     methods: {
         createAccount(){
-            useProfileStore().addProfile(
+            useProfileStore().createProfile(
                 {
                     name: this.profile_form.name,
                     uid: crypto.randomUUID(),
                     inventory: [],
+                    queue: [],
+                    proficiencies: {
+                        exploration: 0,
+                        harvesting: 0,
+                        fishing: 0,
+                        cooking: 0,
+                        smithing: 0,
+                        melee: 0,
+                        ranged: 0,
+                        magic: 0
+                    },
+                    attributes: {
+
+                    },
                     settings: {
                         usePassword: this.profile_form?.usePassword || false,
                         useAging: this.profile_form?.useAging || false
@@ -145,6 +217,12 @@ export default{
                 }
             );
             this.$router.push({ path: '/' })
+        },
+        generateAttributes(){
+            this.profile_form['attributes']
+            this.profile_form.attributes['damage'] = Math.floor(Math.random() * 50 + 1)
+            this.profile_form.attributes['agility'] = Math.floor(Math.random() * 50 + 1)
+            this.profile_form.attributes['endurance'] = Math.floor(Math.random() * 50 + 1)
         }
     },  
     created(){

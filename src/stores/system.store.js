@@ -17,6 +17,7 @@ export const useSystemStore = defineStore('system', {
             "light-orange",
             "light-green",
         ],
+        scrollReference: null,
         toasts: []
     }),
     getters: {
@@ -26,11 +27,23 @@ export const useSystemStore = defineStore('system', {
         getThemes: (state) => state.themes,
         getAwait: (state) => state.isAwait,
         getComplementary: (state) => state.isComplementary,
-        getToasts: (state) => state.toasts
+        getToasts: (state) => state.toasts,
+        getScrollReference: (state) => state.scrollReference
     },
     actions: {
         setAwait(value){
             this.isAwait = value
+        },
+        setScrollReference(reference){
+            this.scrollReference = reference
+        },
+        resetScroll(){
+            if(this.scrollReference){
+                this.scrollReference.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                })
+            }
         },
         toggleComplementary(){
             this.isComplementary = !this.isComplementary

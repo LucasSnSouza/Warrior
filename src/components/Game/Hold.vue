@@ -200,7 +200,7 @@ export default{
                 ){
                     let item = utils.get_item_by_uid(raw, utils.choice_by_weight(this.getSelectedNode.drops).uid)
                     if(item){
-                        utils.set_stackable_item_to_array(this.getSelectedNode.storage, item)
+                        utils.set_stackable_item_to_array(this.getSelectedNode.storage, { ...item, cratedAt: Date.now() } )
                     }
                 }
                 this.is_charging = false;

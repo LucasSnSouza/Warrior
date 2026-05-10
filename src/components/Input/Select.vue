@@ -1,26 +1,26 @@
 <template>
     <div 
-        class="input-select-wrapper"
+        class="input-select-wrapper flex y-center"
         :class="class"
     >
         <div 
             class="input-value"
             @click="options_tab_opened = !options_tab_opened"
         >
-            <p class="o-half" v-if="!selected">{{ placeholder }}</p>
-            <p class="" v-else>{{ selected[reference] }}</p>
+            <p class="o-3-4 font-md" v-if="!selected">{{ placeholder }}</p>
+            <p class="font-md" v-else>{{ selected[reference] }}</p>
         </div>
         <div 
             v-if="options_tab_opened"
             class="input-options absolute"
             :class="inputOptionsClass" 
+            :style="inputOptionsStyle"
         >
-            <div 
-                v-for="(item, index) in items"
+            <slot 
+                v-for="(item, index) of items" 
                 :key="index"
-            >
-                <slot :item="item"></slot>
-            </div>
+                :item="item"
+            />
         </div>
     </div>
 </template>
@@ -42,7 +42,11 @@ export default{
         inputOptionsClass:{
             type: String,
             default: ""
-        },  
+        },
+        inputOptionsStyle:{
+            type: String,
+            default: ""
+        },
         placeholder: {
             type: String,
             default: ""

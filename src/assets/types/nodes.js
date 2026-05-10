@@ -4,8 +4,10 @@ export const nodes_types = [
         image: "/Images/Nodes/oak-tree.png",
         tier: 0,
         author: "World",
+        type: "wood",
         biomes: ["plain", "florest"],
         storage: [],
+        queue: [],
         interaction: {
             type: "hold",
         },
@@ -21,8 +23,10 @@ export const nodes_types = [
         image: "/Images/Nodes/stone-geode.png",
         tier: 0,
         author: "World",
+        type: "stone",
         biomes: ["plain", "florest"],
         storage: [],
+        queue: [],
         interaction: {
             type: "hold",
         },

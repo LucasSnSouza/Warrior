@@ -118,9 +118,9 @@ export default{
     },
     computed: {
         getCraftQueue(){
-            let craftQueaeFiltered = useGameStore().getCraftQueue
+            let craftqueueFiltered = useGameStore().getCraftQueue
             .filter(item => this.refineTypes.includes(item.type))
-            return craftQueaeFiltered
+            return craftqueueFiltered
         }
     },
     mounted(){
