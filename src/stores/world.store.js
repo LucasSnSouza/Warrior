@@ -6,8 +6,9 @@ import { useProfileStore } from "./profile.store.js"
 import { useSystemStore } from "./system.store.js"
 
 import { sleep } from "@/scripts/time.js"
-import Generator from "@/scripts/generator.js"
 import { watch } from "vue";
+
+import Generator from "@/scripts/generator.js"
 
 export const useWorldStore = defineStore('world', {
     state: () => ({

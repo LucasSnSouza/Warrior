@@ -38,8 +38,8 @@
                         "
                     />
                     <div class="flex flex-column">
-                        <p class="font-md">{{ getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex].name }}</p>
-                        <p class="font-sm o-half">{{ getSelectedRegion.places[getPlaceIndex].name }}</p>
+                        <p class="font-md">{{ getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex]?.name }}</p>
+                        <p class="font-sm o-half">{{ getSelectedRegion.places[getPlaceIndex]?.name }}</p>
                     </div>
                     
                 </div>
@@ -63,8 +63,8 @@
             <CardBasic
                 v-if="getSelectedRegion && getSelectedRegion.places.length > 0 && getSelectedRegion.places[getPlaceIndex]"
                 style="margin-top: 10px;"
-                :background="getSelectedRegion.places[getPlaceIndex].background"
-                :display="getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex].image"
+                :background="getSelectedRegion.places[getPlaceIndex]?.background"
+                :display="getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex]?.image"
                 :uid="getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex]?.uid"
                 :key="getPlaceIndex"
                 @click="

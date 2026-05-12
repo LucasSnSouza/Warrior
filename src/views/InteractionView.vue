@@ -65,9 +65,7 @@
 <script>
 
 import { useExplorationStore } from "@/stores/exploration.store.js"
-import { useSystemStore } from '@/stores/system.store.js'
 import { useInteractionStore } from '@/stores/interaction.store.js'
-import { useGameStore } from '@/stores/game.store.js'
 
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"
@@ -94,7 +92,7 @@ export default {
     },
     methods: {
         removeSelectedItem(){
-            return useInteractionStore().removeSelectedItem();
+            useInteractionStore().removeSelectedItem();
         }
     },
     computed: {

@@ -3,6 +3,8 @@ import { defineStore } from "pinia";
 import { useGameStore } from "./game.store.js"
 import { useWorldStore } from "./world.store.js"
 
+import { watch } from "vue";
+
 import utils from "@/scripts/utilities.js"
 
 export const useProfileStore = defineStore('profile', {
@@ -14,10 +16,12 @@ export const useProfileStore = defineStore('profile', {
         getProfiles: (state) => state.profiles,
         getProfile: (state) => state.profile,
         getQueue: (state) => state.profile?.queue,
+        getAttributes: (state) => state.profile?.attributes,
+        getProficiencies: (state) => state.profile?.proficiencies,
         getEquipped: (state) => state.profile?.inventory.filter(item => item.equipped) || [],
         getInventory: (state) => state.profile?.inventory,
         getEquipedInventory: (state) => state.profile?.inventory?.filter(item => item?.equipped),
-        getNotEquipedInventory: (state) => state.profile?.inventory?.filter(item => !item?.equipped)
+        getNotEquipedInventory: (state) => state.profile?.inventory?.filter(item => !item?.equipped),
     },
     actions: {
         fetchProfilesByGame(){
@@ -46,6 +50,16 @@ export const useProfileStore = defineStore('profile', {
             useWorldStore().getCurrentNode.storage =
             useWorldStore().getCurrentNode.storage.filter(
                 storage_item => storage_item.uid !== item.uid
+            )
+        },
+        watchers(){
+            watch(
+                () => this.profile?.attributes?.health,
+                (value) => {
+                    if(value <= 0){
+                        // this.$router.push({ path: '/navigation' })
+                    }                    
+                }
             )
         }
     }

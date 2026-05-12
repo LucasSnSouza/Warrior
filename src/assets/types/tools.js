@@ -11,7 +11,7 @@ export const tools = [
         },
         attributes: [
             {
-                internal: "weight",
+                type: "weight",
                 name: "Peso",
                 value: 5
             }
@@ -43,7 +43,7 @@ export const tools = [
         },
         attributes: [
             {
-                internal: "weight",
+                type: "weight",
                 name: "Peso",
                 value: 5
             }
@@ -75,7 +75,7 @@ export const tools = [
         },
         attributes: [
             {
-                internal: "weight",
+                type: "weight",
                 name: "Peso",
                 value: 5
             }
@@ -107,7 +107,7 @@ export const tools = [
         },
         attributes: [
             {
-                internal: "weight",
+                type: "weight",
                 name: "Peso",
                 value: 5
             }

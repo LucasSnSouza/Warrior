@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.outpostinnovations.calmlife",
+        "sha256_cert_fingerprints": ["10:4E:58:3A:08:31:AF:EC:4D:21:58:D1:21:56:A7:EA:8F:93:37:08:40:13:1F:04:15:61:9A:2C:57:A4:6B:6C"]
+      }
+    }]

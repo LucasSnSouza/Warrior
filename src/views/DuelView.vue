@@ -70,17 +70,6 @@
 
                 </div>
             </div>
-            <div 
-                v-if="getDefeated"
-                class="absolute w-full h-full rounded-lg flex x-center y-center"
-                style="
-                    top: 0px;
-                    left: 0px;
-                    background-color: color-mix(in srgb, var(--color-brand-three) 95%, transparent);
-                "
-            >
-                <p class="font-md color-brand-two">Inimigo derrotado</p>
-            </div>
         </div>
 
         <div class="w-full flex gap-md x-end y-center">
@@ -158,11 +147,12 @@
                     "
                 >
                     <ButtonBasic
+                        v-if="isStepAvailable"
                         class="w-full rounded-md p-md bg-color-brand-two"
                         style="
                             border: 1px solid var(--color-brand-four);
                         "
-                        @click="addStepAction('attack'), addStep()"
+                        @click="addStep(), addStepAction('attack')"
                     >
                         <MiscIcon
                             icon="sword-icon"
@@ -172,11 +162,12 @@
                     </ButtonBasic>
         
                     <ButtonBasic
+                        v-if="isStepAvailable"
                         class="w-full rounded-md p-md bg-color-brand-two"
                         style="
                             border: 1px solid var(--color-brand-four);
                         "
-                        @click="addStepAction('defend'), addStep()"
+                        @click="addStep(), addStepAction('defend')"
                     >
                         <MiscIcon
                             icon="shield-icon"
@@ -191,6 +182,46 @@
         <MiscNotice
             information="Você deve escolher uma seleção de ataques e defesas antes que o tempo se encerre, após a vitoria você pode coletar sua recompensa."
         />
+
+        <div class="w-full flex gap-md">
+
+            <ButtonBasic
+                class="w-full h-full aspect-ratio rounded-lg relative p-md bg-none flex flex-column y-start"
+                style="
+                    border: 1px solid var(--color-brand-four);
+                    height: 51px;
+                "
+            >
+                <p class="font-sm o-half absolute">Vida</p>
+                <div class="flex h-full w-full x-end y-center">
+                    <h1 
+                        class="value-attribute font-md"
+                        :key="getProfileAttributes.health"
+                    >
+                        {{ getProfileAttributes.health }}
+                    </h1>
+                </div>
+            </ButtonBasic>
+
+            <ButtonBasic
+                class="w-full h-full aspect-ratio rounded-lg relative p-md bg-none flex flex-column y-start"
+                style="
+                    border: 1px solid var(--color-brand-four);
+                    height: 51px;
+                "
+            >
+                <p class="font-sm o-half absolute">Stamina</p>
+                <div class="flex h-full w-full x-end y-center">
+                    <h1 
+                        class="value-attribute font-md"
+                        :key="getProfileAttributes.stamina"
+                    >
+                        {{ getProfileAttributes.stamina }}
+                    </h1>
+                </div>
+            </ButtonBasic>
+
+        </div>
 
         <div
             class="w-full flex flex-column gap-md"
@@ -231,6 +262,22 @@
 
         </div>
 
+        <ModalBasic
+            v-if="getSelectedItem"
+            cancel-button="Voltar"
+            @cancel-action="removeSelectedItem()"
+        >
+            <ViewModalDetails
+                v-if="getSelectedItem.display_types.includes('overview')"
+                :item="getSelectedItem"
+            />
+            <ViewModalCollect
+                v-if="getSelectedItem.display_types.includes('collect')"
+                :item="getSelectedItem"
+                @collected="removeSelectedItem()"
+            />
+        </ModalBasic>
+
     </div>
 
 </template>
@@ -239,8 +286,9 @@
 
 import { useExplorationStore } from "@/stores/exploration.store.js"
 import { useWorldStore } from "@/stores/world.store.js"
+import { useProfileStore } from "@/stores/profile.store.js"
 import { useDuelStore } from "@/stores/duel.store.js"
-import { useSystemStore } from '@/stores/system.store.js'
+import { useInteractionStore } from '@/stores/interaction.store.js'
 
 import * as Button from "@/components/Button"
 import * as Misc from "@/components/Misc"
@@ -270,6 +318,9 @@ export default {
         cleanupSteps(){
             useDuelStore().cleanupSteps();
         },
+        resetStep(){
+            useDuelStore().resetStep();
+        },
         addStepAction(step_action){
             useDuelStore().addAction(this.getStep, step_action)
         },
@@ -281,9 +332,18 @@ export default {
         },
         cleanupInterval(){
             useDuelStore().cleanupInterval();
-        }
+        },
+        removeSelectedItem(){
+            useInteractionStore().removeSelectedItem();
+        },
+        setSelectedItem(item){
+            useInteractionStore().setSelectedItem(item)
+        },
     },
     computed: {
+        getSelectedItem(){
+            return useInteractionStore().getSelectedItem
+        },
         getSelectedNode(){
             return useExplorationStore().getSelectedNode
         },
@@ -310,20 +370,43 @@ export default {
         },
         getDefeated(){
             return useDuelStore().getDefeated
+        },
+        getProfileAttributes(){
+            return useProfileStore().getAttributes
+        },
+        isStepAvailable(){
+            return useDuelStore().isStepAvailable
         }
     },
     created(){
         this.cleanupSteps()
         this.createSteps()
-        this.setPreparation()
+        if(this.getSelectedNode.attributes.health > 0){
+            this.setPreparation()
+        }
     },
     beforeUnmount(){
         this.cleanupInterval()
+        this.cleanupSteps()
+        this.resetStep()
     }
 }
 
 </script>
 
 <style lang="scss">
+
+.value-attribute{
+    animation: fade-in 1s ease;
+}
+
+@keyframes fade-in {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
 
 </style>

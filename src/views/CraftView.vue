@@ -121,13 +121,22 @@
             cancel-button="Voltar"
             @cancel-action="queue_status = false"
         >
-            <ButtonItem
-                v-for="(queue_item, queue_index) in getQueue"
-                :item="queue_item"
-                :index="queue_index"
+            <MiscNotice
+                v-if="!getQueue.length"
+                information="Aqui seram mostrados todos os itens que estão sendo fabricados manualmente."
+            />
+            <div 
+                v-else
+                class="flex flex-column gap-md w-full"
             >
-                <p class="font-sm o-half">{{ getComputedData(new Date(queue_item.craftedAt)) }}</p>
-            </ButtonItem>            
+                <ButtonItem
+                    v-for="(queue_item, queue_index) in getQueue"
+                    :item="queue_item"
+                    :index="queue_index"
+                >
+                    <p class="font-sm o-half">{{ getComputedData(new Date(queue_item.craftedAt)) }}</p>
+                </ButtonItem>            
+            </div>
         </ModalBasic>
 
     </div>

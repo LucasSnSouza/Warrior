@@ -4,6 +4,7 @@ import utils from "@/scripts/utilities.js"
 
 import { useProfileStore } from "@/stores/profile.store.js"
 import { useSystemStore } from "@/stores/system.store.js"
+
 import { watch } from "vue";
 
 export const useInteractionStore = defineStore('interaction', {
@@ -34,21 +35,23 @@ export const useInteractionStore = defineStore('interaction', {
             })
         },
         resolveQueueItems(reference_queue, reference_storage){
-            const now = Date.now();
-            for (let i = reference_queue.length - 1; i >= 0; i--) {
-                const item = reference_queue[i];
-                const craftedAt = new Date(item.craftedAt).getTime();
-                if (craftedAt <= now) {
-                    reference_storage.push(
-                        {
-                            ...item,
-                            uid: crypto.randomUUID(),
-                            author: useProfileStore().getProfile.name,
-                            amount: 1,
-                            createdAt: Date.now()
-                        }
-                    );
-                    reference_queue.splice(i, 1);
+            if(reference_queue){
+                const now = Date.now();
+                for (let i = reference_queue.length - 1; i >= 0; i--) {
+                    const item = reference_queue[i];
+                    const craftedAt = new Date(item.craftedAt).getTime();
+                    if (craftedAt <= now) {
+                        reference_storage.push(
+                            {
+                                ...item,
+                                uid: crypto.randomUUID(),
+                                author: useProfileStore().getProfile.name,
+                                amount: 1,
+                                createdAt: Date.now()
+                            }
+                        );
+                        reference_queue.splice(i, 1);
+                    }
                 }
             }
         },

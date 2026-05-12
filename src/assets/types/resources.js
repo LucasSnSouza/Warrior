@@ -4,7 +4,7 @@ export const raw = [
         name: "Carvalho",
         author: "World",
         description: "Um recurso abundante em todas as regiões e escencial para a produção das primeiras ferramentas.",
-        type: "wood",
+        types: ["resource", "wood"],
         tier: 0,
         equipped: false,
         visuals: {
@@ -13,7 +13,7 @@ export const raw = [
         },
         attributes: [
             {
-                internal: "weight",
+                type: "weight",
                 name: "Peso",
                 value: 1
             }
@@ -28,7 +28,7 @@ export const raw = [
         name: "Pedra",
         author: "World",
         description: "Um recurso abundante em todas as regiões e escencial para a produção das primeiras ferramentas.",
-        type: "stone",
+        types: ["resource", "stone"],
         tier: 0,
         equipped: false,
         visuals: {
@@ -37,7 +37,7 @@ export const raw = [
         },
         attributes: [
             {
-                internal: "weight",
+                type: "weight",
                 name: "Peso",
                 value: 1
             }
@@ -63,7 +63,7 @@ export const refined = [
         },
         attributes: [
             {
-                internal: "weight",
+                type: "weight",
                 name: "Peso",
                 value: 2
             }

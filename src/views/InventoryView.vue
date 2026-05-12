@@ -96,6 +96,30 @@
             <ViewModalDetails
                 :item="getSelectedItem"
             />
+            <div 
+                v-if="getSelectedItem.settings?.isEquippable"
+            >
+                <ButtonBasic
+                    v-if="!getSelectedItem.equipped"
+                    class="bg-color-brand-two p-md rounded-md w-full"
+                    style="
+                        border: 1px solid var(--color-brand-four);
+                    "
+                    @click="getSelectedItem.equipped = true, removeSelectedItem()"
+                >
+                    <p class="color-brand-three font-md">Equipar</p>
+                </ButtonBasic>
+                <ButtonBasic
+                    v-else
+                    class="bg-color-brand-two p-md rounded-md w-full"
+                    style="
+                        border: 1px solid var(--color-brand-four);
+                    "
+                    @click="getSelectedItem.equipped = false, removeSelectedItem()"
+                >
+                    <p class="color-brand-three font-md">Desequipar</p>
+                </ButtonBasic>
+            </div>
         </ModalBasic>
 
     </div>

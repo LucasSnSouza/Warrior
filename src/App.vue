@@ -137,6 +137,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 import { useSystemStore } from '@/stores/system.store.js'
 import { useInteractionStore } from '@/stores/interaction.store.js'
+import { useProfileStore } from '@/stores/profile.store.js'
 import { useGameStore } from '@/stores/game.store.js'
 
 import { Storage } from '@/scripts/storage.js'
@@ -255,6 +256,7 @@ export default {
 
         useWorldStore().watchers();
         useInteractionStore().watchers();
+        useProfileStore().watchers();
 
     }
 }

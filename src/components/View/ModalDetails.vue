@@ -25,7 +25,7 @@
     >
         <p class="font-md text-center" >Atributos</p>
         <div
-            class="flex x-center gap-md"
+            class="flex x-center gap-xlg"
         >
             <div
                 v-for="(item, index) in item?.attributes"

@@ -51,6 +51,30 @@ export default{
                 updatedAt: Date.now()
             })
         }
+    },
+
+    compute_damage(damage, armor){
+        return damage * (100 / (100 + armor))
+    },
+
+    compute_action_timer(player_agility, enemy_agility){
+        const difference = player_agility - enemy_agility
+       return Math.floor(Math.max(1, 10 + difference * 0.1))
+    },
+
+    compute_modifier(base_value, target_attribute, items){
+        return items.reduce((total, item) => {
+            const modifiers =
+                item.attributes?.filter(attribute =>
+                    attribute.type == 'modifier' &&
+                    attribute.modifier == target_attribute
+                ) || []
+            const modifier_total =
+                modifiers.reduce((sum, modifier) =>
+                    sum + modifier.value
+                , 0)
+            return total + modifier_total
+        }, 0) + base_value
     }
 
 }

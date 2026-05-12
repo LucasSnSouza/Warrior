@@ -52,7 +52,12 @@
                 >
                     <p class="font-sm o-half absolute">Dano</p>
                     <div class="flex h-full w-full x-end y-center">
-                        <h1 class="font-md">10</h1>
+                        <h1 
+                            class="value-attribute font-md" 
+                            :key="this.profile_form?.attributes?.damage"
+                        >
+                            {{ this.profile_form?.attributes?.damage }}
+                        </h1>
                     </div>
                 </ButtonBasic>
 
@@ -65,7 +70,12 @@
                 >
                     <p class="font-sm o-half absolute">Agilidade</p>
                     <div class="flex h-full w-full x-end y-center">
-                        <h1 class="font-md">10</h1>
+                        <h1 
+                            class="value-attribute font-md" 
+                            :key="this.profile_form?.attributes?.agility"
+                        >
+                            {{ this.profile_form?.attributes?.agility }}
+                        </h1>
                     </div>
                 </ButtonBasic>
 
@@ -78,7 +88,12 @@
                 >
                     <p class="font-sm o-half absolute">Resistencia</p>
                     <div class="flex h-full w-full x-end y-center">
-                        <h1 class="font-md">10</h1>
+                        <h1 
+                            class="value-attribute font-md" 
+                            :key="this.profile_form?.attributes?.armor"
+                        >
+                            {{ this.profile_form?.attributes?.armor }}
+                        </h1>
                     </div>
                 </ButtonBasic>
             </div>
@@ -86,6 +101,7 @@
             <ButtonBasic
                 class="p-lg w-full bg-color-brand-three color-brand-two font-md text-start rounded-md flex y-center gap-md"
                 style="box-shadow: 2px 2px 8px #00000022; z-index: 2;"
+                @click="generateAttributes()"
             >
                 <p class="p-sm">Embaralhar</p>
             </ButtonBasic>
@@ -207,9 +223,7 @@ export default{
                         ranged: 0,
                         magic: 0
                     },
-                    attributes: {
-
-                    },
+                    attributes: this.profile_form?.attributes,
                     settings: {
                         usePassword: this.profile_form?.usePassword || false,
                         useAging: this.profile_form?.useAging || false
@@ -218,15 +232,20 @@ export default{
             );
             this.$router.push({ path: '/' })
         },
-        generateAttributes(){
-            this.profile_form['attributes']
-            this.profile_form.attributes['damage'] = Math.floor(Math.random() * 50 + 1)
-            this.profile_form.attributes['agility'] = Math.floor(Math.random() * 50 + 1)
-            this.profile_form.attributes['endurance'] = Math.floor(Math.random() * 50 + 1)
+        generateAttributes() {
+            const randomStat = () => Math.floor(Math.random() * 10) + 1
+            this.profile_form.attributes = {
+                health: 100,
+                stamina: 1000,
+                damage: randomStat(),
+                agility: randomStat(),
+                armor: randomStat()
+            }
         }
     },  
     created(){
         this.list_profiles = Storage.get("game-system").data.profiles
+        this.generateAttributes()
     }
 }
 
@@ -234,10 +253,17 @@ export default{
 
 <style lang="scss">
 
-.ellipsis{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+.value-attribute{
+    animation: fade-in 1s ease;
+}
+
+@keyframes fade-in {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }
 
 </style>

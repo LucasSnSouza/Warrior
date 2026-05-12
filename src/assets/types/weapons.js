@@ -11,8 +11,20 @@ export const weapons = [
         },
         attributes: [
             {
-                internal: "weight",
+                type: "weight",
                 name: "Peso",
+                value: 5
+            },
+            {
+                type: "modifier",
+                modifier: "damage",
+                name: "Dano",
+                value: 20
+            },
+            {
+                type: "modifier",
+                modifier: "agility",
+                name: "Agilidade",
                 value: 5
             }
         ],
@@ -23,11 +35,11 @@ export const weapons = [
         requires: [
             {
                 uid: "976d3dc4-fed5-468d-ab86-491019089313",
-                amount: 15
+                amount: 1
             },
             {
                 uid: "9ffbb22a-5b09-4e81-8b68-1d27668fcf99",
-                amount: 3
+                amount: 1
             }
         ]
     },
@@ -43,9 +55,21 @@ export const weapons = [
         },
         attributes: [
             {
-                internal: "weight",
+                type: "weight",
                 name: "Peso",
                 value: 5
+            },
+            {
+                type: "modifier",
+                modifier: "damage",
+                name: "Dano",
+                value: 10
+            },
+            {
+                type: "modifier",
+                modifier: "agility",
+                name: "Agilidade",
+                value: 10
             }
         ],
         settings: {
@@ -55,11 +79,11 @@ export const weapons = [
         requires: [
             {
                 uid: "976d3dc4-fed5-468d-ab86-491019089313",
-                amount: 15
+                amount: 1
             },
             {
                 uid: "9ffbb22a-5b09-4e81-8b68-1d27668fcf99",
-                amount: 3
+                amount: 1
             }
         ]
     }

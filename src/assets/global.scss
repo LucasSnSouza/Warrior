@@ -3,6 +3,12 @@
     padding-right: var(--scale-brand-xlg);
 }
 
+.ellipsis{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 .pointer{
     cursor: pointer;
 }

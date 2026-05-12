@@ -4,13 +4,16 @@ export const animals_types = [
         image: "/Images/Animals/animal-fox.png",
         tier: 0,
         author: "World",
-        type: "animal",
+        classification: "canine",
+        types: ["animal", "neutral"],
         biomes: ["plain", "florest"],
         storage: [],
         queue: [],
         attributes: {
-            health: 100,
-            armor: 20
+            health: 30,
+            armor: 5,
+            damage: 6,
+            agility: 25
         },
         interaction: {
             type: "duel",
