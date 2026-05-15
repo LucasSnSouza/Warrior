@@ -56,11 +56,11 @@ export default{
         let landscape_by_biome = landscapes_types.filter(landscape => landscape.biome == target_biome);
         let nodes_list = []
 
-        for(let i = 0; i < Math.floor(Math.random() * 6); i++){
+        for(let i = 0; i < utils.random_int(1,5); i++){
             nodes_list.push(this.generate_node(target_tier, target_biome))
         }
 
-        for(let i = 0; i < Math.floor(Math.random() * 3); i++){
+        for(let i = 0; i < utils.random_int(0,3); i++){
             nodes_list.push(this.generate_animal(target_tier, target_biome))
         }
 

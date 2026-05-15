@@ -6,12 +6,12 @@
     >
         <div 
             class="card-wrapper h-full flex relative bg-color-brand-three"
-            :style="{ backgroundImage: `url(${background})` }"
+            :style="{ backgroundImage: `url(${ getBackground })` }"
         >
             <div class="card-information flex x-center y-center w-full">
                 <img 
                     class="h-full"
-                    :src="display"
+                    :src="getVisual"
                 >
                 </img>
             </div>
@@ -23,6 +23,8 @@
 
 <script>
 
+import { tiers_types } from "@/assets/types/types.js"
+
 export default {
     data(){
         return{
@@ -32,19 +34,22 @@ export default {
         class: {
             type: String,
             default: ""
-        },  
-        background: {
-            type: String,
         },
-        display: {
-            type: String,
-        },
+        item: {
+            type: Object
+        }
     },
     components: {
     },
     methods: {
     },
     computed: {
+        getBackground(){
+            return tiers_types[this.item.tier].background
+        },
+        getVisual(){
+            return this.item.available ? this.item.visuals.default : this.item.visuals.depleted
+        }
     },
     created(){
     }

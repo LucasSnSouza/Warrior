@@ -61,11 +61,13 @@
             </div>
 
             <CardBasic
-                v-if="getSelectedRegion && getSelectedRegion.places.length > 0 && getSelectedRegion.places[getPlaceIndex]"
+                v-if="
+                    getSelectedRegion &&
+                    getSelectedRegion.places[getPlaceIndex].nodes.length > 0
+                "
                 style="margin-top: 10px;"
                 :background="getSelectedRegion.places[getPlaceIndex]?.background"
-                :display="getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex]?.image"
-                :uid="getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex]?.uid"
+                :node="getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex]"
                 :key="getPlaceIndex"
                 @click="
                     setRouteByNode(getSelectedRegion.places[getPlaceIndex].nodes[getNodeIndex]), 

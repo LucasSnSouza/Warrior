@@ -1,13 +1,17 @@
 export const nodes_types = [
     {
         name: "Arvore de Carvalho",
-        image: "/Images/Nodes/oak-tree.png",
         tier: 0,
         author: "World",
         type: "wood",
         biomes: ["plain", "florest"],
         storage: [],
         queue: [],
+        available: true,
+        visuals: {
+            default: "/Images/Nodes/oak-tree.png",
+            depleted: "/Images/Nodes/Depleted/depleted-oak-tree.png"
+        },
         interaction: {
             type: "hold",
         },
@@ -20,13 +24,17 @@ export const nodes_types = [
     },
     {
         name: "Rocha",
-        image: "/Images/Nodes/stone-geode.png",
         tier: 0,
         author: "World",
         type: "stone",
         biomes: ["plain", "florest"],
         storage: [],
         queue: [],
+        available: true,
+        visuals: {
+            default: "/Images/Nodes/stone-geode.png",
+            depleted: "/Images/Nodes/Depleted/depleted-stone-geode.png"
+        },
         interaction: {
             type: "hold",
         },

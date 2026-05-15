@@ -23,7 +23,7 @@ export const useInteractionStore = defineStore('interaction', {
         setSelectedItem(item){
             this.selected_item = item
         },
-        createSelectedItem(reference_queue){
+        setSelectedItemToQueae(reference_queue){
             if(!utils.has_required_items(useProfileStore().getInventory, this.selected_item.requires)) return false
             utils.deduct_required_items(
                 useProfileStore().getInventory, 
@@ -31,7 +31,7 @@ export const useInteractionStore = defineStore('interaction', {
             )
             reference_queue.push({
                 ...this.selected_item,
-                craftedAt: Date.now()
+                craftedAt: Date.now() + this.selected_item?.crafting
             })
         },
         resolveQueueItems(reference_queue, reference_storage){

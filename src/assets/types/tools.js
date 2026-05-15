@@ -3,11 +3,11 @@ export const tools = [
         name: "Machado Iniciante",
         description: "Um machado inicial para coletas basicas, com baixo custo e uma boa eficiencia.",
         types: ["tool", "axe"],
+        crafting: 1,
         tier: 0,
         equipped: false,
         visuals: {
-            background: "/Images/Tiers/tier-0.png",
-            display: "/Images/Resources/oak-wood.png"
+            default: "/Images/Resources/oak-wood.png"
         },
         attributes: [
             {
@@ -35,11 +35,11 @@ export const tools = [
         name: "Picareta Iniciante",
         description: "A primeira picareta que um explorador conseguira, junta baixo custo e boa eficiencia.",
         types: ["tool", "pick"],
+        crafting: 1,
         tier: 0,
         equipped: false,
         visuals: {
-            background: "/Images/Tiers/tier-0.png",
-            display: "/Images/Resources/oak-wood.png"
+            default: "/Images/Resources/oak-wood.png"
         },
         attributes: [
             {
@@ -67,11 +67,11 @@ export const tools = [
         name: "Foice Iniciante",
         description: "Barata e eficaz para a colheita de vegetações rasteiras.",
         types: ["tool", "sickle"],
+        crafting: 1,
         tier: 0,
         equipped: false,
         visuals: {
-            background: "/Images/Tiers/tier-0.png",
-            display: "/Images/Resources/oak-wood.png"
+            default: "/Images/Resources/oak-wood.png"
         },
         attributes: [
             {
@@ -99,11 +99,11 @@ export const tools = [
         name: "Faca Iniciante",
         description: "Uma ferramenta basica para a coleta de pele e carne de animais.",
         types: ["tool", "knife"],
+        crafting: 1,
         tier: 0,
         equipped: false,
         visuals: {
-            background: "/Images/Tiers/tier-0.png",
-            display: "/Images/Resources/oak-wood.png"
+            default: "/Images/Resources/oak-wood.png"
         },
         attributes: [
             {

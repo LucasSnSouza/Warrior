@@ -2,8 +2,7 @@
 
     <div class="flex x-center">
         <CardOverview
-            :background="item?.visuals.background"
-            :display="item?.visuals.display"
+            :item="item"
             style="
                 width: 30%;
                 margin-top: -20%;

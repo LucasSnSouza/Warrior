@@ -6,6 +6,7 @@ export const useExplorationStore = defineStore('exploration', {
     }),
     getters: {
         getSelectedNode: (state) => state.selected_node,
+        getAvailable: (state) => state.selected_node.available
     },
     actions: {
         setSelectedNode(node){

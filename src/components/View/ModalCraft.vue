@@ -39,7 +39,7 @@
             style="
                 border: 1px solid var(--color-brand-four);
             "
-            @click="createSelectedItem()"
+            @click="setSelectedItemToQueae()"
         >
             <p class="color-brand-three font-md">Criar</p>
         </ButtonBasic>
@@ -103,8 +103,8 @@ export default{
         }
     },
     methods: {
-        createSelectedItem(){
-            useInteractionStore().createSelectedItem(this.getProfilequeue);
+        setSelectedItemToQueae(){
+            useInteractionStore().setSelectedItemToQueae(this.getProfilequeue);
         }
     }
 }

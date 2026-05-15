@@ -3,11 +3,11 @@ export const weapons = [
         name: "Espada Iniciante",
         description: "",
         types: ["weapon", "sword"],
+        crafting: 1,
         tier: 0,
         equipped: false,
         visuals: {
-            background: "/Images/Tiers/tier-0.png",
-            display: "/Images/Resources/oak-wood.png"
+            default: "/Images/Resources/oak-wood.png"
         },
         attributes: [
             {
@@ -47,11 +47,11 @@ export const weapons = [
         name: "Arco Iniciante",
         description: "",
         types: ["weapon", "bow"],
+        crafting: 1,
         tier: 0,
         equipped: false,
         visuals: {
-            background: "/Images/Tiers/tier-0.png",
-            display: "/Images/Resources/oak-wood.png"
+            default: "/Images/Resources/oak-wood.png"
         },
         attributes: [
             {

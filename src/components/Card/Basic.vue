@@ -28,8 +28,8 @@
                 <div class="card-information flex x-center y-center w-full h-full">
                     <img 
                         class="card-node h-3-4"
-                        :src="display"
-                        :key="uid"
+                        :src="getVisual"
+                        :key="node.uid"
                     >
                     </img>
                 </div>
@@ -55,11 +55,8 @@ export default {
         background: {
             type: String,
         },
-        display: {
-            type: String,
-        },
-        uid: {
-            type: String
+        node: {
+            type: Object,
         }
     },
     components: {
@@ -70,6 +67,9 @@ export default {
     computed: {
         getAwait(){
             return useSystemStore().getAwait
+        },
+        getVisual(){
+            return this.node.available ? this.node.visuals.default : this.node.visuals.depleted
         }
     },
     created(){

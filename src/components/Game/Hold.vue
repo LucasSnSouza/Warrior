@@ -48,7 +48,7 @@
                 }"
             ></div>
             <div
-                v-if="charging_disabled"
+                v-if="!getAvailable"
                 class="absolute w-full h-full flex x-center y-center color-brand-two"
                 style="
                     background-color: color-mix(in srgb, var(--color-brand-three) 95%, transparent);
@@ -152,7 +152,7 @@ export default{
     watch:{
         'getSelectedNode.amount'(value){
             if(value <= 0){
-                this.charging_disabled = true;
+                useExplorationStore().getSelectedNode.available = false
             }
         }
     },  
@@ -165,6 +165,9 @@ export default{
         },
         getCurrentPlace(){
             return useWorldStore().getCurrentPlace
+        },
+        getAvailable(){
+            return useExplorationStore().getAvailable
         }
     },
     methods: {
@@ -176,7 +179,7 @@ export default{
             this.charging_target_max_size = this.charging_target_min_size + (Math.floor(Math.random() * 20) + 3)
         },
         initCharging(){
-            if(!this.charging_disabled){
+            if(this.getAvailable){
                 this.is_charging = true;
                 this.interval_reference = setInterval(() => {
                     this.charging();
@@ -193,14 +196,14 @@ export default{
             }
         },
         stopCharging(){
-            if(!this.charging_disabled){
+            if(this.getAvailable){
                 if(
                     this.charging_size <= this.charging_target_max_size && 
                     this.charging_size >= this.charging_target_min_size
                 ){
                     let item = utils.get_item_by_uid(raw, utils.choice_by_weight(this.getSelectedNode.drops).uid)
                     if(item){
-                        utils.set_stackable_item_to_array(this.getSelectedNode.storage, { ...item, cratedAt: Date.now() } )
+                        utils.set_stackable_item_to_array(this.getSelectedNode.storage, { ...item, createdAt: Date.now() } )
                     }
                 }
                 this.is_charging = false;

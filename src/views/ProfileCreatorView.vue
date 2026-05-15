@@ -211,8 +211,11 @@ export default{
                 {
                     name: this.profile_form.name,
                     uid: crypto.randomUUID(),
+                    defeated: false,
                     inventory: [],
                     queue: [],
+                    effects: [],
+                    events: [],
                     proficiencies: {
                         exploration: 0,
                         harvesting: 0,
@@ -235,8 +238,8 @@ export default{
         generateAttributes() {
             const randomStat = () => Math.floor(Math.random() * 10) + 1
             this.profile_form.attributes = {
-                health: 100,
-                stamina: 1000,
+                health: 30,
+                stamina: 100,
                 damage: randomStat(),
                 agility: randomStat(),
                 armor: randomStat()

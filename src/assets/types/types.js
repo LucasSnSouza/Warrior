@@ -37,3 +37,21 @@ export const duel_types = [
     "attack",
     "defend",
 ]
+
+export const tiers_types = [
+    {
+        background: "/Images/Tiers/tier-0.png"
+    },
+    {
+        background: "/Images/Tiers/tier-1.png"
+    },
+    {
+        background: "/Images/Tiers/tier-2.png"
+    },
+    {
+        background: "/Images/Tiers/tier-3.png"
+    },
+    {
+        background: "/Images/Tiers/tier-4.png"
+    }
+]

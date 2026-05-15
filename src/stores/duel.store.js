@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 
 import { duel_types } from "@/assets/types/types.js"
+import { raw, refined } from "@/assets/types/resources.js"
 
 import { useProfileStore } from "./profile.store.js"
 import { useExplorationStore } from "./exploration.store.js"
@@ -10,8 +11,6 @@ import utils from '@/scripts/utilities.js'
 export const useDuelStore = defineStore('duel', {
     state: () => ({
         intervalId: null,
-        history: [],
-        history_index: 0,
         round: 0,
         step: -1,
         steps: [],
@@ -23,7 +22,6 @@ export const useDuelStore = defineStore('duel', {
         getRound: (state) => state.round,
         getStep: (state) => state.step,
         getTime: (state) => state.time,
-        getHistory: (state) => state.history,
         getDefeated: (state) => state.defeated,
         isStepAvailable: (state) => state.step < state.steps.length - 1
     },
@@ -32,8 +30,6 @@ export const useDuelStore = defineStore('duel', {
 
             let NodeAttributes = useExplorationStore().getSelectedNode.attributes
             let ProfileAttributes = useProfileStore().getAttributes
-
-            ProfileAttributes.stamina--
 
             if(this.steps[step].player == 'attack' && this.steps[step].enemy == 'attack'){
                 NodeAttributes.health -= 
@@ -50,6 +46,7 @@ export const useDuelStore = defineStore('duel', {
                             utils.compute_modifier(ProfileAttributes.armor, "armor", useProfileStore().getEquipedInventory),
                         )
                     )
+                ProfileAttributes.stamina -= 2
             }
             else if(this.steps[step].player == 'attack' && this.steps[step].enemy == 'defend'){
                 NodeAttributes.health -= 
@@ -59,6 +56,7 @@ export const useDuelStore = defineStore('duel', {
                             NodeAttributes.armor
                         ) * 0.5
                     )
+                ProfileAttributes.stamina -= 2
             }
             else if(this.steps[step].player == 'defend' && this.steps[step].enemy == 'attack'){
                 ProfileAttributes.health -= 
@@ -68,6 +66,7 @@ export const useDuelStore = defineStore('duel', {
                             utils.compute_modifier(ProfileAttributes.armor, "armor", useProfileStore().getEquipedInventory),
                         ) * 0.5
                     )
+                ProfileAttributes.stamina -= 6
             }
             else if(this.steps[step].player == null && this.steps[step].enemy == 'attack'){
                 ProfileAttributes.health -= 
@@ -78,11 +77,17 @@ export const useDuelStore = defineStore('duel', {
                         )
                     )
             }
+            else{
+                ProfileAttributes.stamina -= 4
+            }
 
             if(NodeAttributes.health <= 0){
+                let Node = useExplorationStore().getSelectedNode
                 clearInterval(this.intervalId)
-                useExplorationStore().getSelectedNode.attributes.health = 0
+                Node.attributes.health = 0
+                Node.available = false
                 this.defeated = true
+                this.generateDrops(utils.random_int(1,6))
             }
 
         },
@@ -91,9 +96,9 @@ export const useDuelStore = defineStore('duel', {
             this.intervalId = setInterval(() => {
                 this.processStep(step)
                 step++
-                this.history_index++
                 if(step >= this.steps.length){
                     clearInterval(this.intervalId)
+                    this.round++
                     this.resetStep()
                     this.cleanupSteps()
                     this.createSteps()
@@ -110,6 +115,16 @@ export const useDuelStore = defineStore('duel', {
                     this.setFight()
                 }
             }, 1000);
+        },
+        generateDrops(amount){
+            for(let i = 0; i < amount; i++){
+                let SelectedNode = useExplorationStore().getSelectedNode
+                let item = utils.get_item_by_uid(
+                    [...raw, ...refined], 
+                    utils.choice_by_weight(SelectedNode.drops).uid
+                )
+                utils.set_stackable_item_to_array(SelectedNode.storage, { ...item, createdAt: Date.now() })
+            }
         },
         computeTimer(){
             this.time = utils.compute_action_timer(

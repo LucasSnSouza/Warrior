@@ -8,8 +8,7 @@ export const raw = [
         tier: 0,
         equipped: false,
         visuals: {
-            background: "/Images/Tiers/tier-0.png",
-            display: "/Images/Resources/oak-wood.png"
+            default: "/Images/Resources/oak-wood.png"
         },
         attributes: [
             {
@@ -32,8 +31,7 @@ export const raw = [
         tier: 0,
         equipped: false,
         visuals: {
-            background: "/Images/Tiers/tier-0.png",
-            display: "/Images/Resources/stone-rock.png"
+            default: "/Images/Resources/stone-rock.png"
         },
         attributes: [
             {
@@ -59,7 +57,7 @@ export const refined = [
         production_time: 5,
         visuals: {
             background: "/images/tiers/tier-1.png",
-            display: "/images/resources/tin-ingot.png"
+            default: "/images/resources/tin-ingot.png"
         },
         attributes: [
             {
@@ -79,7 +77,7 @@ export const refined = [
         production_time: 10,
         visuals: {
             background: "/images/tiers/tier-2.png",
-            display: "/images/resources/cooper-ingot.png"
+            default: "/images/resources/cooper-ingot.png"
         },
         attributes: [
             {
@@ -99,7 +97,7 @@ export const refined = [
         production_time: 15,
         visuals: {
             background: "/images/tiers/tier-3.png",
-            display: "/images/resources/iron-ingot.png"
+            default: "/images/resources/iron-ingot.png"
         },
         attributes: [
             {
@@ -119,7 +117,7 @@ export const refined = [
         production_time: 20,
         visuals: {
             background: "/images/tiers/tier-4.png",
-            display: "/images/resources/iron-ingot.png"
+            default: "/images/resources/iron-ingot.png"
         },
         attributes: [
             {
@@ -139,7 +137,7 @@ export const refined = [
         tier: 1,
         visuals: {
             background: "/images/tiers/tier-1.png",
-            display: "/images/resources/sandstone-brick.png"
+            default: "/images/resources/sandstone-brick.png"
         },
         attributes: [
             {
@@ -159,7 +157,7 @@ export const refined = [
         tier: 2,
         visuals: {
             background: "/images/tiers/tier-2.png",
-            display: "/images/resources/shale-brick.png"
+            default: "/images/resources/shale-brick.png"
         },
         attributes: [
             {
@@ -179,7 +177,7 @@ export const refined = [
         tier: 3,
         visuals: {
             background: "/images/tiers/tier-3.png",
-            display: "/images/resources/dolomite-brick.png"
+            default: "/images/resources/dolomite-brick.png"
         },
         attributes: [
             {
@@ -199,7 +197,7 @@ export const refined = [
         tier: 4,
         visuals: {
             background: "/images/tiers/tier-4.png",
-            display: "/images/resources/obsidian-brick.png"
+            default: "/images/resources/obsidian-brick.png"
         },
         attributes: [
             {

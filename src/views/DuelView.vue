@@ -42,7 +42,7 @@
                     width: 60%;
                     transform: translateY(-15px);
                 "
-                :src="getSelectedNode.image"
+                :src="getVisual"
             />
             <div class="w-full flex flex-column gap-sm">
                 <div>
@@ -50,7 +50,10 @@
                 </div>
                 <div class="flex gap-md o-half">
 
-                    <div class="flex gap-sm y-center">
+                    <div 
+                        class="flex gap-sm y-center value-attribute" 
+                        :key="getSelectedNode.attributes.health"
+                    >
                         <MiscIcon
                             icon="heart-icon"
                             class="bg-color-brand-one"
@@ -87,6 +90,7 @@
                     padding-right: 30px;
                     background-color: color-mix(in srgb, darkred 15%, transparent);
                 "
+                @click="$router.push({ path: '/exploration' })"
             >
                 <p class="font-md" style="color: darkred;">Abandonar</p>
             </ButtonBasic>
@@ -119,7 +123,7 @@
                     icon="theme-icon"
                     class="bg-color-brand-three"
                     :size="[20,20]"
-                />            
+                />       
             </div>
         </div>
 
@@ -268,11 +272,9 @@
             @cancel-action="removeSelectedItem()"
         >
             <ViewModalDetails
-                v-if="getSelectedItem.display_types.includes('overview')"
                 :item="getSelectedItem"
             />
             <ViewModalCollect
-                v-if="getSelectedItem.display_types.includes('collect')"
                 :item="getSelectedItem"
                 @collected="removeSelectedItem()"
             />
@@ -300,7 +302,7 @@ import * as View from "@/components/View"
 export default {
     data(){
         return{
-            drops_status: false,
+            drops_status: true,
         }
     },
     components: {
@@ -341,6 +343,9 @@ export default {
         },
     },
     computed: {
+        getVisual(){
+            return this.getSelectedNode.available ? this.getSelectedNode.visuals.default : this.getSelectedNode.visuals.depleted
+        },
         getSelectedItem(){
             return useInteractionStore().getSelectedItem
         },
@@ -397,15 +402,17 @@ export default {
 <style lang="scss">
 
 .value-attribute{
-    animation: fade-in 1s ease;
+    animation: fade-scale-in 1s ease;
 }
 
-@keyframes fade-in {
+@keyframes fade-scale-in {
     from{
         opacity: 0;
+        transform: scale(1.5);
     }
     to{
         opacity: 1;
+        transform: scale(1);
     }
 }
 

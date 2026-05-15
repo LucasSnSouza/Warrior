@@ -5,12 +5,13 @@ import { useWorldStore } from "./world.store.js"
 
 import { watch } from "vue";
 
+import router from '@/router'
 import utils from "@/scripts/utilities.js"
 
 export const useProfileStore = defineStore('profile', {
     state: () => ({
         profiles: [],
-        profile: null
+        profile: null,
     }),
     getters: {
         getProfiles: (state) => state.profiles,
@@ -52,13 +53,30 @@ export const useProfileStore = defineStore('profile', {
                 storage_item => storage_item.uid !== item.uid
             )
         },
+        setDeadEvent(time, description){
+            this.profile.push({
+                name: "Morte",
+                description: description,
+                createdAt: Date.now(),
+                finishAt: Date.now() + time
+            })
+        },
         watchers(){
             watch(
                 () => this.profile?.attributes?.health,
                 (value) => {
                     if(value <= 0){
-                        // this.$router.push({ path: '/navigation' })
-                    }                    
+                        this.profile.defeated = true
+                        router.push('/')
+                    }                
+                }
+            )
+            watch(
+                () => this.profile?.defeated,
+                (value) => {
+                    if(value){
+                        router.push('/navigation')
+                    }                
                 }
             )
         }

@@ -1,7 +1,6 @@
 export const animals_types = [
     {
         name: "Veyra",
-        image: "/Images/Animals/animal-fox.png",
         tier: 0,
         author: "World",
         classification: "canine",
@@ -9,6 +8,16 @@ export const animals_types = [
         biomes: ["plain", "florest"],
         storage: [],
         queue: [],
+        available: true,
+        visuals: {
+            default: "/Images/Animals/animal-fox.png",
+            depleted: "/Images/Animals/Depleted/depleted-animal-fox.png"
+        },
+        sounds: {
+            default: "",
+            attack: "",
+            damage: ""
+        },
         attributes: {
             health: 30,
             armor: 5,
